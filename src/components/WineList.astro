@@ -12,12 +12,16 @@ const { locale, sections } = Astro.props;
 const strings = t(locale);
 ---
 
-<div class="space-y-14">
+<div class="space-y-16">
   {sections.map((section) => (
-    <section id={section.id} aria-labelledby={`${section.id}-title`}>
-      <h2 id={`${section.id}-title`} class="font-display text-3xl tracking-wide text-ink">
-        {section.title[locale]}
-      </h2>
+    <section id={section.id} aria-labelledby={`${section.id}-title`} class="scroll-mt-24">
+      <div class="flex items-center gap-4">
+        <span aria-hidden="true" class="diamond h-2.5 w-2.5 shrink-0 bg-olive-dark"></span>
+        <h2 id={`${section.id}-title`} class="font-display text-3xl text-ink">
+          {section.title[locale]}
+        </h2>
+        <span aria-hidden="true" class="h-px flex-1 bg-ink/15"></span>
+      </div>
 
       <ul class="mt-6 divide-y divide-ink/10">
         {section.wines.map((wine) => (
@@ -29,7 +33,7 @@ const strings = t(locale);
               {wine.aging && <p class="text-sm italic text-ink-soft">{wine.aging[locale]}</p>}
               <AllergenTags locale={locale} codes={wine.allergens} />
             </div>
-            <div class="flex shrink-0 gap-4 text-right sm:flex-col sm:items-end sm:gap-1">
+            <div class="flex shrink-0 gap-4 text-right sm:flex-col sm:items-end sm:gap-0.5">
               {wine.prices.glass && (
                 <p class="whitespace-nowrap text-ink">
                   <span class="mr-1 text-xs uppercase tracking-wide text-ink-soft">Copa</span>

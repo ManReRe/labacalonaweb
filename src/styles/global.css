@@ -41,11 +41,51 @@ body {
 
 .font-display {
   font-family: var(--font-display);
-  letter-spacing: 0.04em;
+  letter-spacing: 0.02em;
 }
 
 /* Visible focus ring everywhere for keyboard navigation (accessibility, CLAUDE.md 3). */
 :focus-visible {
   outline: 3px solid var(--color-olive);
   outline-offset: 2px;
+}
+
+/* --- Decorative diamond motif, reused from the logo mark as a design element --- */
+
+/* A single outlined diamond, used as a section-divider / bullet accent. */
+.diamond {
+  display: inline-block;
+  width: 0.6em;
+  height: 0.6em;
+  transform: rotate(45deg);
+}
+
+/* Repeating faint diamond grid, used as a background texture on dark sections. */
+.bg-diamond-texture {
+  background-image: radial-gradient(circle at 1px 1px, color-mix(in srgb, var(--color-cream-white) 14%, transparent) 1px, transparent 0);
+  background-size: 28px 28px;
+}
+
+/* Centered "· ◆ ·" style rule between major sections. */
+.section-divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+}
+.section-divider::before,
+.section-divider::after {
+  content: "";
+  height: 1px;
+  width: 3rem;
+  background: color-mix(in srgb, var(--color-ink) 20%, transparent);
+}
+
+/* Dotted price leader, classic printed-menu treatment between a dish name and its price. */
+.price-leader {
+  flex: 1 1 auto;
+  min-width: 1rem;
+  border-bottom: 1px dotted color-mix(in srgb, var(--color-ink) 35%, transparent);
+  margin: 0 0.5rem;
+  transform: translateY(-0.3em);
 }

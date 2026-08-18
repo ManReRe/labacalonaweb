@@ -1,6 +1,7 @@
 ---
 import { restaurant } from '../data/restaurant';
 import { routes, t, otherLocale, type Locale, type RouteKey } from '../data/i18n';
+import { withBase } from '../utils/paths';
 
 interface Props {
   locale: Locale;
@@ -21,17 +22,17 @@ const navItems: { key: RouteKey; label: string }[] = [
 ];
 ---
 
-<header class="sticky top-0 z-40 border-b border-ink/10 bg-paper/95 backdrop-blur">
-  <div class="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-3 sm:px-6">
-    <a href={routes.home[locale]} class="flex items-center gap-2 font-display text-2xl tracking-wide text-ink">
-      <span aria-hidden="true" class="inline-block h-5 w-5 rotate-45 bg-ink"></span>
-      {restaurant.name}
+<header class="sticky top-0 z-40 border-b border-ink/10 bg-paper/95 shadow-sm backdrop-blur">
+  <div class="mx-auto flex h-[68px] max-w-6xl items-center justify-between gap-4 px-4 sm:px-6">
+    <a href={withBase(routes.home[locale])} class="flex items-center gap-2.5 font-display text-2xl leading-none text-ink">
+      <span aria-hidden="true" class="diamond h-3.5 w-3.5 shrink-0 bg-ink"></span>
+      <span class="pt-0.5">{restaurant.name}</span>
     </a>
 
     <input type="checkbox" id="nav-toggle" class="peer hidden" />
     <label
       for="nav-toggle"
-      class="flex h-11 w-11 cursor-pointer items-center justify-center rounded md:hidden"
+      class="flex h-11 w-11 shrink-0 cursor-pointer items-center justify-center rounded md:hidden"
       aria-label={strings.nav.home}
     >
       <span class="sr-only">Menú</span>
@@ -41,34 +42,39 @@ const navItems: { key: RouteKey; label: string }[] = [
     </label>
 
     <nav
-      class="fixed inset-x-0 top-[61px] hidden max-h-[calc(100vh-61px)] flex-col gap-1 overflow-y-auto bg-paper px-4 py-4 peer-checked:flex md:static md:flex md:max-h-none md:flex-row md:items-center md:gap-6 md:overflow-visible md:bg-transparent md:p-0"
+      class="fixed inset-x-0 top-[68px] hidden max-h-[calc(100vh-68px)] flex-col gap-1 overflow-y-auto bg-paper px-4 py-4 shadow-lg peer-checked:flex md:static md:flex md:max-h-none md:flex-row md:items-center md:gap-8 md:overflow-visible md:bg-transparent md:p-0 md:shadow-none"
       aria-label="Main"
     >
-      {navItems.map((item) => (
-        <a
-          href={routes[item.key][locale]}
-          class:list={[
-            'min-h-[44px] py-2.5 font-medium hover:text-olive-dark md:py-0',
-            routeKey === item.key ? 'text-olive-dark underline underline-offset-4' : 'text-ink',
-          ]}
-          aria-current={routeKey === item.key ? 'page' : undefined}
-        >
-          {item.label}
-        </a>
-      ))}
+      <div class="flex flex-col gap-1 md:flex-row md:items-center md:gap-8">
+        {navItems.map((item) => (
+          <a
+            href={withBase(routes[item.key][locale])}
+            class:list={[
+              'relative min-h-[44px] py-2.5 font-medium tracking-wide hover:text-olive-dark md:min-h-0 md:py-1',
+              routeKey === item.key ? 'text-olive-dark' : 'text-ink',
+            ]}
+            aria-current={routeKey === item.key ? 'page' : undefined}
+          >
+            {item.label}
+            {routeKey === item.key && (
+              <span aria-hidden="true" class="diamond absolute -bottom-1.5 left-0 hidden h-1.5 w-1.5 bg-olive-dark md:inline-block"></span>
+            )}
+          </a>
+        ))}
+      </div>
 
-      <div class="flex items-center gap-3 border-t border-ink/10 py-3 md:border-0 md:py-0">
+      <div class="mt-2 flex items-center gap-3 border-t border-ink/10 pt-3 md:ml-2 md:mt-0 md:border-0 md:pt-0">
         <a
-          href={routes[routeKey][other]}
+          href={withBase(routes[routeKey][other])}
           hreflang={other}
-          class="min-h-[44px] px-2 font-medium text-ink underline-offset-4 hover:underline md:min-h-0"
+          class="inline-flex min-h-[44px] items-center justify-center rounded-full border border-ink/20 px-3 py-1.5 text-sm font-semibold tracking-wide text-ink hover:border-ink/40 hover:bg-ink/5 md:min-h-0"
           aria-label={strings.languageSwitcher}
         >
           {other.toUpperCase()}
         </a>
         <a
-          href={routes.reservations[locale]}
-          class="inline-flex min-h-[44px] items-center justify-center rounded-md bg-olive px-4 py-2.5 font-semibold text-cream-white shadow-sm hover:bg-olive-dark"
+          href={withBase(routes.reservations[locale])}
+          class="inline-flex min-h-[44px] items-center justify-center rounded-md bg-olive px-5 py-2.5 font-semibold text-cream-white shadow-sm transition-colors hover:bg-olive-dark"
         >
           {strings.cta.reserve}
         </a>

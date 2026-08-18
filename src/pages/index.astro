@@ -4,6 +4,7 @@ import Layout from '../layouts/Layout.astro';
 import ReservationCta from '../components/ReservationCta.astro';
 import { routes, t } from '../data/i18n';
 import { restaurant } from '../data/restaurant';
+import { withBase } from '../utils/paths';
 import interiorImg from '../assets/images/interior-1.jpg';
 import huevosImg from '../assets/images/dish-huevos-fritas.jpg';
 import boqueronesImg from '../assets/images/dish-boquerones.jpg';
@@ -21,64 +22,83 @@ const strings = t(locale);
   description="La Bacalona: abacería y taberna sevillana con producto de temporada, ibéricos de bellota y una carta pensada para compartir. Reserva tu mesa en el centro de Sevilla."
 >
   <section class="relative overflow-hidden bg-espresso text-cream-white">
-    <div class="mx-auto grid max-w-6xl items-center gap-8 px-4 py-16 sm:px-6 md:grid-cols-2 md:py-24">
+    <div class="bg-diamond-texture pointer-events-none absolute inset-0"></div>
+    <div class="relative mx-auto grid max-w-6xl items-center gap-10 px-4 py-16 sm:px-6 md:grid-cols-2 md:py-28">
       <div>
-        <p class="font-semibold uppercase tracking-widest text-sand">Sevilla, centro</p>
-        <h1 class="mt-2 font-display text-5xl leading-tight tracking-wide sm:text-6xl">
+        <p class="flex items-center gap-2 font-semibold uppercase tracking-[0.2em] text-sand">
+          <span aria-hidden="true" class="diamond h-2 w-2 bg-sand"></span>
+          Sevilla, centro
+        </p>
+        <h1 class="mt-3 font-display text-6xl leading-[0.95] sm:text-7xl">
           {restaurant.name}
         </h1>
-        <p class="mt-4 text-lg text-cream-white/90">{restaurant.tagline.es}</p>
-        <p class="mt-2 max-w-md text-cream-white/70">{restaurant.shortDescription.es}</p>
-        <div class="mt-8">
+        <p class="mt-5 text-xl text-cream-white/90">{restaurant.tagline.es}</p>
+        <p class="mt-3 max-w-md text-cream-white/70">{restaurant.shortDescription.es}</p>
+        <div class="mt-9">
           <ReservationCta locale={locale} />
         </div>
       </div>
-      <div class="overflow-hidden rounded-lg shadow-xl">
-        <Image
-          src={interiorImg}
-          alt="Interior del comedor de La Bacalona en Sevilla"
-          width={640}
-          height={800}
-          class="h-full w-full object-cover"
-        />
+      <div class="relative">
+        <div class="absolute -inset-3 -z-10 hidden rotate-1 rounded-lg border border-cream-white/20 sm:block"></div>
+        <div class="overflow-hidden rounded-lg shadow-2xl ring-1 ring-cream-white/10">
+          <Image
+            src={interiorImg}
+            alt="Interior del comedor de La Bacalona en Sevilla"
+            width={640}
+            height={800}
+            class="h-full w-full object-cover"
+          />
+        </div>
       </div>
     </div>
   </section>
 
-  <section class="mx-auto max-w-6xl px-4 py-16 sm:px-6">
-    <h2 class="font-display text-3xl tracking-wide text-ink">Platos que nos definen</h2>
-    <div class="mt-8 grid gap-6 sm:grid-cols-3">
-      <a href={routes.menu[locale]} class="group block overflow-hidden rounded-lg border border-ink/10">
-        <Image src={huevosImg} alt="Huevos rotos con patatas fritas de La Bacalona" width={480} height={480} class="h-56 w-full object-cover transition-transform group-hover:scale-105" />
+  <section class="mx-auto max-w-6xl px-4 py-20 sm:px-6">
+    <div class="flex items-end justify-between gap-4">
+      <div>
+        <p class="font-semibold uppercase tracking-[0.2em] text-olive-dark">Nuestra cocina</p>
+        <h2 class="mt-2 font-display text-4xl text-ink">Platos que nos definen</h2>
+      </div>
+    </div>
+    <div class="mt-9 grid gap-6 sm:grid-cols-3">
+      <a href={withBase(routes.menu[locale])} class="group block overflow-hidden rounded-lg border border-ink/10 bg-cream-white shadow-sm transition-shadow hover:shadow-lg">
+        <div class="overflow-hidden">
+          <Image src={huevosImg} alt="Huevos rotos con patatas fritas de La Bacalona" width={480} height={480} class="h-56 w-full object-cover transition-transform duration-300 group-hover:scale-105" />
+        </div>
         <p class="p-4 font-semibold text-ink">Huevos rotos, un clásico de la casa</p>
       </a>
-      <a href={routes.menu[locale]} class="group block overflow-hidden rounded-lg border border-ink/10">
-        <Image src={boqueronesImg} alt="Aceitunas y boquerones en vinagre de La Bacalona" width={480} height={480} class="h-56 w-full object-cover transition-transform group-hover:scale-105" />
+      <a href={withBase(routes.menu[locale])} class="group block overflow-hidden rounded-lg border border-ink/10 bg-cream-white shadow-sm transition-shadow hover:shadow-lg">
+        <div class="overflow-hidden">
+          <Image src={boqueronesImg} alt="Aceitunas y boquerones en vinagre de La Bacalona" width={480} height={480} class="h-56 w-full object-cover transition-transform duration-300 group-hover:scale-105" />
+        </div>
         <p class="p-4 font-semibold text-ink">Aperitivos y encurtidos de la abacería</p>
       </a>
-      <a href={routes.menu[locale]} class="group block overflow-hidden rounded-lg border border-ink/10">
-        <Image src={tacoImg} alt="Sugerencia de la casa servida en mesa de madera" width={480} height={480} class="h-56 w-full object-cover transition-transform group-hover:scale-105" />
+      <a href={withBase(routes.menu[locale])} class="group block overflow-hidden rounded-lg border border-ink/10 bg-cream-white shadow-sm transition-shadow hover:shadow-lg">
+        <div class="overflow-hidden">
+          <Image src={tacoImg} alt="Sugerencia de la casa servida en mesa de madera" width={480} height={480} class="h-56 w-full object-cover transition-transform duration-300 group-hover:scale-105" />
+        </div>
         <p class="p-4 font-semibold text-ink">Sugerencias de la casa, cada semana</p>
       </a>
     </div>
-    <div class="mt-8 flex flex-wrap gap-4">
-      <a href={routes.menu[locale]} class="inline-flex min-h-[44px] items-center justify-center rounded-md bg-ink px-6 py-3 font-semibold text-cream-white hover:bg-ink-soft">
+    <div class="mt-9 flex flex-wrap gap-4">
+      <a href={withBase(routes.menu[locale])} class="inline-flex min-h-[44px] items-center justify-center rounded-md bg-ink px-6 py-3 font-semibold text-cream-white shadow-sm hover:bg-ink-soft">
         {strings.cta.seeMenu}
       </a>
-      <a href={routes.wines[locale]} class="inline-flex min-h-[44px] items-center justify-center rounded-md border border-ink/30 px-6 py-3 font-semibold text-ink hover:bg-ink hover:text-cream-white">
+      <a href={withBase(routes.wines[locale])} class="inline-flex min-h-[44px] items-center justify-center rounded-md border border-ink/30 px-6 py-3 font-semibold text-ink hover:bg-ink hover:text-cream-white">
         {strings.cta.seeWines}
       </a>
     </div>
   </section>
 
-  <section class="bg-sand/50 py-16">
+  <section class="bg-sand/50 py-20">
     <div class="mx-auto max-w-4xl px-4 text-center sm:px-6">
-      <h2 class="font-display text-3xl tracking-wide text-ink">En el corazón de Sevilla</h2>
-      <p class="mx-auto mt-4 max-w-2xl text-ink-soft">
+      <span aria-hidden="true" class="diamond mx-auto mb-4 block h-3 w-3 bg-olive-dark"></span>
+      <h2 class="font-display text-4xl text-ink">En el corazón de Sevilla</h2>
+      <p class="mx-auto mt-5 max-w-2xl text-lg text-ink-soft">
         Nos encontrarás en la calle Amador de los Ríos, en pleno centro histórico de Sevilla. Un espacio cercano
         donde el producto de temporada, los ibéricos de bellota y la cocina honesta son los protagonistas.
       </p>
-      <a href={routes.about[locale]} class="mt-6 inline-block font-semibold text-olive-dark underline-offset-4 hover:underline">
+      <a href={withBase(routes.about[locale])} class="mt-6 inline-block font-semibold text-olive-dark underline-offset-4 hover:underline">
         Conoce nuestra historia →
       </a>
     </div>
