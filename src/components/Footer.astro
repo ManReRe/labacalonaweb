@@ -1,6 +1,7 @@
 ---
 import { restaurant } from '../data/restaurant';
 import { routes, t, type Locale } from '../data/i18n';
+import { withBase } from '../utils/paths';
 
 interface Props {
   locale: Locale;
@@ -43,21 +44,21 @@ const year = new Date().getFullYear();
     <div>
       <p class="font-semibold">{strings.footer.linksTitle}</p>
       <ul class="mt-2 space-y-2 text-sm text-cream-white/80">
-        <li><a class="hover:underline" href={routes.home[locale]}>{strings.nav.home}</a></li>
-        <li><a class="hover:underline" href={routes.menu[locale]}>{strings.nav.menu}</a></li>
-        <li><a class="hover:underline" href={routes.wines[locale]}>{strings.nav.wines}</a></li>
-        <li><a class="hover:underline" href={routes.reservations[locale]}>{strings.nav.reservations}</a></li>
-        <li><a class="hover:underline" href={routes.about[locale]}>{strings.nav.about}</a></li>
-        <li><a class="hover:underline" href={routes.contact[locale]}>{strings.nav.contact}</a></li>
+        <li><a class="hover:underline" href={withBase(routes.home[locale])}>{strings.nav.home}</a></li>
+        <li><a class="hover:underline" href={withBase(routes.menu[locale])}>{strings.nav.menu}</a></li>
+        <li><a class="hover:underline" href={withBase(routes.wines[locale])}>{strings.nav.wines}</a></li>
+        <li><a class="hover:underline" href={withBase(routes.reservations[locale])}>{strings.nav.reservations}</a></li>
+        <li><a class="hover:underline" href={withBase(routes.about[locale])}>{strings.nav.about}</a></li>
+        <li><a class="hover:underline" href={withBase(routes.contact[locale])}>{strings.nav.contact}</a></li>
       </ul>
     </div>
 
     <div>
       <p class="font-semibold">{strings.footer.legalTitle}</p>
       <ul class="mt-2 space-y-2 text-sm text-cream-white/80">
-        <li><a class="hover:underline" href={routes.legalNotice[locale]}>{strings.footer.legalNotice}</a></li>
-        <li><a class="hover:underline" href={routes.privacy[locale]}>{strings.footer.privacy}</a></li>
-        <li><a class="hover:underline" href={routes.cookies[locale]}>{strings.footer.cookies}</a></li>
+        <li><a class="hover:underline" href={withBase(routes.legalNotice[locale])}>{strings.footer.legalNotice}</a></li>
+        <li><a class="hover:underline" href={withBase(routes.privacy[locale])}>{strings.footer.privacy}</a></li>
+        <li><a class="hover:underline" href={withBase(routes.cookies[locale])}>{strings.footer.cookies}</a></li>
       </ul>
     </div>
   </div>

@@ -4,6 +4,7 @@ import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import { restaurant } from '../data/restaurant';
 import { routes, t, type Locale, type RouteKey } from '../data/i18n';
+import { withBase } from '../utils/paths';
 
 interface Props {
   locale: Locale;
@@ -23,6 +24,8 @@ const canonicalURL = new URL(canonicalPath, Astro.site);
 const esURL = new URL(routes[routeKey].es, Astro.site);
 const enURL = new URL(routes[routeKey].en, Astro.site);
 const defaultOgImage = new URL('/og-default.jpg', Astro.site).toString();
+const homeEs = withBase(routes.home.es);
+const homeEn = withBase(routes.home.en);
 
 const restaurantJsonLd = {
   '@context': 'https://schema.org',
@@ -58,7 +61,7 @@ const restaurantJsonLd = {
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/svg+xml" href={withBase('/favicon.svg')} />
     <meta name="generator" content={Astro.generator} />
 
     <title>{title}</title>
@@ -80,7 +83,7 @@ const restaurantJsonLd = {
     <script type="application/ld+json" set:html={JSON.stringify(restaurantJsonLd)} />
 
     {isHome && (
-      <script>
+      <script define:vars={{ homeEs, homeEn }}>
         // One-time client-side language redirect on first visit only (CLAUDE.md 3.1).
         // Never a server/edge redirect — crawlers always see the unprefixed ES page.
         (function () {
@@ -88,12 +91,12 @@ const restaurantJsonLd = {
             if (localStorage.getItem('labacalona-locale-redirected')) return;
             localStorage.setItem('labacalona-locale-redirected', '1');
             const path = window.location.pathname;
-            const isEnglishPage = path === '/en' || path.startsWith('/en/');
+            const isEnglishPage = path === homeEn || path.startsWith(homeEn + '/');
             const prefersEnglish = navigator.language?.toLowerCase().startsWith('en');
             if (prefersEnglish && !isEnglishPage) {
-              window.location.replace('/en');
+              window.location.replace(homeEn);
             } else if (!prefersEnglish && isEnglishPage) {
-              window.location.replace('/');
+              window.location.replace(homeEs);
             }
           } catch (_e) {
             // localStorage unavailable (privacy mode, etc.) — skip redirect silently.

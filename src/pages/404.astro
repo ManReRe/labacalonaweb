@@ -1,6 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import { routes } from '../data/i18n';
+import { withBase } from '../utils/paths';
 
 const locale = 'es' as const;
 ---
@@ -16,7 +17,7 @@ const locale = 'es' as const;
     <h1 class="mt-4 text-2xl font-semibold text-ink">Página no encontrada</h1>
     <p class="mt-2 text-ink-soft">Lo sentimos, la página que buscas no existe o se ha movido.</p>
     <a
-      href={routes.home.es}
+      href={withBase(routes.home.es)}
       class="mt-8 inline-flex min-h-[44px] items-center justify-center rounded-md bg-ink px-6 py-3 font-semibold text-cream-white hover:bg-ink-soft"
     >
       Volver al inicio
