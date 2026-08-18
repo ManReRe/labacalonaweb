@@ -1,0 +1,25 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { routes } from '../data/i18n';
+
+const locale = 'es' as const;
+---
+
+<Layout
+  locale={locale}
+  routeKey="home"
+  title="Página no encontrada | La Bacalona"
+  description="La página que buscas no existe."
+>
+  <div class="mx-auto max-w-2xl px-4 py-24 text-center sm:px-6">
+    <p class="font-display text-6xl tracking-wide text-ink">404</p>
+    <h1 class="mt-4 text-2xl font-semibold text-ink">Página no encontrada</h1>
+    <p class="mt-2 text-ink-soft">Lo sentimos, la página que buscas no existe o se ha movido.</p>
+    <a
+      href={routes.home.es}
+      class="mt-8 inline-flex min-h-[44px] items-center justify-center rounded-md bg-ink px-6 py-3 font-semibold text-cream-white hover:bg-ink-soft"
+    >
+      Volver al inicio
+    </a>
+  </div>
+</Layout>

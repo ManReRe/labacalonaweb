@@ -1,0 +1,51 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import PageHero from '../../components/PageHero.astro';
+import { restaurant } from '../../data/restaurant';
+
+const locale = 'en' as const;
+---
+
+<Layout
+  locale={locale}
+  routeKey="privacy"
+  title="Privacy policy | La Bacalona"
+  description="How La Bacalona handles the personal data of visitors to this website."
+>
+  <PageHero eyebrow="Legal" title="Privacy policy" />
+
+  <div class="mx-auto max-w-3xl space-y-6 px-4 py-12 text-ink-soft sm:px-6">
+    <section>
+      <h2 class="font-display text-2xl tracking-wide text-ink">1. Data controller</h2>
+      <p class="mt-2">
+        {restaurant.legalName}, located at {restaurant.address.streetAddress}, {restaurant.address.postalCode} {restaurant.address.addressLocality}, Spain.
+        Contact: +34 {restaurant.phoneDisplay}.
+      </p>
+    </section>
+
+    <section>
+      <h2 class="font-display text-2xl tracking-wide text-ink">2. What data we process</h2>
+      <p class="mt-2">
+        This website has no data-collection forms of its own and no analytics or advertising tools. When you
+        book a table through our reservation provider (CoverManager), your data (name, phone, email) is handled
+        directly by that provider under its own privacy policy, not by {restaurant.name}.
+      </p>
+    </section>
+
+    <section>
+      <h2 class="font-display text-2xl tracking-wide text-ink">3. Third parties that may process data</h2>
+      <ul class="mt-2 list-disc space-y-1 pl-5">
+        <li>CoverManager (online reservation system).</li>
+        <li>Google Maps (map embedded on the contact page).</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2 class="font-display text-2xl tracking-wide text-ink">4. Your rights</h2>
+      <p class="mt-2">
+        You can exercise your rights of access, rectification, erasure, and objection by writing to us or
+        calling +34 {restaurant.phoneDisplay}.
+      </p>
+    </section>
+  </div>
+</Layout>

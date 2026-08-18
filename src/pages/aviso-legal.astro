@@ -1,0 +1,59 @@
+---
+import Layout from '../layouts/Layout.astro';
+import PageHero from '../components/PageHero.astro';
+import { restaurant } from '../data/restaurant';
+
+const locale = 'es' as const;
+---
+
+<Layout
+  locale={locale}
+  routeKey="legalNotice"
+  title="Aviso legal | La Bacalona"
+  description="Aviso legal del sitio web de La Bacalona, restaurante en Sevilla."
+>
+  <PageHero eyebrow="Legal" title="Aviso legal" />
+
+  <div class="mx-auto max-w-3xl space-y-6 px-4 py-12 text-ink-soft sm:px-6">
+    <p class="rounded-md border border-olive-dark/30 bg-sand/60 p-4 text-sm text-ink" role="note">
+      ⚠️ Página pendiente de completar con los datos fiscales reales del titular (razón social, CIF/NIF,
+      datos registrales) antes de publicar el sitio.
+    </p>
+
+    <section>
+      <h2 class="font-display text-2xl tracking-wide text-ink">1. Datos del titular</h2>
+      <p class="mt-2">
+        Titular: <em>razón social pendiente de confirmar</em> (nombre comercial: {restaurant.name})<br />
+        Domicilio: {restaurant.address.streetAddress}, {restaurant.address.postalCode} {restaurant.address.addressLocality}, España<br />
+        Teléfono: {restaurant.phoneDisplay}<br />
+        CIF/NIF: <em>pendiente de confirmar</em>
+      </p>
+    </section>
+
+    <section>
+      <h2 class="font-display text-2xl tracking-wide text-ink">2. Objeto</h2>
+      <p class="mt-2">
+        El presente aviso legal regula el uso del sitio web de {restaurant.name}, cuya finalidad es informar
+        sobre el restaurante, su carta y su sistema de reservas.
+      </p>
+    </section>
+
+    <section>
+      <h2 class="font-display text-2xl tracking-wide text-ink">3. Propiedad intelectual</h2>
+      <p class="mt-2">
+        Los contenidos de este sitio web (textos, imágenes, logotipo y diseño) son propiedad de
+        {restaurant.legalName} o se utilizan con la debida autorización, y están protegidos por la normativa de
+        propiedad intelectual e industrial.
+      </p>
+    </section>
+
+    <section>
+      <h2 class="font-display text-2xl tracking-wide text-ink">4. Responsabilidad</h2>
+      <p class="mt-2">
+        {restaurant.name} no se hace responsable de los daños derivados de un uso inadecuado del sitio web.
+        La información sobre la carta (precios, disponibilidad, alérgenos) puede variar; en caso de duda,
+        consulta con el personal del restaurante antes de tu visita.
+      </p>
+    </section>
+  </div>
+</Layout>

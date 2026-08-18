@@ -1,0 +1,38 @@
+---
+import Layout from '../layouts/Layout.astro';
+import PageHero from '../components/PageHero.astro';
+import { restaurant } from '../data/restaurant';
+
+const locale = 'es' as const;
+---
+
+<Layout
+  locale={locale}
+  routeKey="cookies"
+  title="Política de cookies | La Bacalona"
+  description="Qué cookies utiliza el sitio web de La Bacalona y por qué."
+>
+  <PageHero eyebrow="Legal" title="Política de cookies" />
+
+  <div class="mx-auto max-w-3xl space-y-6 px-4 py-12 text-ink-soft sm:px-6">
+    <p>
+      Este sitio web no utiliza cookies propias de analítica, publicidad o seguimiento. Las únicas cookies que
+      pueden llegar a instalarse proceden de los siguientes servicios funcionales, integrados directamente en
+      algunas páginas:
+    </p>
+    <ul class="list-disc space-y-2 pl-5">
+      <li>
+        <strong class="text-ink">CoverManager</strong> — nuestro sistema de reservas online, enlazado desde las
+        páginas de inicio y reservas.
+      </li>
+      <li>
+        <strong class="text-ink">Google Maps</strong> — el mapa incrustado en la página de contacto.
+      </li>
+    </ul>
+    <p>
+      Puedes gestionar o eliminar estas cookies desde la configuración de tu navegador en cualquier momento. Al
+      no usar cookies de analítica ni publicidad, {restaurant.name} no requiere un panel de gestión de
+      consentimiento.
+    </p>
+  </div>
+</Layout>

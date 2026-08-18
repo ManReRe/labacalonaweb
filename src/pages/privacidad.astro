@@ -1,0 +1,52 @@
+---
+import Layout from '../layouts/Layout.astro';
+import PageHero from '../components/PageHero.astro';
+import { restaurant } from '../data/restaurant';
+
+const locale = 'es' as const;
+---
+
+<Layout
+  locale={locale}
+  routeKey="privacy"
+  title="Política de privacidad | La Bacalona"
+  description="Cómo trata La Bacalona los datos personales de las personas usuarias de este sitio web."
+>
+  <PageHero eyebrow="Legal" title="Política de privacidad" />
+
+  <div class="mx-auto max-w-3xl space-y-6 px-4 py-12 text-ink-soft sm:px-6">
+    <section>
+      <h2 class="font-display text-2xl tracking-wide text-ink">1. Responsable del tratamiento</h2>
+      <p class="mt-2">
+        {restaurant.legalName}, con domicilio en {restaurant.address.streetAddress}, {restaurant.address.postalCode} {restaurant.address.addressLocality}, España.
+        Contacto: {restaurant.phoneDisplay}.
+      </p>
+    </section>
+
+    <section>
+      <h2 class="font-display text-2xl tracking-wide text-ink">2. Qué datos tratamos</h2>
+      <p class="mt-2">
+        Este sitio web no incorpora formularios propios de recogida de datos ni herramientas de analítica o
+        publicidad. Cuando reservas mesa a través de nuestro proveedor de reservas (CoverManager), tus datos
+        (nombre, teléfono, email) son tratados directamente por dicho proveedor conforme a su propia política de
+        privacidad, no por {restaurant.name}.
+      </p>
+    </section>
+
+    <section>
+      <h2 class="font-display text-2xl tracking-wide text-ink">3. Terceros que pueden tratar datos</h2>
+      <ul class="mt-2 list-disc space-y-1 pl-5">
+        <li>CoverManager (sistema de reservas online).</li>
+        <li>Google Maps (mapa incrustado en la página de contacto).</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2 class="font-display text-2xl tracking-wide text-ink">4. Tus derechos</h2>
+      <p class="mt-2">
+        Puedes ejercer tus derechos de acceso, rectificación, supresión y oposición escribiéndonos o llamando al
+        {restaurant.phoneDisplay}.
+      </p>
+    </section>
+  </div>
+</Layout>

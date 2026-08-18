@@ -1,0 +1,59 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import PageHero from '../../components/PageHero.astro';
+import { restaurant } from '../../data/restaurant';
+
+const locale = 'en' as const;
+---
+
+<Layout
+  locale={locale}
+  routeKey="legalNotice"
+  title="Legal notice | La Bacalona"
+  description="Legal notice for La Bacalona's website, a restaurant in Seville."
+>
+  <PageHero eyebrow="Legal" title="Legal notice" />
+
+  <div class="mx-auto max-w-3xl space-y-6 px-4 py-12 text-ink-soft sm:px-6">
+    <p class="rounded-md border border-olive-dark/30 bg-sand/60 p-4 text-sm text-ink" role="note">
+      ⚠️ This page is pending completion with the owner's real tax details (legal name, tax ID, registry
+      details) before the site goes live.
+    </p>
+
+    <section>
+      <h2 class="font-display text-2xl tracking-wide text-ink">1. Site owner</h2>
+      <p class="mt-2">
+        Owner: <em>legal entity name pending confirmation</em> (trading as {restaurant.name})<br />
+        Address: {restaurant.address.streetAddress}, {restaurant.address.postalCode} {restaurant.address.addressLocality}, Spain<br />
+        Phone: +34 {restaurant.phoneDisplay}<br />
+        Tax ID: <em>pending confirmation</em>
+      </p>
+    </section>
+
+    <section>
+      <h2 class="font-display text-2xl tracking-wide text-ink">2. Purpose</h2>
+      <p class="mt-2">
+        This legal notice governs the use of {restaurant.name}'s website, which exists to provide information
+        about the restaurant, its menu, and its reservation system.
+      </p>
+    </section>
+
+    <section>
+      <h2 class="font-display text-2xl tracking-wide text-ink">3. Intellectual property</h2>
+      <p class="mt-2">
+        The content on this website (text, images, logo, and design) is owned by {restaurant.legalName} or used
+        under appropriate authorization, and is protected under applicable intellectual and industrial property
+        law.
+      </p>
+    </section>
+
+    <section>
+      <h2 class="font-display text-2xl tracking-wide text-ink">4. Liability</h2>
+      <p class="mt-2">
+        {restaurant.name} is not liable for damages arising from improper use of the website. Menu information
+        (prices, availability, allergens) may change; if in doubt, please check with our staff before your
+        visit.
+      </p>
+    </section>
+  </div>
+</Layout>
