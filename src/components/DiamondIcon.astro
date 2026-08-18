@@ -1,0 +1,18 @@
+---
+// The brand's nested-diamond mark, traced from Logo/Logo_Secondary_Use_1.pdf
+// (same path as public/favicon.svg). Color via `text-*` (uses currentColor)
+// so it can be reused anywhere the brand's diamond bullet/divider appears.
+interface Props {
+  class?: string;
+}
+
+const { class: className } = Astro.props;
+---
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 91.2052 91.3129" class={className} aria-hidden="true">
+  <path
+    fill-rule="nonzero"
+    fill="currentColor"
+    d="M 66.605469 45.28125 L 45.210938 23.832031 L 23.867188 45.28125 L 45.296875 66.691406 Z M 89.425781 45.261719 L 45.316406 89.585938 L 0.992188 45.261719 L 45.316406 1.046875 Z M 45.296875 34.1875 L 56.378906 45.296875 L 45.339844 56.390625 L 34.238281 45.296875 Z M 45.296875 34.1875 "
+  />
+</svg>

@@ -3,6 +3,7 @@ import { Image } from 'astro:assets';
 import { restaurant } from '../data/restaurant';
 import { routes, t, otherLocale, type Locale, type RouteKey } from '../data/i18n';
 import { withBase } from '../utils/paths';
+import DiamondIcon from './DiamondIcon.astro';
 import logoHeader from '../assets/images/logo-header.png';
 
 interface Props {
@@ -58,7 +59,7 @@ const navItems: { key: RouteKey; label: string }[] = [
           >
             {item.label}
             {routeKey === item.key && (
-              <span aria-hidden="true" class="diamond absolute -bottom-1.5 left-0 hidden h-1.5 w-1.5 bg-olive-dark lg:inline-block"></span>
+              <DiamondIcon class="absolute -bottom-1.5 left-0 hidden h-1.5 w-1.5 text-olive lg:block" />
             )}
           </a>
         ))}

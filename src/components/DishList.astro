@@ -1,6 +1,7 @@
 ---
 import type { MenuSection } from '../data/menu';
 import AllergenTags from './AllergenTags.astro';
+import DiamondIcon from './DiamondIcon.astro';
 import { t, type Locale } from '../data/i18n';
 
 interface Props {
@@ -16,7 +17,7 @@ const strings = t(locale);
   {sections.map((section) => (
     <section id={section.id} aria-labelledby={`${section.id}-title`} class="scroll-mt-24">
       <div class="flex items-center gap-4">
-        <span aria-hidden="true" class="diamond h-2.5 w-2.5 shrink-0 bg-olive-dark"></span>
+        <DiamondIcon class="h-2.5 w-2.5 shrink-0 text-olive" />
         <h2 id={`${section.id}-title`} class="font-display text-3xl text-ink">
           {section.title[locale]}
         </h2>
