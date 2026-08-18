@@ -3,7 +3,9 @@
 
 export const restaurant = {
   name: 'La Bacalona',
-  legalName: 'La Bacalona Come & Bebe',
+  // Real registered legal name (razón social) is pending — see aviso-legal.
+  // "Come & Bebe" under the logo is the tagline, not part of the name.
+  legalName: 'La Bacalona',
   tagline: {
     es: 'Come y bebe en el corazón de Sevilla',
     en: 'Eat and drink in the heart of Seville',
