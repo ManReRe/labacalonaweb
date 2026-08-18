@@ -1,0 +1,37 @@
+---
+import Layout from '../layouts/Layout.astro';
+import DishList from '../components/DishList.astro';
+import AllergenLegend from '../components/AllergenLegend.astro';
+import PageHero from '../components/PageHero.astro';
+import ReservationCta from '../components/ReservationCta.astro';
+import { menuSections, menuNotes } from '../data/menu';
+
+const locale = 'es' as const;
+---
+
+<Layout
+  locale={locale}
+  routeKey="menu"
+  title="Carta | La Bacalona — Restaurante en Sevilla"
+  description="Descubre la carta de La Bacalona: entrantes, ibéricos, guisos, platos a la plancha y postres caseros, con alérgenos indicados en cada plato."
+>
+  <PageHero
+    eyebrow="Carta"
+    title="Nuestra carta"
+    subtitle="Producto de temporada, ibéricos de bellota y cocina honesta, pensada para compartir."
+  />
+
+  <div class="mx-auto max-w-4xl px-4 py-12 sm:px-6">
+    <DishList locale={locale} sections={menuSections} />
+
+    <ul class="mt-10 space-y-1 text-sm text-ink-soft">
+      {menuNotes.es.map((note) => <li>{note}</li>)}
+    </ul>
+
+    <AllergenLegend locale={locale} />
+
+    <div class="mt-10">
+      <ReservationCta locale={locale} />
+    </div>
+  </div>
+</Layout>

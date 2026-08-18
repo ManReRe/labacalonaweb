@@ -1,0 +1,33 @@
+---
+import Layout from '../layouts/Layout.astro';
+import WineList from '../components/WineList.astro';
+import AllergenLegend from '../components/AllergenLegend.astro';
+import PageHero from '../components/PageHero.astro';
+import ReservationCta from '../components/ReservationCta.astro';
+import { wineSections } from '../data/wines';
+
+const locale = 'es' as const;
+---
+
+<Layout
+  locale={locale}
+  routeKey="wines"
+  title="Vinos | La Bacalona — Restaurante en Sevilla"
+  description="Carta de vinos de La Bacalona: tintos de Ribera del Duero, Rioja y Ribera del Guadiana, blancos, generosos y espumosos, por copa o botella."
+>
+  <PageHero
+    eyebrow="Vinos"
+    title="Nuestra carta de vinos"
+    subtitle="Una selección pensada para acompañar cada plato, con denominaciones de origen españolas."
+  />
+
+  <div class="mx-auto max-w-4xl px-4 py-12 sm:px-6">
+    <WineList locale={locale} sections={wineSections} />
+
+    <AllergenLegend locale={locale} />
+
+    <div class="mt-10">
+      <ReservationCta locale={locale} />
+    </div>
+  </div>
+</Layout>

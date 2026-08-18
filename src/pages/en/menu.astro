@@ -1,0 +1,37 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import DishList from '../../components/DishList.astro';
+import AllergenLegend from '../../components/AllergenLegend.astro';
+import PageHero from '../../components/PageHero.astro';
+import ReservationCta from '../../components/ReservationCta.astro';
+import { menuSections, menuNotes } from '../../data/menu';
+
+const locale = 'en' as const;
+---
+
+<Layout
+  locale={locale}
+  routeKey="menu"
+  title="Menu | La Bacalona — Restaurant in Seville"
+  description="Explore La Bacalona's menu: starters, Iberian cured meats, stews, grilled dishes, and homemade desserts, with allergens listed for every dish."
+>
+  <PageHero
+    eyebrow="Menu"
+    title="Our menu"
+    subtitle="Seasonal produce, acorn-fed Iberian cured meats, and honest cooking, made for sharing."
+  />
+
+  <div class="mx-auto max-w-4xl px-4 py-12 sm:px-6">
+    <DishList locale={locale} sections={menuSections} />
+
+    <ul class="mt-10 space-y-1 text-sm text-ink-soft">
+      {menuNotes.en.map((note) => <li>{note}</li>)}
+    </ul>
+
+    <AllergenLegend locale={locale} />
+
+    <div class="mt-10">
+      <ReservationCta locale={locale} />
+    </div>
+  </div>
+</Layout>
