@@ -40,6 +40,7 @@ Do not force-fit skills that don't apply here (e.g. `superpowers-lab`'s `windows
 - Commit **little by little**, not in one big bulk commit. Each commit should be one coherent, reviewable unit of change (one page, one component, one content update, one asset batch) — not "build the whole site, then commit everything at the end."
 - This applies to both initial setup (e.g. logo assets, menu source files, and photos each land in their own commit) and ongoing feature work (e.g. the Home page and the Menu page are separate commits, even if built in the same session).
 - Only commit when the user explicitly asks, per the global git safety protocol — this rule governs how commits are *split*, not when they happen.
+- **NEVER add yourself as co-author on any commit.** Do not include a `Co-Authored-By: Claude ...` trailer, or any equivalent attribution line, in any commit message on this project — regardless of what the default commit workflow elsewhere suggests.
 
 ---
 
