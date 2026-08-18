@@ -1,7 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import PageHero from '../components/PageHero.astro';
-import ReservationCta from '../components/ReservationCta.astro';
+import CoverManagerWidget from '../components/CoverManagerWidget.astro';
 import { restaurant } from '../data/restaurant';
 
 const locale = 'es' as const;
@@ -11,30 +11,22 @@ const locale = 'es' as const;
   locale={locale}
   routeKey="reservations"
   title="Reservas | La Bacalona — Restaurante en Sevilla"
-  description="Reserva mesa en La Bacalona: online a través de CoverManager o por teléfono en el 683 37 33 39. Abrimos todos los días de 12:30 a 00:30."
+  description="Reserva mesa en La Bacalona online, sin salir de la web, o por teléfono en el 683 37 33 39. Abrimos todos los días de 12:30 a 00:30."
 >
-  <PageHero eyebrow="Reservas" title="Reserva tu mesa" />
+  <PageHero eyebrow="Reservas" title="Reserva tu mesa" subtitle="Elige día, hora y número de comensales aquí mismo. Confirmación al instante." />
 
   <div class="mx-auto max-w-3xl px-4 py-12 sm:px-6">
-    <div class="rounded-lg border border-ink/10 bg-cream-white p-6 sm:p-8">
-      <h2 class="font-display text-2xl tracking-wide text-ink">Dos formas de reservar</h2>
-      <ol class="mt-4 space-y-4 text-ink-soft">
-        <li>
-          <p class="font-semibold text-ink">1. Online, a través de CoverManager</p>
-          <p>Elige día, hora y número de comensales desde nuestro sistema de reservas. Confirmación al instante.</p>
-        </li>
-        <li>
-          <p class="font-semibold text-ink">2. Por teléfono</p>
-          <p>
-            Llámanos al <a class="underline underline-offset-4 hover:text-olive-dark" href={`tel:+34${restaurant.phone}`}>{restaurant.phoneDisplay}</a>
-            y te ayudamos a encontrar el mejor horario, también para grupos y eventos.
-          </p>
-        </li>
-      </ol>
+    <div class="flex items-start gap-4 rounded-lg border border-ink/10 bg-cream-white p-5">
+      <span aria-hidden="true" class="mt-0.5 inline-block h-3.5 w-3.5 shrink-0 rotate-45 bg-olive"></span>
+      <p class="text-ink-soft">
+        ¿Prefieres hablar con nosotros? Llámanos al
+        <a class="font-semibold text-ink underline underline-offset-4 hover:text-olive-dark" href={`tel:+34${restaurant.phone}`}>{restaurant.phoneDisplay}</a>,
+        también para grupos grandes y eventos privados.
+      </p>
+    </div>
 
-      <div class="mt-8">
-        <ReservationCta locale={locale} />
-      </div>
+    <div class="mt-8">
+      <CoverManagerWidget locale={locale} />
     </div>
 
     <p class="mt-8 text-center text-ink-soft">

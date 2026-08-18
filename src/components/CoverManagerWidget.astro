@@ -1,0 +1,33 @@
+---
+import { restaurant } from '../data/restaurant';
+import { t, type Locale } from '../data/i18n';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const strings = t(locale);
+const src = restaurant.coverManagerWidgetSrc[locale];
+---
+
+<div id="reservar" class="overflow-hidden rounded-lg border border-ink/10 bg-cream-white shadow-md scroll-mt-24">
+  <iframe
+    id="cm-widget"
+    title={strings.cta.reserveOnline}
+    src={src}
+    width="100%"
+    height="796"
+    loading="lazy"
+    allow="payment"
+    style="border:0; display:block"
+  ></iframe>
+</div>
+
+<script src="https://www.covermanager.com/js/iframeResizer/iframeResizer.min.js" is:inline></script>
+<script is:inline>
+  // Auto-resize the CoverManager iframe to its real content height (their own widget relies on this).
+  if (window.iFrameResize) {
+    window.iFrameResize({ log: false }, '#cm-widget');
+  }
+</script>

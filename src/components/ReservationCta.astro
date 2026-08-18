@@ -1,6 +1,7 @@
 ---
 import { restaurant } from '../data/restaurant';
-import { t, type Locale } from '../data/i18n';
+import { routes, t, type Locale } from '../data/i18n';
+import { withBase } from '../utils/paths';
 
 interface Props {
   locale: Locale;
@@ -18,9 +19,7 @@ const classes =
 
 <div class="flex flex-col gap-3 sm:flex-row">
   <a
-    href={restaurant.coverManagerUrl}
-    target="_blank"
-    rel="noopener noreferrer"
+    href={`${withBase(routes.reservations[locale])}#reservar`}
     class:list={[
       'inline-flex min-h-[44px] items-center justify-center rounded-md px-6 py-3 font-semibold shadow-sm transition-colors',
       classes,

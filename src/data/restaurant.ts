@@ -25,7 +25,13 @@ export const restaurant = {
   phoneDisplay: '683 37 33 39',
   email: null as string | null,
   instagram: 'https://www.instagram.com/labacalona/',
-  // Public reservation URL — see CLAUDE.md 6: link out unless a real embed script is available.
+  // Real CoverManager widget iframe (confirmed on restaurante.covermanager.com/la-bacalona,
+  // which embeds this same URL) — used directly on /reservas so booking never leaves the site.
+  coverManagerWidgetSrc: {
+    es: 'https://www.covermanager.com/reservation/module_restaurant/restaurante-la-bacalona/spanish',
+    en: 'https://www.covermanager.com/reservation/module_restaurant/restaurante-la-bacalona/english',
+  },
+  // Kept only as a fallback deep-link (e.g. JSON-LD `reservations`), never as the primary CTA.
   coverManagerUrl: 'https://restaurante.covermanager.com/la-bacalona/',
   // Google Maps embed needs no API key for a basic place query iframe.
   mapEmbedSrc:

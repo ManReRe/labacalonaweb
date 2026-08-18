@@ -1,7 +1,7 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import PageHero from '../../components/PageHero.astro';
-import ReservationCta from '../../components/ReservationCta.astro';
+import CoverManagerWidget from '../../components/CoverManagerWidget.astro';
 import { restaurant } from '../../data/restaurant';
 
 const locale = 'en' as const;
@@ -11,30 +11,22 @@ const locale = 'en' as const;
   locale={locale}
   routeKey="reservations"
   title="Reservations | La Bacalona — Restaurant in Seville"
-  description="Book a table at La Bacalona: online via CoverManager or by phone at +34 683 37 33 39. Open every day from 12:30 PM to 12:30 AM."
+  description="Book a table at La Bacalona online, right on this page, or by phone at +34 683 37 33 39. Open every day from 12:30 PM to 12:30 AM."
 >
-  <PageHero eyebrow="Reservations" title="Book your table" />
+  <PageHero eyebrow="Reservations" title="Book your table" subtitle="Choose your date, time, and party size right here. Instant confirmation." />
 
   <div class="mx-auto max-w-3xl px-4 py-12 sm:px-6">
-    <div class="rounded-lg border border-ink/10 bg-cream-white p-6 sm:p-8">
-      <h2 class="font-display text-2xl tracking-wide text-ink">Two ways to book</h2>
-      <ol class="mt-4 space-y-4 text-ink-soft">
-        <li>
-          <p class="font-semibold text-ink">1. Online, via CoverManager</p>
-          <p>Choose your date, time, and party size through our booking system. Instant confirmation.</p>
-        </li>
-        <li>
-          <p class="font-semibold text-ink">2. By phone</p>
-          <p>
-            Call us at <a class="underline underline-offset-4 hover:text-olive-dark" href={`tel:+34${restaurant.phone}`}>+34 {restaurant.phoneDisplay}</a>
-            and we'll help you find the best time, including for groups and events.
-          </p>
-        </li>
-      </ol>
+    <div class="flex items-start gap-4 rounded-lg border border-ink/10 bg-cream-white p-5">
+      <span aria-hidden="true" class="mt-0.5 inline-block h-3.5 w-3.5 shrink-0 rotate-45 bg-olive"></span>
+      <p class="text-ink-soft">
+        Prefer to talk to us? Call
+        <a class="font-semibold text-ink underline underline-offset-4 hover:text-olive-dark" href={`tel:+34${restaurant.phone}`}>+34 {restaurant.phoneDisplay}</a>,
+        also for large groups and private events.
+      </p>
+    </div>
 
-      <div class="mt-8">
-        <ReservationCta locale={locale} />
-      </div>
+    <div class="mt-8">
+      <CoverManagerWidget locale={locale} />
     </div>
 
     <p class="mt-8 text-center text-ink-soft">
