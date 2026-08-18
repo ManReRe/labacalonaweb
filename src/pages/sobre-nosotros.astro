@@ -1,0 +1,51 @@
+---
+import { Image } from 'astro:assets';
+import Layout from '../layouts/Layout.astro';
+import PageHero from '../components/PageHero.astro';
+import ReservationCta from '../components/ReservationCta.astro';
+import interiorImg from '../assets/images/interior-1.jpg';
+
+const locale = 'es' as const;
+---
+
+<Layout
+  locale={locale}
+  routeKey="about"
+  title="Sobre nosotros | La Bacalona — Restaurante en Sevilla"
+  description="Conoce La Bacalona: una abacería y taberna sevillana nacida del cariño por el producto de temporada, los ibéricos de bellota y el barrio que nos rodea."
+>
+  <PageHero eyebrow="Sobre nosotros" title="Nuestra historia" />
+
+  <div class="mx-auto grid max-w-5xl gap-10 px-4 py-12 sm:px-6 md:grid-cols-2 md:items-center">
+    <div class="space-y-5 text-ink-soft">
+      <p>
+        La Bacalona nace como una abacería y taberna en el corazón de Sevilla, un lugar donde comer y beber bien
+        no está reñido con la cercanía. Recuperamos el espíritu de las abacerías extremeñas —el mostrador de
+        chacinas y quesos, el producto curado con paciencia— y lo servimos con la calidez propia de una taberna
+        sevillana de barrio.
+      </p>
+      <p>
+        Nuestra cocina se apoya en el producto de temporada y en los ibéricos de bellota, con guiños a la
+        tradición andaluza —el salmorejo, la tortilla, las frituras— y sugerencias que cambian según lo que nos
+        trae el mercado. No buscamos complicar: buscamos que cada plato sepa exactamente a lo que es.
+      </p>
+      <p>
+        Creemos en la mesa compartida, en las raciones que invitan a probar de todo y en un servicio cercano que
+        te hace sentir en casa, aunque estés a pie de calle en pleno centro de Sevilla.
+      </p>
+    </div>
+    <div class="overflow-hidden rounded-lg shadow-lg">
+      <Image
+        src={interiorImg}
+        alt="Comedor de La Bacalona en Sevilla"
+        width={640}
+        height={800}
+        class="h-full w-full object-cover"
+      />
+    </div>
+  </div>
+
+  <div class="mx-auto max-w-4xl px-4 pb-16 sm:px-6">
+    <ReservationCta locale={locale} />
+  </div>
+</Layout>

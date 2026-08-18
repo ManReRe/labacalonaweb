@@ -1,0 +1,44 @@
+---
+import Layout from '../layouts/Layout.astro';
+import PageHero from '../components/PageHero.astro';
+import ReservationCta from '../components/ReservationCta.astro';
+import { restaurant } from '../data/restaurant';
+
+const locale = 'es' as const;
+---
+
+<Layout
+  locale={locale}
+  routeKey="reservations"
+  title="Reservas | La Bacalona — Restaurante en Sevilla"
+  description="Reserva mesa en La Bacalona: online a través de CoverManager o por teléfono en el 683 37 33 39. Abrimos todos los días de 12:30 a 00:30."
+>
+  <PageHero eyebrow="Reservas" title="Reserva tu mesa" />
+
+  <div class="mx-auto max-w-3xl px-4 py-12 sm:px-6">
+    <div class="rounded-lg border border-ink/10 bg-cream-white p-6 sm:p-8">
+      <h2 class="font-display text-2xl tracking-wide text-ink">Dos formas de reservar</h2>
+      <ol class="mt-4 space-y-4 text-ink-soft">
+        <li>
+          <p class="font-semibold text-ink">1. Online, a través de CoverManager</p>
+          <p>Elige día, hora y número de comensales desde nuestro sistema de reservas. Confirmación al instante.</p>
+        </li>
+        <li>
+          <p class="font-semibold text-ink">2. Por teléfono</p>
+          <p>
+            Llámanos al <a class="underline underline-offset-4 hover:text-olive-dark" href={`tel:+34${restaurant.phone}`}>{restaurant.phoneDisplay}</a>
+            y te ayudamos a encontrar el mejor horario, también para grupos y eventos.
+          </p>
+        </li>
+      </ol>
+
+      <div class="mt-8">
+        <ReservationCta locale={locale} />
+      </div>
+    </div>
+
+    <p class="mt-8 text-center text-ink-soft">
+      Abrimos todos los días de <strong class="text-ink">12:30 a 00:30</strong>, sin cierre a mediodía.
+    </p>
+  </div>
+</Layout>

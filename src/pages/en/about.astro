@@ -1,0 +1,51 @@
+---
+import { Image } from 'astro:assets';
+import Layout from '../../layouts/Layout.astro';
+import PageHero from '../../components/PageHero.astro';
+import ReservationCta from '../../components/ReservationCta.astro';
+import interiorImg from '../../assets/images/interior-1.jpg';
+
+const locale = 'en' as const;
+---
+
+<Layout
+  locale={locale}
+  routeKey="about"
+  title="About us | La Bacalona — Restaurant in Seville"
+  description="Meet La Bacalona: a Seville tavern and grocer-style restaurant built on seasonal produce, acorn-fed Iberian cured meats, and the neighborhood around us."
+>
+  <PageHero eyebrow="About us" title="Our story" />
+
+  <div class="mx-auto grid max-w-5xl gap-10 px-4 py-12 sm:px-6 md:grid-cols-2 md:items-center">
+    <div class="space-y-5 text-ink-soft">
+      <p>
+        La Bacalona was born as an "abacería" (a traditional Spanish grocer) and tavern in the heart of Seville —
+        a place where eating and drinking well doesn't mean losing that neighborhood feel. We bring back the
+        spirit of Extremadura's grocers, with their counters of cured meats and cheeses aged with patience, and
+        serve it with the warmth of a Seville corner tavern.
+      </p>
+      <p>
+        Our kitchen leans on seasonal produce and acorn-fed Iberian cured meats, with nods to Andalusian
+        tradition — salmorejo, tortilla, fried classics — alongside chef's suggestions that shift with what the
+        market brings. We're not chasing complexity: we want every dish to taste exactly like what it is.
+      </p>
+      <p>
+        We believe in the shared table, in portions made for tasting a bit of everything, and in service that
+        feels like home, even while you're right in the middle of Seville's city centre.
+      </p>
+    </div>
+    <div class="overflow-hidden rounded-lg shadow-lg">
+      <Image
+        src={interiorImg}
+        alt="Dining room at La Bacalona in Seville"
+        width={640}
+        height={800}
+        class="h-full w-full object-cover"
+      />
+    </div>
+  </div>
+
+  <div class="mx-auto max-w-4xl px-4 pb-16 sm:px-6">
+    <ReservationCta locale={locale} />
+  </div>
+</Layout>
