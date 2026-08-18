@@ -34,18 +34,18 @@ const locale = 'en' as const;
         feels like home, even while you're right in the middle of Seville's city centre.
       </p>
     </div>
-    <div class="overflow-hidden rounded-lg shadow-lg">
+    <div class="aspect-square overflow-hidden rounded-lg shadow-lg">
       <Image
         src={interiorImg}
         alt="Dining room at La Bacalona in Seville"
         width={640}
-        height={800}
+        height={640}
         class="h-full w-full object-cover"
       />
     </div>
   </div>
 
-  <div class="mx-auto max-w-4xl px-4 pb-16 sm:px-6">
+  <div class="mx-auto flex max-w-4xl justify-center px-4 pb-16 sm:px-6">
     <ReservationCta locale={locale} />
   </div>
 </Layout>
