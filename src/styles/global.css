@@ -1,0 +1,51 @@
+@import "tailwindcss";
+
+/* Self-hosted fonts (no third-party requests) — see CLAUDE.md 3.2 (no trackers/third parties). */
+@import "@fontsource/bebas-neue";
+@import "@fontsource/lora/400.css";
+@import "@fontsource/lora/500.css";
+@import "@fontsource/lora/600.css";
+@import "@fontsource/lora/400-italic.css";
+
+/*
+  Palette derived from the La Bacalona brand materials (Logo/, Menu/):
+  the logo itself is pure black/white with a diamond mark; the printed
+  menu and wine list use a warm cream "abaceria" tone, dark mahogany,
+  and a sage-olive accent for section headers. Reused here as tokens.
+*/
+@theme {
+  --color-ink: #1a1512;
+  --color-ink-soft: #3a322c;
+  --color-paper: #f6f0e4;
+  --color-sand: #d9cba9;
+  --color-sand-dark: #c3b28a;
+  --color-espresso: #3c2417;
+  --color-espresso-dark: #2a1810;
+  --color-olive: #7c8a5c;
+  --color-olive-dark: #5f6b45;
+  --color-cream-white: #fffdf8;
+
+  --font-display: "Bebas Neue", "Arial Narrow", sans-serif;
+  --font-body: "Lora", "Georgia", serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--color-paper);
+  color: var(--color-ink);
+  font-family: var(--font-body);
+}
+
+.font-display {
+  font-family: var(--font-display);
+  letter-spacing: 0.04em;
+}
+
+/* Visible focus ring everywhere for keyboard navigation (accessibility, CLAUDE.md 3). */
+:focus-visible {
+  outline: 3px solid var(--color-olive);
+  outline-offset: 2px;
+}
