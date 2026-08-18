@@ -1,0 +1,86 @@
+---
+import { Image } from 'astro:assets';
+import Layout from '../../layouts/Layout.astro';
+import ReservationCta from '../../components/ReservationCta.astro';
+import { routes, t } from '../../data/i18n';
+import { restaurant } from '../../data/restaurant';
+import interiorImg from '../../assets/images/interior-1.jpg';
+import huevosImg from '../../assets/images/dish-huevos-fritas.jpg';
+import boqueronesImg from '../../assets/images/dish-boquerones.jpg';
+import tacoImg from '../../assets/images/dish-taco.jpg';
+
+const locale = 'en' as const;
+const strings = t(locale);
+---
+
+<Layout
+  locale={locale}
+  routeKey="home"
+  isHome
+  title="La Bacalona | Restaurant in central Seville"
+  description="La Bacalona: a Seville tavern and grocer-style restaurant built on seasonal produce, acorn-fed Iberian cured meats, and a menu made for sharing. Book your table in central Seville."
+>
+  <section class="relative overflow-hidden bg-espresso text-cream-white">
+    <div class="mx-auto grid max-w-6xl items-center gap-8 px-4 py-16 sm:px-6 md:grid-cols-2 md:py-24">
+      <div>
+        <p class="font-semibold uppercase tracking-widest text-sand">Seville, city centre</p>
+        <h1 class="mt-2 font-display text-5xl leading-tight tracking-wide sm:text-6xl">
+          {restaurant.name}
+        </h1>
+        <p class="mt-4 text-lg text-cream-white/90">{restaurant.tagline.en}</p>
+        <p class="mt-2 max-w-md text-cream-white/70">{restaurant.shortDescription.en}</p>
+        <div class="mt-8">
+          <ReservationCta locale={locale} />
+        </div>
+      </div>
+      <div class="overflow-hidden rounded-lg shadow-xl">
+        <Image
+          src={interiorImg}
+          alt="Dining room interior at La Bacalona in Seville"
+          width={640}
+          height={800}
+          class="h-full w-full object-cover"
+        />
+      </div>
+    </div>
+  </section>
+
+  <section class="mx-auto max-w-6xl px-4 py-16 sm:px-6">
+    <h2 class="font-display text-3xl tracking-wide text-ink">Dishes that define us</h2>
+    <div class="mt-8 grid gap-6 sm:grid-cols-3">
+      <a href={routes.menu[locale]} class="group block overflow-hidden rounded-lg border border-ink/10">
+        <Image src={huevosImg} alt="Huevos rotos with fries at La Bacalona" width={480} height={480} class="h-56 w-full object-cover transition-transform group-hover:scale-105" />
+        <p class="p-4 font-semibold text-ink">Huevos rotos, a house classic</p>
+      </a>
+      <a href={routes.menu[locale]} class="group block overflow-hidden rounded-lg border border-ink/10">
+        <Image src={boqueronesImg} alt="Olives and marinated anchovies at La Bacalona" width={480} height={480} class="h-56 w-full object-cover transition-transform group-hover:scale-105" />
+        <p class="p-4 font-semibold text-ink">Grocer-style bites and pickles</p>
+      </a>
+      <a href={routes.menu[locale]} class="group block overflow-hidden rounded-lg border border-ink/10">
+        <Image src={tacoImg} alt="Chef's suggestion served on a wooden table" width={480} height={480} class="h-56 w-full object-cover transition-transform group-hover:scale-105" />
+        <p class="p-4 font-semibold text-ink">Chef's suggestions, every week</p>
+      </a>
+    </div>
+    <div class="mt-8 flex flex-wrap gap-4">
+      <a href={routes.menu[locale]} class="inline-flex min-h-[44px] items-center justify-center rounded-md bg-ink px-6 py-3 font-semibold text-cream-white hover:bg-ink-soft">
+        {strings.cta.seeMenu}
+      </a>
+      <a href={routes.wines[locale]} class="inline-flex min-h-[44px] items-center justify-center rounded-md border border-ink/30 px-6 py-3 font-semibold text-ink hover:bg-ink hover:text-cream-white">
+        {strings.cta.seeWines}
+      </a>
+    </div>
+  </section>
+
+  <section class="bg-sand/50 py-16">
+    <div class="mx-auto max-w-4xl px-4 text-center sm:px-6">
+      <h2 class="font-display text-3xl tracking-wide text-ink">In the heart of Seville</h2>
+      <p class="mx-auto mt-4 max-w-2xl text-ink-soft">
+        You'll find us on Calle Amador de los Ríos, right in Seville's historic centre. A welcoming space where
+        seasonal produce, acorn-fed Iberian cured meats, and honest cooking take centre stage.
+      </p>
+      <a href={routes.about[locale]} class="mt-6 inline-block font-semibold text-olive-dark underline-offset-4 hover:underline">
+        Read our story →
+      </a>
+    </div>
+  </section>
+</Layout>
