@@ -7,12 +7,12 @@ export const restaurant = {
   // "Come & Bebe" under the logo is the tagline, not part of the name.
   legalName: 'La Bacalona',
   tagline: {
-    es: 'Come y bebe en el corazón de Sevilla',
-    en: 'Eat and drink in the heart of Seville',
+    es: 'Comé, bebé, viví…',
+    en: 'Eat, drink, live…',
   },
   shortDescription: {
-    es: 'Abacería y taberna sevillana con producto de temporada, ibéricos, quesos y una carta pensada para compartir.',
-    en: 'A Seville tavern and grocer-style restaurant built on seasonal produce, Iberian cured meats, cheeses, and a menu made for sharing.',
+    es: 'Taberna extremeña-andaluza con producto de temporada, ibéricos, quesos y una carta pensada para compartir.',
+    en: 'An Extremaduran-Andalusian tavern built on seasonal produce, Iberian cured meats, cheeses, and a menu made for sharing.',
   },
   address: {
     streetAddress: 'C. Amador de los Ríos, 38',
@@ -48,5 +48,5 @@ export const restaurant = {
     },
   },
   priceRange: '€€',
-  cuisineTypes: ['Spanish', 'Andalusian', 'Tapas'],
+  cuisineTypes: ['Spanish', 'Andalusian', 'Extremaduran', 'Tapas'],
 } as const;
