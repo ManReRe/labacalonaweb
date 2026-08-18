@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://labacalona.es/sitemap-index.xml
