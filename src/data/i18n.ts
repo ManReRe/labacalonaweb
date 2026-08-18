@@ -28,7 +28,7 @@ export const ui = {
     cta: {
       reserve: 'Reservar mesa',
       reserveOnline: 'Reservar mesa online',
-      callUs: 'Llamar al',
+      callUs: 'Llámanos',
       seeMenu: 'Ver la carta',
       seeWines: 'Ver los vinos',
       viewOnMap: 'Cómo llegar',
@@ -68,7 +68,7 @@ export const ui = {
     cta: {
       reserve: 'Book a table',
       reserveOnline: 'Book a table online',
-      callUs: 'Call',
+      callUs: 'Call us',
       seeMenu: 'See the menu',
       seeWines: 'See the wine list',
       viewOnMap: 'Get directions',
