@@ -1,0 +1,51 @@
+---
+import type { WineSection } from '../data/wines';
+import AllergenTags from './AllergenTags.astro';
+import { t, type Locale } from '../data/i18n';
+
+interface Props {
+  locale: Locale;
+  sections: WineSection[];
+}
+
+const { locale, sections } = Astro.props;
+const strings = t(locale);
+---
+
+<div class="space-y-14">
+  {sections.map((section) => (
+    <section id={section.id} aria-labelledby={`${section.id}-title`}>
+      <h2 id={`${section.id}-title`} class="font-display text-3xl tracking-wide text-ink">
+        {section.title[locale]}
+      </h2>
+
+      <ul class="mt-6 divide-y divide-ink/10">
+        {section.wines.map((wine) => (
+          <li class="flex flex-col gap-2 py-4 sm:flex-row sm:items-start sm:justify-between sm:gap-6">
+            <div class="sm:max-w-xl">
+              <p class="font-semibold text-ink">{wine.name}</p>
+              {wine.grape && <p class="mt-0.5 text-sm text-ink-soft">{wine.grape[locale]}</p>}
+              {wine.origin && <p class="text-sm text-ink-soft">{wine.origin[locale]}</p>}
+              {wine.aging && <p class="text-sm italic text-ink-soft">{wine.aging[locale]}</p>}
+              <AllergenTags locale={locale} codes={wine.allergens} />
+            </div>
+            <div class="flex shrink-0 gap-4 text-right sm:flex-col sm:items-end sm:gap-1">
+              {wine.prices.glass && (
+                <p class="whitespace-nowrap text-ink">
+                  <span class="mr-1 text-xs uppercase tracking-wide text-ink-soft">Copa</span>
+                  <span class="font-semibold">{wine.prices.glass}</span>
+                </p>
+              )}
+              {wine.prices.bottle && (
+                <p class="whitespace-nowrap text-ink">
+                  <span class="mr-1 text-xs uppercase tracking-wide text-ink-soft">Botella</span>
+                  <span class="font-semibold">{wine.prices.bottle}</span>
+                </p>
+              )}
+            </div>
+          </li>
+        ))}
+      </ul>
+    </section>
+  ))}
+</div>

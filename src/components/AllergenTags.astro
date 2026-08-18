@@ -1,0 +1,26 @@
+---
+import { allergens, type AllergenCode } from '../data/allergens';
+import { t, type Locale } from '../data/i18n';
+
+interface Props {
+  locale: Locale;
+  codes: AllergenCode[];
+}
+
+const { locale, codes } = Astro.props;
+const strings = t(locale);
+---
+
+{codes.length > 0 && (
+  <ul class="mt-1 flex flex-wrap gap-1" aria-label={`${strings.allergens.contains}: ${codes.map((c) => allergens[c][locale]).join(', ')}`}>
+    {codes.map((code) => (
+      <li
+        class="inline-flex h-7 min-w-7 items-center justify-center rounded-full bg-sand px-1.5 text-sm"
+        title={allergens[code][locale]}
+        aria-hidden="true"
+      >
+        {allergens[code].icon}
+      </li>
+    ))}
+  </ul>
+)}

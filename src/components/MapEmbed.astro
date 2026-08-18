@@ -1,0 +1,23 @@
+---
+import { restaurant } from '../data/restaurant';
+import { t, type Locale } from '../data/i18n';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const strings = t(locale);
+---
+
+<div class="overflow-hidden rounded-lg border border-ink/10">
+  <iframe
+    title={`${strings.address}: ${restaurant.address.streetAddress}, ${restaurant.address.addressLocality}`}
+    src={restaurant.mapEmbedSrc}
+    width="100%"
+    height="360"
+    style="border:0"
+    loading="lazy"
+    referrerpolicy="no-referrer-when-downgrade"
+  ></iframe>
+</div>

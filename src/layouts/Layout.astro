@@ -1,0 +1,118 @@
+---
+import '../styles/global.css';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { restaurant } from '../data/restaurant';
+import { routes, t, type Locale, type RouteKey } from '../data/i18n';
+
+interface Props {
+  locale: Locale;
+  routeKey: RouteKey;
+  title: string;
+  description: string;
+  /** Set true only on the two homepages — drives the one-time client redirect. */
+  isHome?: boolean;
+  ogImage?: string;
+}
+
+const { locale, routeKey, title, description, isHome = false, ogImage } = Astro.props;
+const strings = t(locale);
+
+const canonicalPath = routes[routeKey][locale];
+const canonicalURL = new URL(canonicalPath, Astro.site);
+const esURL = new URL(routes[routeKey].es, Astro.site);
+const enURL = new URL(routes[routeKey].en, Astro.site);
+const defaultOgImage = new URL('/og-default.jpg', Astro.site).toString();
+
+const restaurantJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Restaurant',
+  name: restaurant.name,
+  image: defaultOgImage,
+  url: Astro.site?.toString(),
+  telephone: `+34${restaurant.phone}`,
+  priceRange: restaurant.priceRange,
+  servesCuisine: restaurant.cuisineTypes,
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: restaurant.address.streetAddress,
+    postalCode: restaurant.address.postalCode,
+    addressLocality: restaurant.address.addressLocality,
+    addressRegion: restaurant.address.addressRegion,
+    addressCountry: restaurant.address.addressCountry,
+  },
+  openingHoursSpecification: {
+    '@type': 'OpeningHoursSpecification',
+    dayOfWeek: restaurant.openingHours.days,
+    opens: restaurant.openingHours.opens,
+    closes: restaurant.openingHours.closes,
+  },
+  sameAs: [restaurant.instagram],
+  acceptsReservations: 'True',
+  reservations: restaurant.coverManagerUrl,
+} as const;
+---
+
+<!doctype html>
+<html lang={locale}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalURL} />
+
+    <link rel="alternate" hreflang="es" href={esURL} />
+    <link rel="alternate" hreflang="en" href={enURL} />
+    <link rel="alternate" hreflang="x-default" href={esURL} />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:image" content={ogImage ?? defaultOgImage} />
+    <meta property="og:locale" content={locale === 'es' ? 'es_ES' : 'en_US'} />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <script type="application/ld+json" set:html={JSON.stringify(restaurantJsonLd)} />
+
+    {isHome && (
+      <script>
+        // One-time client-side language redirect on first visit only (CLAUDE.md 3.1).
+        // Never a server/edge redirect — crawlers always see the unprefixed ES page.
+        (function () {
+          try {
+            if (localStorage.getItem('labacalona-locale-redirected')) return;
+            localStorage.setItem('labacalona-locale-redirected', '1');
+            const path = window.location.pathname;
+            const isEnglishPage = path === '/en' || path.startsWith('/en/');
+            const prefersEnglish = navigator.language?.toLowerCase().startsWith('en');
+            if (prefersEnglish && !isEnglishPage) {
+              window.location.replace('/en');
+            } else if (!prefersEnglish && isEnglishPage) {
+              window.location.replace('/');
+            }
+          } catch (_e) {
+            // localStorage unavailable (privacy mode, etc.) — skip redirect silently.
+          }
+        })();
+      </script>
+    )}
+  </head>
+  <body class="flex min-h-screen flex-col bg-paper text-ink">
+    <a
+      href="#main-content"
+      class="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-50 focus:bg-ink focus:text-paper focus:px-4 focus:py-2 focus:rounded"
+    >
+      {strings.skipToContent}
+    </a>
+    <Header locale={locale} routeKey={routeKey} />
+    <main id="main-content" class="flex-1">
+      <slot />
+    </main>
+    <Footer locale={locale} />
+  </body>
+</html>

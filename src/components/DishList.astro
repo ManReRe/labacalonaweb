@@ -1,0 +1,44 @@
+---
+import type { MenuSection } from '../data/menu';
+import AllergenTags from './AllergenTags.astro';
+import { t, type Locale } from '../data/i18n';
+
+interface Props {
+  locale: Locale;
+  sections: MenuSection[];
+}
+
+const { locale, sections } = Astro.props;
+const strings = t(locale);
+---
+
+<div class="space-y-14">
+  {sections.map((section) => (
+    <section id={section.id} aria-labelledby={`${section.id}-title`}>
+      <h2 id={`${section.id}-title`} class="font-display text-3xl tracking-wide text-ink">
+        {section.title[locale]}
+      </h2>
+      {section.subtitle && <p class="mt-1 italic text-ink-soft">{section.subtitle[locale]}</p>}
+
+      <ul class="mt-6 divide-y divide-ink/10">
+        {section.dishes.map((dish) => (
+          <li class="flex flex-col gap-2 py-4 sm:flex-row sm:items-start sm:justify-between sm:gap-6">
+            <div class="sm:max-w-xl">
+              <p class="font-semibold text-ink">{dish.name}</p>
+              {dish.description && <p class="mt-0.5 text-sm text-ink-soft">{dish.description[locale]}</p>}
+              <AllergenTags locale={locale} codes={dish.allergens} />
+            </div>
+            <div class="flex shrink-0 gap-4 text-right sm:flex-col sm:items-end sm:gap-1">
+              {dish.prices.map((p) => (
+                <p class="whitespace-nowrap text-ink">
+                  {p.label && <span class="mr-1 text-xs uppercase tracking-wide text-ink-soft">{p.label[locale]}</span>}
+                  <span class="font-semibold">{p.price}</span>
+                </p>
+              ))}
+            </div>
+          </li>
+        ))}
+      </ul>
+    </section>
+  ))}
+</div>

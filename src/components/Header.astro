@@ -1,0 +1,78 @@
+---
+import { restaurant } from '../data/restaurant';
+import { routes, t, otherLocale, type Locale, type RouteKey } from '../data/i18n';
+
+interface Props {
+  locale: Locale;
+  routeKey: RouteKey;
+}
+
+const { locale, routeKey } = Astro.props;
+const strings = t(locale);
+const other = otherLocale(locale);
+
+const navItems: { key: RouteKey; label: string }[] = [
+  { key: 'home', label: strings.nav.home },
+  { key: 'about', label: strings.nav.about },
+  { key: 'menu', label: strings.nav.menu },
+  { key: 'wines', label: strings.nav.wines },
+  { key: 'reservations', label: strings.nav.reservations },
+  { key: 'contact', label: strings.nav.contact },
+];
+---
+
+<header class="sticky top-0 z-40 border-b border-ink/10 bg-paper/95 backdrop-blur">
+  <div class="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-3 sm:px-6">
+    <a href={routes.home[locale]} class="flex items-center gap-2 font-display text-2xl tracking-wide text-ink">
+      <span aria-hidden="true" class="inline-block h-5 w-5 rotate-45 bg-ink"></span>
+      {restaurant.name}
+    </a>
+
+    <input type="checkbox" id="nav-toggle" class="peer hidden" />
+    <label
+      for="nav-toggle"
+      class="flex h-11 w-11 cursor-pointer items-center justify-center rounded md:hidden"
+      aria-label={strings.nav.home}
+    >
+      <span class="sr-only">Menú</span>
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="2">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+      </svg>
+    </label>
+
+    <nav
+      class="fixed inset-x-0 top-[61px] hidden max-h-[calc(100vh-61px)] flex-col gap-1 overflow-y-auto bg-paper px-4 py-4 peer-checked:flex md:static md:flex md:max-h-none md:flex-row md:items-center md:gap-6 md:overflow-visible md:bg-transparent md:p-0"
+      aria-label="Main"
+    >
+      {navItems.map((item) => (
+        <a
+          href={routes[item.key][locale]}
+          class:list={[
+            'min-h-[44px] py-2.5 font-medium hover:text-olive-dark md:py-0',
+            routeKey === item.key ? 'text-olive-dark underline underline-offset-4' : 'text-ink',
+          ]}
+          aria-current={routeKey === item.key ? 'page' : undefined}
+        >
+          {item.label}
+        </a>
+      ))}
+
+      <div class="flex items-center gap-3 border-t border-ink/10 py-3 md:border-0 md:py-0">
+        <a
+          href={routes[routeKey][other]}
+          hreflang={other}
+          class="min-h-[44px] px-2 font-medium text-ink underline-offset-4 hover:underline md:min-h-0"
+          aria-label={strings.languageSwitcher}
+        >
+          {other.toUpperCase()}
+        </a>
+        <a
+          href={routes.reservations[locale]}
+          class="inline-flex min-h-[44px] items-center justify-center rounded-md bg-olive px-4 py-2.5 font-semibold text-cream-white shadow-sm hover:bg-olive-dark"
+        >
+          {strings.cta.reserve}
+        </a>
+      </div>
+    </nav>
+  </div>
+</header>

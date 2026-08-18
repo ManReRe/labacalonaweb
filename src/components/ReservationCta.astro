@@ -1,0 +1,37 @@
+---
+import { restaurant } from '../data/restaurant';
+import { t, type Locale } from '../data/i18n';
+
+interface Props {
+  locale: Locale;
+  variant?: 'primary' | 'secondary';
+}
+
+const { locale, variant = 'primary' } = Astro.props;
+const strings = t(locale);
+
+const classes =
+  variant === 'primary'
+    ? 'bg-olive text-cream-white hover:bg-olive-dark'
+    : 'bg-transparent text-ink border border-ink/30 hover:bg-ink hover:text-cream-white';
+---
+
+<div class="flex flex-col gap-3 sm:flex-row">
+  <a
+    href={restaurant.coverManagerUrl}
+    target="_blank"
+    rel="noopener noreferrer"
+    class:list={[
+      'inline-flex min-h-[44px] items-center justify-center rounded-md px-6 py-3 font-semibold shadow-sm transition-colors',
+      classes,
+    ]}
+  >
+    {strings.cta.reserveOnline}
+  </a>
+  <a
+    href={`tel:+34${restaurant.phone}`}
+    class="inline-flex min-h-[44px] items-center justify-center gap-1 rounded-md border border-ink/30 px-6 py-3 font-semibold text-ink hover:bg-ink hover:text-cream-white"
+  >
+    {strings.cta.callUs} {restaurant.phoneDisplay}
+  </a>
+</div>

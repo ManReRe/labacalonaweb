@@ -1,0 +1,26 @@
+---
+import { allergens, allergenOrder } from '../data/allergens';
+import { t, type Locale } from '../data/i18n';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const strings = t(locale);
+---
+
+<section class="mt-12 rounded-lg border border-ink/10 bg-cream-white p-5" aria-labelledby="allergen-legend-title">
+  <h2 id="allergen-legend-title" class="font-display text-xl tracking-wide">{strings.allergens.legend}</h2>
+  <ul class="mt-3 grid grid-cols-2 gap-x-4 gap-y-2 sm:grid-cols-3 md:grid-cols-4">
+    {allergenOrder.map((code) => (
+      <li class="flex items-center gap-2 text-sm">
+        <span aria-hidden="true" class="text-base">{allergens[code].icon}</span>
+        {allergens[code][locale]}
+      </li>
+    ))}
+  </ul>
+  <p class="mt-4 rounded-md bg-sand/60 p-3 text-sm text-ink-soft" role="note">
+    ⚠️ {strings.allergens.disclaimer}
+  </p>
+</section>
