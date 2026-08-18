@@ -1,7 +1,9 @@
 ---
+import { Image } from 'astro:assets';
 import { restaurant } from '../data/restaurant';
 import { routes, t, otherLocale, type Locale, type RouteKey } from '../data/i18n';
 import { withBase } from '../utils/paths';
+import logoHeader from '../assets/images/logo-header.png';
 
 interface Props {
   locale: Locale;
@@ -23,16 +25,15 @@ const navItems: { key: RouteKey; label: string }[] = [
 ---
 
 <header class="sticky top-0 z-40 border-b border-ink/10 bg-paper/95 shadow-sm backdrop-blur">
-  <div class="mx-auto flex h-[68px] max-w-6xl items-center justify-between gap-4 px-4 sm:px-6">
-    <a href={withBase(routes.home[locale])} class="flex items-center gap-2.5 font-display text-2xl leading-none text-ink">
-      <span aria-hidden="true" class="diamond h-3.5 w-3.5 shrink-0 bg-ink"></span>
-      <span class="pt-0.5">{restaurant.name}</span>
+  <div class="mx-auto flex min-h-[64px] max-w-6xl items-center justify-between gap-4 px-4 py-2 sm:px-6">
+    <a href={withBase(routes.home[locale])} class="flex shrink-0 items-center">
+      <Image src={logoHeader} alt={restaurant.name} class="h-5 w-auto sm:h-6" />
     </a>
 
     <input type="checkbox" id="nav-toggle" class="peer hidden" />
     <label
       for="nav-toggle"
-      class="flex h-11 w-11 shrink-0 cursor-pointer items-center justify-center rounded md:hidden"
+      class="flex h-11 w-11 shrink-0 cursor-pointer items-center justify-center rounded lg:hidden"
       aria-label={strings.nav.home}
     >
       <span class="sr-only">Menú</span>
@@ -42,32 +43,32 @@ const navItems: { key: RouteKey; label: string }[] = [
     </label>
 
     <nav
-      class="fixed inset-x-0 top-[68px] hidden max-h-[calc(100vh-68px)] flex-col gap-1 overflow-y-auto bg-paper px-4 py-4 shadow-lg peer-checked:flex md:static md:flex md:max-h-none md:flex-row md:items-center md:gap-8 md:overflow-visible md:bg-transparent md:p-0 md:shadow-none"
+      class="fixed inset-x-0 top-[64px] hidden max-h-[calc(100vh-64px)] flex-col gap-1 overflow-y-auto bg-paper px-4 py-4 shadow-lg peer-checked:flex lg:static lg:flex lg:max-h-none lg:flex-row lg:items-center lg:gap-6 lg:overflow-visible lg:bg-transparent lg:p-0 lg:shadow-none"
       aria-label="Main"
     >
-      <div class="flex flex-col gap-1 md:flex-row md:items-center md:gap-8">
+      <div class="flex flex-col gap-1 lg:flex-row lg:items-center lg:gap-6">
         {navItems.map((item) => (
           <a
             href={withBase(routes[item.key][locale])}
             class:list={[
-              'relative min-h-[44px] py-2.5 font-medium tracking-wide hover:text-olive-dark md:min-h-0 md:py-1',
+              'relative min-h-[44px] whitespace-nowrap py-2.5 font-medium tracking-wide hover:text-olive-dark lg:min-h-0 lg:py-1',
               routeKey === item.key ? 'text-olive-dark' : 'text-ink',
             ]}
             aria-current={routeKey === item.key ? 'page' : undefined}
           >
             {item.label}
             {routeKey === item.key && (
-              <span aria-hidden="true" class="diamond absolute -bottom-1.5 left-0 hidden h-1.5 w-1.5 bg-olive-dark md:inline-block"></span>
+              <span aria-hidden="true" class="diamond absolute -bottom-1.5 left-0 hidden h-1.5 w-1.5 bg-olive-dark lg:inline-block"></span>
             )}
           </a>
         ))}
       </div>
 
-      <div class="mt-2 flex items-center gap-3 border-t border-ink/10 pt-3 md:ml-2 md:mt-0 md:border-0 md:pt-0">
+      <div class="mt-2 flex items-center gap-3 border-t border-ink/10 pt-3 lg:ml-2 lg:mt-0 lg:border-0 lg:pt-0">
         <a
           href={withBase(routes[routeKey][other])}
           hreflang={other}
-          class="inline-flex min-h-[44px] items-center justify-center rounded-full border border-ink/20 px-3 py-1.5 text-sm font-semibold tracking-wide text-ink hover:border-ink/40 hover:bg-ink/5 md:min-h-0"
+          class="inline-flex min-h-[44px] items-center justify-center rounded-full border border-ink/20 px-3 py-1.5 text-sm font-semibold tracking-wide text-ink hover:border-ink/40 hover:bg-ink/5 lg:min-h-0"
           aria-label={strings.languageSwitcher}
         >
           {other.toUpperCase()}
