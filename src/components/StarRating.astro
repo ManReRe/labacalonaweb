@@ -1,0 +1,24 @@
+---
+// Renders a 0–5 star rating (supports halves) as two overlaid star rows,
+// the top one clipped to the rating percentage. Colors via props so it
+// reads correctly on both light and dark section backgrounds.
+interface Props {
+  value: number;
+  emptyClass?: string;
+  filledClass?: string;
+}
+
+const { value, emptyClass = 'text-ink/20', filledClass = 'text-olive' } = Astro.props;
+const percent = Math.max(0, Math.min(100, (value / 5) * 100));
+const stars = '★★★★★';
+---
+
+<span class="relative inline-block leading-none" aria-hidden="true">
+  <span class:list={['flex gap-0.5', emptyClass]}>{stars}</span>
+  <span
+    class:list={['absolute inset-0 flex gap-0.5 overflow-hidden', filledClass]}
+    style={`width: ${percent}%`}
+  >
+    {stars}
+  </span>
+</span>

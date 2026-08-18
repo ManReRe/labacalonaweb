@@ -53,6 +53,11 @@ const restaurantJsonLd = {
   sameAs: [restaurant.instagram],
   acceptsReservations: 'True',
   reservations: restaurant.coverManagerUrl,
+  aggregateRating: {
+    '@type': 'AggregateRating',
+    ratingValue: restaurant.googleRating.value,
+    reviewCount: restaurant.googleRating.count,
+  },
 } as const;
 ---
 

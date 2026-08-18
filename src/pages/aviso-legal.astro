@@ -15,18 +15,13 @@ const locale = 'es' as const;
   <PageHero eyebrow="Legal" title="Aviso legal" />
 
   <div class="mx-auto max-w-3xl space-y-6 px-4 py-12 text-ink-soft sm:px-6">
-    <p class="rounded-md border border-olive-dark/30 bg-sand/60 p-4 text-sm text-ink" role="note">
-      ⚠️ Página pendiente de completar con los datos fiscales reales del titular (razón social, CIF/NIF,
-      datos registrales) antes de publicar el sitio.
-    </p>
-
     <section>
       <h2 class="font-display text-2xl tracking-wide text-ink">1. Datos del titular</h2>
       <p class="mt-2">
-        Titular: <em>razón social pendiente de confirmar</em> (nombre comercial: {restaurant.name})<br />
+        Titular: {restaurant.legalOwner.name} (nombre comercial: {restaurant.name})<br />
+        NIF: {restaurant.legalOwner.nif}<br />
         Domicilio: {restaurant.address.streetAddress}, {restaurant.address.postalCode} {restaurant.address.addressLocality}, España<br />
-        Teléfono: {restaurant.phoneDisplay}<br />
-        CIF/NIF: <em>pendiente de confirmar</em>
+        Teléfono: {restaurant.phoneDisplay}
       </p>
     </section>
 
@@ -41,7 +36,7 @@ const locale = 'es' as const;
     <section>
       <h2 class="font-display text-2xl tracking-wide text-ink">3. Propiedad intelectual</h2>
       <p class="mt-2">
-        Los contenidos de este sitio web (textos, imágenes, logotipo y diseño) son propiedad de
+        Los contenidos de este sitio web (textos, imágenes, logotipo y diseño) son propiedad de{' '}
         {restaurant.legalName} o se utilizan con la debida autorización, y están protegidos por la normativa de
         propiedad intelectual e industrial.
       </p>

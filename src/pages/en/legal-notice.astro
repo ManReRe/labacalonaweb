@@ -15,18 +15,13 @@ const locale = 'en' as const;
   <PageHero eyebrow="Legal" title="Legal notice" />
 
   <div class="mx-auto max-w-3xl space-y-6 px-4 py-12 text-ink-soft sm:px-6">
-    <p class="rounded-md border border-olive-dark/30 bg-sand/60 p-4 text-sm text-ink" role="note">
-      ⚠️ This page is pending completion with the owner's real tax details (legal name, tax ID, registry
-      details) before the site goes live.
-    </p>
-
     <section>
       <h2 class="font-display text-2xl tracking-wide text-ink">1. Site owner</h2>
       <p class="mt-2">
-        Owner: <em>legal entity name pending confirmation</em> (trading as {restaurant.name})<br />
+        Owner: {restaurant.legalOwner.name} (trading as {restaurant.name})<br />
+        Tax ID (NIF): {restaurant.legalOwner.nif}<br />
         Address: {restaurant.address.streetAddress}, {restaurant.address.postalCode} {restaurant.address.addressLocality}, Spain<br />
-        Phone: +34 {restaurant.phoneDisplay}<br />
-        Tax ID: <em>pending confirmation</em>
+        Phone: +34 {restaurant.phoneDisplay}
       </p>
     </section>
 
