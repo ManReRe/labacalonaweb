@@ -2,7 +2,7 @@
 import type { WineSection } from '../data/wines';
 import AllergenTags from './AllergenTags.astro';
 import DiamondIcon from './DiamondIcon.astro';
-import { t, type Locale } from '../data/i18n';
+import type { Locale } from '../data/i18n';
 
 interface Props {
   locale: Locale;
@@ -10,7 +10,6 @@ interface Props {
 }
 
 const { locale, sections } = Astro.props;
-const strings = t(locale);
 ---
 
 <div class="space-y-16">

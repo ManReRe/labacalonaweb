@@ -85,10 +85,10 @@ const restaurantJsonLd = {
     <meta property="og:locale" content={locale === 'es' ? 'es_ES' : 'en_US'} />
     <meta name="twitter:card" content="summary_large_image" />
 
-    <script type="application/ld+json" set:html={JSON.stringify(restaurantJsonLd)} />
+    <script type="application/ld+json" set:html={JSON.stringify(restaurantJsonLd)} is:inline />
 
     {isHome && (
-      <script define:vars={{ homeEs, homeEn }}>
+      <script define:vars={{ homeEs, homeEn }} is:inline>
         // One-time client-side language redirect on first visit only (CLAUDE.md 3.1).
         // Never a server/edge redirect — crawlers always see the unprefixed ES page.
         (function () {
