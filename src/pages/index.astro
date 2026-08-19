@@ -8,6 +8,7 @@ import { withBase } from '../utils/paths';
 import DiamondIcon from '../components/DiamondIcon.astro';
 import StarRating from '../components/StarRating.astro';
 import interiorImg from '../assets/images/interior-1.jpg';
+import logoWhite from '../assets/images/logo-header-white.png';
 import huevosImg from '../assets/images/dish-huevos-fritas.jpg';
 import boqueronesImg from '../assets/images/dish-boquerones.jpg';
 import tacoImg from '../assets/images/dish-taco.jpg';
@@ -33,39 +34,13 @@ const highlights = [
   title="La Bacalona Sevilla"
   description="La Bacalona: taberna extremeña-andaluza con producto de temporada, ibéricos de bellota y una carta pensada para compartir. Reserva mesa en Sevilla."
 >
-  <section class="relative overflow-hidden bg-espresso text-cream-white">
-    <div class="bg-diamond-texture pointer-events-none absolute inset-0"></div>
-    <div class="relative mx-auto grid max-w-6xl items-center gap-10 px-4 py-16 sm:px-6 md:grid-cols-2 md:py-28">
-      <div>
-        <p class="flex items-center gap-2 font-semibold uppercase tracking-[0.2em] text-sand">
-          <DiamondIcon class="h-3.5 w-3.5 text-olive" />
-          Sevilla, centro
-        </p>
-        <h1 class="mt-3 font-display text-6xl leading-[0.95] sm:text-7xl">
-          {restaurant.name}
-        </h1>
-        <p class="mt-5 text-xl text-cream-white/90">{restaurant.tagline.es}</p>
-        <p class="mt-3 max-w-md text-cream-white/70">{restaurant.shortDescription.es}</p>
-        <div class="mt-4 inline-flex items-center gap-2 text-cream-white/90">
-          <StarRating value={restaurant.googleRating.value} emptyClass="text-cream-white/25" filledClass="text-olive" />
-          <span class="font-semibold">{restaurant.googleRating.value.toString().replace('.', ',')}</span>
-          <span class="text-cream-white/60">· {restaurant.googleRating.count} reseñas en Google</span>
-        </div>
-        <div class="mt-9">
-          <ReservationCta locale={locale} />
-        </div>
-      </div>
-      <div class="relative">
-        <div class="absolute -inset-3 -z-10 hidden rotate-1 rounded-lg border border-cream-white/20 sm:block"></div>
-        <div class="aspect-square overflow-hidden rounded-lg shadow-2xl ring-1 ring-cream-white/10">
-          <Image
-            src={interiorImg}
-            alt="Interior del comedor de La Bacalona en Sevilla"
-            width={640}
-            height={640}
-            class="h-full w-full object-cover"
-          />
-        </div>
+  <section class="bg-espresso text-cream-white">
+    <div class="mx-auto max-w-3xl px-4 py-20 text-center sm:px-6 md:py-28">
+      <h1>
+        <Image src={logoWhite} alt={restaurant.name} width={480} height={56} class="mx-auto h-auto w-full max-w-md" />
+      </h1>
+      <div class="mt-9 flex justify-center">
+        <ReservationCta locale={locale} />
       </div>
     </div>
   </section>
@@ -105,6 +80,11 @@ const highlights = [
       <a href={withBase(routes.about[locale])} class="mt-6 inline-block font-semibold text-olive-dark underline-offset-4 hover:underline">
         Conoce nuestra historia →
       </a>
+      <div class="mt-6 inline-flex items-center gap-2 text-ink-soft">
+        <StarRating value={restaurant.googleRating.value} emptyClass="text-ink/15" filledClass="text-olive-dark" />
+        <span class="font-semibold text-ink">{restaurant.googleRating.value.toString().replace('.', ',')}</span>
+        <span>· {restaurant.googleRating.count} reseñas en Google</span>
+      </div>
     </div>
   </section>
 </Layout>
