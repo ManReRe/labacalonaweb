@@ -21,9 +21,15 @@ const year = new Date().getFullYear();
         href={restaurant.instagram}
         target="_blank"
         rel="noopener noreferrer"
+        aria-label={`${strings.footer.followUs} · Instagram`}
         class="mt-4 inline-flex min-h-[44px] items-center gap-2 text-sm font-medium underline-offset-4 hover:underline"
       >
-        {strings.footer.followUs} · Instagram
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="h-5 w-5 shrink-0" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+          <rect x="3" y="3" width="18" height="18" rx="5" />
+          <circle cx="12" cy="12" r="4" />
+          <circle cx="17.2" cy="6.8" r="0.9" fill="currentColor" stroke="none" />
+        </svg>
+        {strings.footer.followUs}
       </a>
     </div>
 
