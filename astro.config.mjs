@@ -30,6 +30,12 @@ export default defineConfig({
   },
   vite: {
     plugins: [tailwindcss()],
+    // Exposes the GITHUB_ACTIONS check to client code (Layout.astro uses it to
+    // noindex the temporary GH Pages preview so it never competes with the
+    // real domain once labacalona.es is live).
+    define: {
+      'import.meta.env.PUBLIC_IS_PREVIEW_DEPLOY': JSON.stringify(process.env.GITHUB_ACTIONS ? 'true' : 'false'),
+    },
   },
   integrations: [sitemap()],
 });

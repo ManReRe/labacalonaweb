@@ -28,7 +28,7 @@ const navItems: { key: RouteKey; label: string }[] = [
 <header class="sticky top-0 z-40 border-b border-ink/10 bg-paper/95 shadow-sm backdrop-blur">
   <div class="mx-auto flex min-h-[64px] max-w-6xl items-center justify-between gap-4 px-4 py-2 sm:px-6">
     <a href={withBase(routes.home[locale])} class="flex shrink-0 items-center">
-      <Image src={logoHeader} alt={restaurant.name} class="h-5 w-auto sm:h-6" />
+      <Image src={logoHeader} alt={restaurant.name} loading="eager" class="h-5 w-auto sm:h-6" />
     </a>
 
     <input type="checkbox" id="nav-toggle" class="peer hidden" />

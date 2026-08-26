@@ -417,3 +417,34 @@ export const menuNotes = {
     'For events and celebrations at La Bacalona, call +34 683 37 33 39.',
   ],
 };
+
+// First price found in a "X,XX€" style string, as a plain number for Offer.price.
+function parsePrice(raw: string): string | undefined {
+  const match = raw.match(/(\d+(?:,\d+)?)/);
+  return match ? match[1].replace(',', '.') : undefined;
+}
+
+// Schema.org Menu/MenuSection/MenuItem/Offer JSON-LD for the /menu page
+// (CLAUDE.md 3: "Implement structured data — Menu and Offer where relevant").
+export function buildMenuJsonLd(locale: 'es' | 'en') {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'Menu',
+    name: locale === 'es' ? 'Carta' : 'Menu',
+    hasMenuSection: menuSections.map((section) => ({
+      '@type': 'MenuSection',
+      name: section.title[locale],
+      hasMenuItem: section.dishes.map((dish) => {
+        const price = parsePrice(dish.prices[0]?.price ?? '');
+        return {
+          '@type': 'MenuItem',
+          name: dish.name,
+          ...(dish.description ? { description: dish.description[locale] } : {}),
+          ...(price
+            ? { offers: { '@type': 'Offer', price, priceCurrency: 'EUR' } }
+            : {}),
+        };
+      }),
+    })),
+  } as const;
+}

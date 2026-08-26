@@ -4,9 +4,10 @@ import DishList from '../components/DishList.astro';
 import AllergenLegend from '../components/AllergenLegend.astro';
 import PageHero from '../components/PageHero.astro';
 import ReservationCta from '../components/ReservationCta.astro';
-import { menuSections, menuNotes } from '../data/menu';
+import { menuSections, menuNotes, buildMenuJsonLd } from '../data/menu';
 
 const locale = 'es' as const;
+const menuJsonLd = buildMenuJsonLd(locale);
 ---
 
 <Layout
@@ -15,6 +16,8 @@ const locale = 'es' as const;
   title="Carta | La Bacalona — Restaurante en Sevilla"
   description="Descubre la carta de La Bacalona: entrantes, ibéricos, guisos, platos a la plancha y postres caseros, con alérgenos indicados en cada plato."
 >
+  <script type="application/ld+json" set:html={JSON.stringify(menuJsonLd)} is:inline />
+
   <PageHero eyebrow="Carta" title="Nuestra carta" />
 
   <div class="mx-auto max-w-4xl px-4 py-12 sm:px-6">

@@ -72,6 +72,9 @@ const restaurantJsonLd = {
     <title>{title}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonicalURL} />
+    {import.meta.env.PUBLIC_IS_PREVIEW_DEPLOY === 'true' && (
+      <meta name="robots" content="noindex, nofollow" />
+    )}
 
     <link rel="alternate" hreflang="es" href={esURL} />
     <link rel="alternate" hreflang="en" href={enURL} />
