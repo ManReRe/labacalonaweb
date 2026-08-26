@@ -72,26 +72,32 @@ const highlights = [
   </section>
 
   <section class="mx-auto max-w-6xl px-4 py-20 sm:px-6">
-    <ul class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-      {highlights.map((item) => (
-        <li data-reveal class="group overflow-hidden rounded-lg border border-ink/10 bg-cream-white shadow-sm transition-shadow hover:shadow-lg">
-          <div class="overflow-hidden">
+    <div class="space-y-16 sm:space-y-24">
+      {highlights.map((item, i) => (
+        <div
+          data-reveal
+          class:list={[
+            'grid items-center gap-8 sm:grid-cols-2 sm:gap-12',
+            i % 2 === 1 && 'sm:[&>*:first-child]:order-2',
+          ]}
+        >
+          <div class="overflow-hidden rounded-lg shadow-md">
             <Image
               src={item.img}
               alt=""
-              width={480}
-              height={340}
-              class="h-48 w-full object-cover transition-transform duration-300 group-hover:scale-105"
+              width={700}
+              height={500}
+              class="aspect-[7/5] w-full object-cover"
             />
           </div>
-          <div class="p-5">
-            <p class="font-semibold text-ink">{item.title}</p>
-            <p class="mt-1.5 text-sm text-ink-soft">{item.text}</p>
+          <div>
+            <p class="font-display text-3xl leading-tight text-ink sm:text-4xl">{item.title}</p>
+            <p class="mt-4 text-lg text-ink-soft">{item.text}</p>
           </div>
-        </li>
+        </div>
       ))}
-    </ul>
-    <div class="mt-10 flex flex-wrap justify-center gap-4">
+    </div>
+    <div class="mt-16 flex flex-wrap justify-center gap-4">
       <a href={withBase(routes.menu[locale])} class="inline-flex min-h-[44px] items-center justify-center rounded-md bg-olive px-6 py-3 font-semibold text-cream-white shadow-sm hover:bg-olive-dark">
         {strings.cta.seeMenu}
       </a>
