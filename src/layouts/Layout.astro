@@ -122,5 +122,33 @@ const restaurantJsonLd = {
       <slot />
     </main>
     <Footer locale={locale} />
+    <script is:inline>
+      // Fade/slide elements up once as they enter the viewport. Only ever
+      // touches opacity/transform (compositor-only) on the element itself —
+      // never position, size, or a container — so it can't misalign layout
+      // on scroll/resize the way sticky/pinned scroll effects can.
+      (function () {
+        if (!('IntersectionObserver' in window)) return;
+        const els = document.querySelectorAll('[data-reveal]');
+        els.forEach(function (el, i) {
+          el.classList.add('reveal-init');
+          el.style.transitionDelay = Math.min(i % 6, 5) * 80 + 'ms';
+        });
+        const io = new IntersectionObserver(
+          function (entries) {
+            entries.forEach(function (entry) {
+              if (entry.isIntersecting) {
+                entry.target.classList.add('reveal-visible');
+                io.unobserve(entry.target);
+              }
+            });
+          },
+          { threshold: 0.15, rootMargin: '0px 0px -40px 0px' }
+        );
+        els.forEach(function (el) {
+          io.observe(el);
+        });
+      })();
+    </script>
   </body>
 </html>

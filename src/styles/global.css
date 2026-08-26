@@ -64,3 +64,31 @@ body {
   margin: 0 0.5rem;
   transform: translateY(-0.3em);
 }
+
+/*
+  Scroll-in reveal: fades/slides an element up once, the first time it
+  enters the viewport (see the reveal-init script in Layout.astro).
+  Only opacity/transform are touched — never position or layout — so
+  nothing can shift or misalign as the user scrolls, unlike sticky/pin
+  based scroll effects.
+*/
+[data-reveal] {
+  transition:
+    opacity 0.6s ease-out,
+    transform 0.6s ease-out;
+}
+[data-reveal].reveal-init {
+  opacity: 0;
+  transform: translateY(24px);
+}
+[data-reveal].reveal-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+@media (prefers-reduced-motion: reduce) {
+  [data-reveal] {
+    transition: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
