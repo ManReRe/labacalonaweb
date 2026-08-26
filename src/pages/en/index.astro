@@ -7,23 +7,49 @@ import { restaurant } from '../../data/restaurant';
 import { withBase } from '../../utils/paths';
 import DiamondIcon from '../../components/DiamondIcon.astro';
 import StarRating from '../../components/StarRating.astro';
-import interiorImg from '../../assets/images/interior-1.jpg';
 import logoWhite from '../../assets/images/logo-header-white.png';
-import huevosImg from '../../assets/images/dish-huevos-fritas.jpg';
-import boqueronesImg from '../../assets/images/dish-boquerones.jpg';
-import tacoImg from '../../assets/images/dish-taco.jpg';
+import jamonImg from '../../assets/images/pro-jamon.jpg';
+import platoImg from '../../assets/images/pro-plato-tapa.jpg';
+import vinosImg from '../../assets/images/pro-vinos.jpg';
+import ambienteImg from '../../assets/images/pro-interior-guitarra.jpg';
+import mesaLargaImg from '../../assets/images/pro-mesa-larga.jpg';
+import servicioImg from '../../assets/images/pro-servicio.jpg';
 
 const locale = 'en' as const;
 const strings = t(locale);
 
-// Placeholder photos, repeated — real dedicated shots come later (site not public yet).
+// Descriptions are a first draft to be refined with the client.
 const highlights = [
-  { text: 'Top-quality Extremaduran produce.', img: huevosImg },
-  { text: 'Traditional cooking with a touch of innovation.', img: tacoImg },
-  { text: 'A wine cellar of Extremaduran and Andalusian wines.', img: boqueronesImg },
-  { text: 'A wonderful, family-friendly atmosphere.', img: interiorImg },
-  { text: 'Perfect for gatherings and private events.', img: interiorImg },
-  { text: 'Warm, personal service.', img: huevosImg },
+  {
+    title: 'Top-quality Extremaduran produce.',
+    text: 'Hand-carved acorn-fed Iberian ham and cured meats, sliced to order.',
+    img: jamonImg,
+  },
+  {
+    title: 'Traditional cooking with a touch of innovation.',
+    text: 'Time-honoured recipes with modern touches that surprise in every bite.',
+    img: platoImg,
+  },
+  {
+    title: 'A wine cellar of Extremaduran and Andalusian wines.',
+    text: 'A curated selection to pair with every dish on the menu.',
+    img: vinosImg,
+  },
+  {
+    title: 'A wonderful, family-friendly atmosphere.',
+    text: 'A warm, well-kept space designed to make you feel at home.',
+    img: ambienteImg,
+  },
+  {
+    title: 'Perfect for gatherings and private events.',
+    text: 'Tables for groups and special occasions, with personal attention.',
+    img: mesaLargaImg,
+  },
+  {
+    title: 'Warm, personal service.',
+    text: 'A team that knows you by name from your very first visit.',
+    img: servicioImg,
+  },
 ];
 ---
 
@@ -48,9 +74,20 @@ const highlights = [
   <section class="mx-auto max-w-6xl px-4 py-20 sm:px-6">
     <ul class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
       {highlights.map((item) => (
-        <li class="overflow-hidden rounded-lg border border-ink/10 bg-cream-white shadow-sm">
-          <Image src={item.img} alt="" width={480} height={320} class="h-40 w-full object-cover" />
-          <p class="p-4 font-medium text-ink">{item.text}</p>
+        <li class="group overflow-hidden rounded-lg border border-ink/10 bg-cream-white shadow-sm transition-shadow hover:shadow-lg">
+          <div class="overflow-hidden">
+            <Image
+              src={item.img}
+              alt=""
+              width={480}
+              height={340}
+              class="h-48 w-full object-cover transition-transform duration-300 group-hover:scale-105"
+            />
+          </div>
+          <div class="p-5">
+            <p class="font-semibold text-ink">{item.title}</p>
+            <p class="mt-1.5 text-sm text-ink-soft">{item.text}</p>
+          </div>
         </li>
       ))}
     </ul>

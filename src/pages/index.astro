@@ -7,23 +7,49 @@ import { restaurant } from '../data/restaurant';
 import { withBase } from '../utils/paths';
 import DiamondIcon from '../components/DiamondIcon.astro';
 import StarRating from '../components/StarRating.astro';
-import interiorImg from '../assets/images/interior-1.jpg';
 import logoWhite from '../assets/images/logo-header-white.png';
-import huevosImg from '../assets/images/dish-huevos-fritas.jpg';
-import boqueronesImg from '../assets/images/dish-boquerones.jpg';
-import tacoImg from '../assets/images/dish-taco.jpg';
+import jamonImg from '../assets/images/pro-jamon.jpg';
+import platoImg from '../assets/images/pro-plato-tapa.jpg';
+import vinosImg from '../assets/images/pro-vinos.jpg';
+import ambienteImg from '../assets/images/pro-interior-guitarra.jpg';
+import mesaLargaImg from '../assets/images/pro-mesa-larga.jpg';
+import servicioImg from '../assets/images/pro-servicio.jpg';
 
 const locale = 'es' as const;
 const strings = t(locale);
 
-// Placeholder photos, repeated — real dedicated shots come later (site not public yet).
+// Descriptions are a first draft to be refined with the client.
 const highlights = [
-  { text: 'Producto extremeño de primera calidad.', img: huevosImg },
-  { text: 'Cocina tradicional e innovación.', img: tacoImg },
-  { text: 'Bodega de vinos extremeños y andaluces.', img: boqueronesImg },
-  { text: 'Magnífico ambiente familiar.', img: interiorImg },
-  { text: 'Celebración de reuniones y de eventos.', img: interiorImg },
-  { text: 'Trato cercano y familiar.', img: huevosImg },
+  {
+    title: 'Producto extremeño de primera calidad.',
+    text: 'Jamón y embutidos ibéricos de bellota, cortados a mano en su punto.',
+    img: jamonImg,
+  },
+  {
+    title: 'Cocina tradicional e innovación.',
+    text: 'Recetas de siempre con toques actuales que sorprenden en cada bocado.',
+    img: platoImg,
+  },
+  {
+    title: 'Bodega de vinos extremeños y andaluces.',
+    text: 'Una selección cuidada para maridar cada plato de la carta.',
+    img: vinosImg,
+  },
+  {
+    title: 'Magnífico ambiente familiar.',
+    text: 'Un espacio cálido y cuidado, pensado para sentirte como en casa.',
+    img: ambienteImg,
+  },
+  {
+    title: 'Celebración de reuniones y de eventos.',
+    text: 'Mesas para grupos y ocasiones especiales, con atención personalizada.',
+    img: mesaLargaImg,
+  },
+  {
+    title: 'Trato cercano y familiar.',
+    text: 'Un equipo que te conoce por tu nombre desde la primera visita.',
+    img: servicioImg,
+  },
 ];
 ---
 
@@ -48,9 +74,20 @@ const highlights = [
   <section class="mx-auto max-w-6xl px-4 py-20 sm:px-6">
     <ul class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
       {highlights.map((item) => (
-        <li class="overflow-hidden rounded-lg border border-ink/10 bg-cream-white shadow-sm">
-          <Image src={item.img} alt="" width={480} height={320} class="h-40 w-full object-cover" />
-          <p class="p-4 font-medium text-ink">{item.text}</p>
+        <li class="group overflow-hidden rounded-lg border border-ink/10 bg-cream-white shadow-sm transition-shadow hover:shadow-lg">
+          <div class="overflow-hidden">
+            <Image
+              src={item.img}
+              alt=""
+              width={480}
+              height={340}
+              class="h-48 w-full object-cover transition-transform duration-300 group-hover:scale-105"
+            />
+          </div>
+          <div class="p-5">
+            <p class="font-semibold text-ink">{item.title}</p>
+            <p class="mt-1.5 text-sm text-ink-soft">{item.text}</p>
+          </div>
         </li>
       ))}
     </ul>
