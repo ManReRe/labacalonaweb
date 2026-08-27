@@ -34,7 +34,7 @@ export interface WineSection {
 export const wineSections: WineSection[] = [
   {
     id: 'ribera-duero',
-    title: { es: 'Tintos D.O. Ribera del Duero', en: 'Reds — D.O. Ribera del Duero' },
+    title: { es: 'Tintos D.O. Ribera del Duero', en: 'Reds, D.O. Ribera del Duero' },
     wines: [
       {
         name: 'Rippa Dorii Roble',
@@ -54,7 +54,7 @@ export const wineSections: WineSection[] = [
   },
   {
     id: 'rioja',
-    title: { es: 'Tintos D.O.Ca. Rioja', en: 'Reds — D.O.Ca. Rioja' },
+    title: { es: 'Tintos D.O.Ca. Rioja', en: 'Reds, D.O.Ca. Rioja' },
     wines: [
       {
         name: 'Ontañón Crianza',
@@ -77,7 +77,7 @@ export const wineSections: WineSection[] = [
   },
   {
     id: 'ribera-guadiana',
-    title: { es: 'Tintos D.O. Ribera del Guadiana', en: 'Reds — D.O. Ribera del Guadiana' },
+    title: { es: 'Tintos D.O. Ribera del Guadiana', en: 'Reds, D.O. Ribera del Guadiana' },
     wines: [
       {
         name: 'Palacio Quemado Crianza',
