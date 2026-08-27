@@ -35,12 +35,23 @@ This environment has the `superpowers` skill family, the `publishing-astro-websi
 
 Do not force-fit skills that don't apply here (e.g. `superpowers-lab`'s `windows-vm`/`mcp-cli`/`tmux` skills, or the Claude Code plugin-development skills) — this project is a static restaurant website, not a Claude Code plugin or a general dev-tooling task.
 
+**Environment reality check:** the actual dev environment here is a VSCode native extension with no terminal CLI, so `/plugin` is unavailable and these are NOT installed as real plugins — the skill content was copied by hand into `~/.claude/skills/`. Confirm at the start of a session that the skills above still appear in the available-skills listing rather than assuming it; if any are missing, say so instead of proceeding as if they exist. Because there's no real plugin install, skill names carry no `superpowers:` prefix — invoke `brainstorming`, `writing-plans`, etc. directly, translating away the prefix wherever it appears above or elsewhere in this file. `browsing` has no real Chrome DevTools Protocol server behind it (may describe steps it can't execute), and `remembering-conversations` has no archiving hook or indexed history (nothing to search) — for actual continuity across sessions, rely on the file-based memory system instead.
+
 ### 1.2. Git commit discipline
 
 - Commit **little by little**, not in one big bulk commit. Each commit should be one coherent, reviewable unit of change (one page, one component, one content update, one asset batch) — not "build the whole site, then commit everything at the end."
 - This applies to both initial setup (e.g. logo assets, menu source files, and photos each land in their own commit) and ongoing feature work (e.g. the Home page and the Menu page are separate commits, even if built in the same session).
 - Only commit when the user explicitly asks, per the global git safety protocol — this rule governs how commits are *split*, not when they happen.
 - **NEVER add yourself as co-author on any commit.** Do not include a `Co-Authored-By: Claude ...` trailer, or any equivalent attribution line, in any commit message on this project — regardless of what the default commit workflow elsewhere suggests.
+- This machine has no `user.name`/`user.email` configured, locally or globally (verified: `git config --get`/`--global --get` both fail, no `~/.gitconfig`). Do **not** run `git config --global` to fix this — that's a persisted config change and off-limits. Instead pass identity inline on each commit only: `git -c user.name="ManReyes" -c user.email="manuel.angel.reyes.resta@gmail.com" commit ...`, matching the author on every prior commit in this repo's history.
+
+### 1.3. No local Node — verify against the live deploy instead
+
+There is no `node`/`npm` on this machine (`npm run build`/`dev`/`check` all fail with "command not found"). This means:
+
+- Never claim a build "passes" or was "verified in the browser" — neither is possible here. Verify by careful manual code review instead, and say so explicitly when reporting work.
+- The real verification loop is: push to `main` → the `deploy.yml` GitHub Actions workflow builds and publishes to GitHub Pages automatically → check the **live** result. Poll `https://api.github.com/repos/ManReRe/labacalonaweb/actions/runs?per_page=1` (public, unauthenticated, no `gh` CLI needed) until `"status":"completed"`, then confirm `"conclusion":"success"`.
+- Inspect the actual deployed markup with `curl` (raw HTML — more reliable than WebFetch's markdown conversion, which can silently drop attributes like `srcset`) or by asking the user for a fresh screenshot/PageSpeed Insights report.
 
 ---
 
@@ -92,7 +103,7 @@ You must always:
   - Unique `<meta name="description">` per page.
   - Clean, human-readable URLs (e.g., `/menu`, `/vinos`, `/reservas`, `/sobre-nosotros`).
 - Implement **local SEO**:
-  - Include NAP (Name, Address, Phone) consistently in footer and contact page.
+  - Include NAP (Name, Address, Phone) consistently in footer and contact page — and make it match the business's Google Business Profile listing **exactly**, not just internally: if the two disagree on formatting (e.g. "C. Amador de los Ríos" vs. "Calle Amador de los Ríos"), that inconsistency itself is a negative local-SEO signal. Verify against the listing's own text (Places API `formattedAddress`, localized per language — Google renders it differently in `es` vs. `en`, so match each) rather than assuming a hand-written address is fine.
   - Use **Spanish (Spain)** keywords relevant to restaurants and the city.
   - Example keywords (adapt to each restaurant):
     - “restaurante en [ciudad]”
@@ -104,7 +115,7 @@ You must always:
   - `Menu` and `Offer` where relevant.
 - Ensure **accessibility**:
   - Proper `alt` text for images.
-  - Sufficient color contrast.
+  - Sufficient color contrast: WCAG AA minimums — **4.5:1** for normal text, **3:1** for large text (≥18.66px, or ≥14px bold) and UI components. When adding or editing a color token, check contrast against **every** background it's actually used on, not just the one you're looking at — a token can pass on one background and fail on another (e.g. button text vs. a link in body copy), and PageSpeed Insights/Lighthouse's accessibility score will only tell you the site still has *a* violation, not which pair.
   - Keyboard-friendly navigation.
 
 All public-facing text must be in **Spanish (Spain)**, natural and oriented to real diners, not robots.
@@ -177,12 +188,13 @@ When the restaurant is **La Bacalona**, apply the following specific configurati
 - **Instagram:** https://www.instagram.com/labacalona/
 - **Current web (for reference only):** https://restaurante.covermanager.com/la-bacalona/
 - **Opening hours:** Every day, 12:30–00:30 (continuous service, no midday closure).
-- **Domain:** Not yet purchased — use `labacalona.es` as a clearly-marked placeholder in canonical URLs, sitemap, hreflang, and JSON-LD until a real domain is confirmed; must be a trivial find-and-replace later.
+- **Domain:** Live since 2026-08-27 — `labacalona.es`, registered at IONOS, served via GitHub Pages with a custom domain (`public/CNAME`). No longer a placeholder; `astro.config.mjs`'s `SITE_URL` is the single source of truth if it ever needs to change. DNS: apex (`@`) has 4 `A` records to GitHub Pages' IPs (185.199.108/109/110/111.153), `www` has a `CNAME` to `<github-username>.github.io` — a subdomain must use `CNAME`, never hardcoded `A` records, so it tracks GitHub if those IPs ever change.
 - **Logo path (local dev):** `/home/texk/development/labacalonaweb/Logo`
 - **Menu path (local dev):** `/home/texk/development/labacalonaweb/Menu` (source for content extraction only — never link or embed the raw PDF/JPEG, see section 3).
-- **Photos path (local dev):** `/home/texk/development/labacalonaweb/Pictures` (currently empty — build with placeholder image slots until populated).
+- **Photos path (local dev):** `/home/texk/development/labacalonaweb/Pictures` (now populated with real professional photography — all placeholders have been replaced; don't reintroduce placeholder slots without checking here first).
 - **Languages:** Spanish (root, primary) + English (`/en/`), with automatic device-language detection on first visit — see section 3.1.
-- **Reservation system:** CoverManager (keep the reservation manager if possible).
+- **Reservation system:** CoverManager (keep the reservation manager if possible). The real widget iframe URL is confirmed and embedded directly (`CoverManagerWidget.astro`) — this isn't a fallback state.
+- **Live Google rating:** the homepage badge (`GoogleRatingBadge.astro`) refreshes the rating/review count client-side from the Places API (New), with no link to the reviews (explicit client request) and a static fallback from `src/data/restaurant.ts` for first paint/no-JS/JSON-LD. Needs `PUBLIC_GOOGLE_PLACES_API_KEY` (HTTP-referrer-restricted to this site's domains, API-restricted to Places API (New) only) and `PUBLIC_GOOGLE_PLACE_ID` — see `.env.example` and the README. Both are already configured as GitHub Actions repo secrets; don't re-walk the whole Google Cloud Console setup unless something is actually broken.
 
 Rules:
 

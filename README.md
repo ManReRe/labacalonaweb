@@ -47,7 +47,11 @@ through at build time.
 ## Content structure
 
 - `src/data/restaurant.ts` — NAP, hours, links, and other restaurant identity (single
-  source of truth, feeds JSON-LD too).
+  source of truth, feeds JSON-LD too). `address.formatted` is kept byte-for-byte
+  identical (per language) to the address text on the Google Business Profile
+  listing — if that listing's formatting ever changes, re-check it via the Places
+  API (`formattedAddress` field, fetched once with `languageCode=es`/`en`) rather
+  than editing this by hand from memory.
 - `src/data/menu.ts` / `src/data/wines.ts` — structured menu and wine list content
   (never sourced from a linked/embedded PDF — see `Menu/` for the original source files).
 - `src/data/allergens.ts` — the 14 EU-regulated allergens used for dish/wine tagging.
@@ -66,4 +70,33 @@ declares `hreflang` alternates (handled centrally in `src/layouts/Layout.astro`)
 
 Pushing to `main` triggers `.github/workflows/deploy.yml`, which builds the site and
 publishes it to GitHub Pages under the custom domain in `public/CNAME`
-(`labacalona.es`).
+(`labacalona.es`). To trigger a rebuild without a new commit, run the workflow
+manually from the **Actions** tab (it has `workflow_dispatch` enabled).
+
+### Custom domain DNS
+
+Registrar: IONOS. Required records:
+
+| Type | Host | Value |
+| --- | --- | --- |
+| A | `@` | `185.199.108.153` |
+| A | `@` | `185.199.109.153` |
+| A | `@` | `185.199.110.153` |
+| A | `@` | `185.199.111.153` |
+| CNAME | `www` | `<github-username>.github.io` |
+
+The apex (`@`) must use `A` records — DNS doesn't allow `CNAME` at the zone root.
+`www` should be a `CNAME`, not hardcoded `A` records, so it keeps tracking GitHub
+Pages if those IPs ever change. GitHub's **Settings → Pages → Custom domain** field
+must be set to the apex (`labacalona.es`, no `www`) to match `public/CNAME` — GitHub
+then handles the `www` → apex redirect and issues one certificate covering both.
+
+## Accessibility
+
+Color tokens live in `src/styles/global.css` (`@theme` block). Any new or edited
+color must clear WCAG AA contrast — **4.5:1** for normal text, **3:1** for large
+text/UI components — against **every** background it's actually used on, not just
+the one being edited at the time. A token used in two places (e.g. as both body
+text and button-background-with-white-text) needs checking against both; PageSpeed
+Insights/Lighthouse's accessibility score only reports that *a* violation exists,
+not which color pair caused it.
