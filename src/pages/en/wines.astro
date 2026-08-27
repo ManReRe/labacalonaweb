@@ -15,11 +15,9 @@ const locale = 'en' as const;
   title="Wines | La Bacalona - Restaurant in Seville"
   description="La Bacalona's wine list: reds from Ribera del Duero, Rioja, and Ribera del Guadiana, whites, fortified wines, and sparkling, by glass or bottle."
 >
-  <PageHero eyebrow="Wines" title="Our wine list" />
-
-  <div class="flex justify-center px-4 pt-10 sm:px-6">
+  <PageHero eyebrow="Wines" title="Our wine list">
     <ReservationCta locale={locale} />
-  </div>
+  </PageHero>
 
   <div class="mx-auto max-w-4xl px-4 py-12 sm:px-6">
     <WineList locale={locale} sections={wineSections} />

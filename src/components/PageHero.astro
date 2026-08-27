@@ -16,5 +16,10 @@ const { eyebrow, title, subtitle } = Astro.props;
     {eyebrow && <p class="font-semibold uppercase tracking-[0.2em] text-olive-dark">{eyebrow}</p>}
     <h1 class="mt-3 font-display text-4xl leading-[1.05] text-ink sm:text-6xl">{title}</h1>
     {subtitle && <p class="mx-auto mt-5 max-w-2xl text-lg text-ink-soft">{subtitle}</p>}
+    {Astro.slots.has('default') && (
+      <div class="mt-8 flex justify-center">
+        <slot />
+      </div>
+    )}
   </div>
 </div>
