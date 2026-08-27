@@ -27,6 +27,14 @@ export const restaurant = {
     addressLocality: 'Sevilla',
     addressRegion: 'Sevilla',
     addressCountry: 'ES',
+    // Byte-for-byte match to the Google Business Profile listing's own
+    // formattedAddress per language (checked via Places API, 2026-08-27),
+    // for NAP consistency — Google omits the country on its ES listing but
+    // includes it on the EN one, so we mirror that rather than picking one.
+    formatted: {
+      es: 'C. Amador de los Ríos, 38, 41003 Sevilla',
+      en: 'C. Amador de los Ríos, 38, 41003 Sevilla, Spain',
+    },
   },
   phone: '683373339',
   phoneDisplay: '683 37 33 39',

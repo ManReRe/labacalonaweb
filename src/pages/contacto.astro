@@ -21,8 +21,7 @@ const strings = t(locale);
     <div>
       <h2 class="font-display text-2xl tracking-wide text-ink">{strings.address}</h2>
       <address class="mt-2 not-italic text-ink-soft">
-        {restaurant.address.streetAddress}<br />
-        {restaurant.address.postalCode} {restaurant.address.addressLocality}, España
+        {restaurant.address.formatted.es}
       </address>
 
       <h2 class="mt-8 font-display text-2xl tracking-wide text-ink">{strings.phone}</h2>

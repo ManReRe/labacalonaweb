@@ -36,8 +36,7 @@ const year = new Date().getFullYear();
     <div>
       <p class="font-semibold">{strings.address}</p>
       <address class="mt-2 not-italic text-sm text-cream-white/80">
-        {restaurant.address.streetAddress}<br />
-        {restaurant.address.postalCode} {restaurant.address.addressLocality}
+        {restaurant.address.formatted[locale]}
       </address>
       <p class="mt-3 font-semibold">{strings.phone}</p>
       <a href={`tel:+34${restaurant.phone}`} class="text-sm text-cream-white/80 hover:underline">
