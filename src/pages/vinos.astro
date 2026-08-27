@@ -17,6 +17,10 @@ const locale = 'es' as const;
 >
   <PageHero eyebrow="Vinos" title="Nuestra carta de vinos" />
 
+  <div class="flex justify-center px-4 pt-10 sm:px-6">
+    <ReservationCta locale={locale} />
+  </div>
+
   <div class="mx-auto max-w-4xl px-4 py-12 sm:px-6">
     <WineList locale={locale} sections={wineSections} />
 
