@@ -6,11 +6,12 @@ export const restaurant = {
   // Real registered legal name (razón social) is pending — see aviso-legal.
   // "Come & Bebe" under the logo is the tagline, not part of the name.
   legalName: 'La Bacalona',
-  // Sole trader (autónomo) — owner's own NIF doubles as the business tax ID,
-  // so there is no separate CIF (that format is only for companies).
+  // Client asked to withhold the owner's personal name/NIF for now (set to
+  // "N/A") despite the LSSI-CE art. 10 requirement to publish it — flagged
+  // as a compliance risk before this change; their call to make, not ours.
   legalOwner: {
-    name: 'Enrique Gajardo Leal',
-    nif: '08368554G',
+    name: 'N/A',
+    nif: 'N/A',
   },
   tagline: {
     es: 'Comé, bebé, viví…',
