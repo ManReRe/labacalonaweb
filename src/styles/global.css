@@ -22,7 +22,10 @@
   --color-espresso: #3c2417;
   --color-espresso-dark: #2a1810;
   --color-olive: #7c8a5c;
-  --color-olive-dark: #5f6b45;
+  /* Darkened from #5f6b45 — that shade only hit ~4.25:1 on bg-sand/50 (the
+     PageHero eyebrow and homepage "history" link), just under WCAG AA's
+     4.5:1 for normal text. This shade clears it with margin everywhere it's used. */
+  --color-olive-dark: #515b3b;
   --color-cream-white: #fffdf8;
 
   --font-display: "Bebas Neue", "Arial Narrow", sans-serif;
