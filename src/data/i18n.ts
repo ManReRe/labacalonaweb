@@ -50,6 +50,10 @@ export const ui = {
         'Los alérgenos indicados son una referencia orientativa pendiente de verificación final por parte de nuestro equipo de cocina. Ante cualquier alergia o intolerancia, consulta siempre con el personal de sala antes de pedir.',
       contains: 'Contiene',
     },
+    wine: {
+      glass: 'Copa',
+      bottle: 'Botella',
+    },
     hours: 'Horario',
     address: 'Dirección',
     phone: 'Teléfono',
@@ -89,6 +93,10 @@ export const ui = {
       disclaimer:
         'The allergens listed are an indicative reference, pending final verification by our kitchen team. If you have any allergy or intolerance, always check with our staff before ordering.',
       contains: 'Contains',
+    },
+    wine: {
+      glass: 'Glass',
+      bottle: 'Bottle',
     },
     hours: 'Hours',
     address: 'Address',

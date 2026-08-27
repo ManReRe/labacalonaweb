@@ -2,7 +2,7 @@
 import type { WineSection } from '../data/wines';
 import AllergenTags from './AllergenTags.astro';
 import DiamondIcon from './DiamondIcon.astro';
-import type { Locale } from '../data/i18n';
+import { t, type Locale } from '../data/i18n';
 
 interface Props {
   locale: Locale;
@@ -10,6 +10,7 @@ interface Props {
 }
 
 const { locale, sections } = Astro.props;
+const strings = t(locale);
 ---
 
 <div class="space-y-16">
@@ -36,13 +37,13 @@ const { locale, sections } = Astro.props;
             <div class="flex shrink-0 gap-4 text-right sm:flex-col sm:items-end sm:gap-0.5">
               {wine.prices.glass && (
                 <p class="whitespace-nowrap text-ink">
-                  <span class="mr-1 text-xs uppercase tracking-wide text-ink-soft">Copa</span>
+                  <span class="mr-1 text-xs uppercase tracking-wide text-ink-soft">{strings.wine.glass}</span>
                   <span class="font-semibold">{wine.prices.glass}</span>
                 </p>
               )}
               {wine.prices.bottle && (
                 <p class="whitespace-nowrap text-ink">
-                  <span class="mr-1 text-xs uppercase tracking-wide text-ink-soft">Botella</span>
+                  <span class="mr-1 text-xs uppercase tracking-wide text-ink-soft">{strings.wine.bottle}</span>
                   <span class="font-semibold">{wine.prices.bottle}</span>
                 </p>
               )}
