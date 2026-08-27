@@ -21,7 +21,10 @@
   --color-sand-dark: #c3b28a;
   --color-espresso: #3c2417;
   --color-espresso-dark: #2a1810;
-  --color-olive: #7c8a5c;
+  /* Darkened from #7c8a5c — that shade only hit ~3.66:1 for cream-white text
+     on bg-olive (every primary button: "Reservar mesa online", "Ver la
+     carta"...), under the 4.5:1 AA minimum. #636e4a clears it (~5.4:1). */
+  --color-olive: #636e4a;
   /* Darkened from #5f6b45 — that shade only hit ~4.25:1 on bg-sand/50 (the
      PageHero eyebrow and homepage "history" link), just under WCAG AA's
      4.5:1 for normal text. This shade clears it with margin everywhere it's used. */

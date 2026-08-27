@@ -22,6 +22,11 @@ export default defineConfig({
   trailingSlash: 'never',
   build: {
     format: 'directory',
+    // The whole site is one small compiled CSS file; inlining it into every
+    // page's <head> removes a render-blocking network round trip (PageSpeed
+    // flagged ~1s of it) at the cost of not caching CSS across page loads —
+    // a fine trade here given the file's size and the page count.
+    inlineStylesheets: 'always',
   },
   vite: {
     plugins: [tailwindcss()],
