@@ -8,6 +8,7 @@ import { withBase } from '../utils/paths';
 import DiamondIcon from '../components/DiamondIcon.astro';
 import StarRating from '../components/StarRating.astro';
 import logoWhite from '../assets/images/logo-header-white.png';
+import heroBgImg from '../assets/images/pro-hero-bg.jpg';
 import jamonImg from '../assets/images/pro-jamon.jpg';
 import platoImg from '../assets/images/pro-plato-tapa.jpg';
 import vinosImg from '../assets/images/pro-vinos.jpg';
@@ -60,8 +61,18 @@ const highlights = [
   title="La Bacalona Sevilla"
   description="La Bacalona: taberna extremeña-andaluza con producto de temporada, ibéricos de bellota y una carta pensada para compartir. Reserva mesa en Sevilla."
 >
-  <section class="bg-espresso text-cream-white">
-    <div class="mx-auto max-w-3xl px-4 py-20 text-center sm:px-6 md:py-28">
+  <section class="relative overflow-hidden bg-espresso text-cream-white">
+    <Image
+      src={heroBgImg}
+      alt=""
+      width={2000}
+      height={1150}
+      loading="eager"
+      fetchpriority="high"
+      class="absolute inset-0 h-full w-full object-cover object-[65%_50%]"
+    />
+    <div class="absolute inset-0 bg-espresso/80"></div>
+    <div class="relative mx-auto max-w-3xl px-4 py-20 text-center sm:px-6 md:py-28">
       <h1>
         <Image src={logoWhite} alt={restaurant.name} width={480} height={56} loading="eager" fetchpriority="high" class="mx-auto h-auto w-full max-w-md" />
       </h1>

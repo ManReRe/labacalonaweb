@@ -15,6 +15,7 @@ npm-debug.log*
 # Editor/OS
 .DS_Store
 
-# Full-resolution source photography (tens of MB each) — optimized
-# copies actually used by the site live in src/assets/images/.
-Pictures/professiona_pics/
+# Full-resolution source photography (tens of MB each, arrives in
+# differently-named folders each time) — optimized copies actually
+# used by the site live in src/assets/images/, which stays tracked.
+Pictures/*/
