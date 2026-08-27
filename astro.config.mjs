@@ -3,17 +3,12 @@ import { defineConfig } from 'astro/config';
 import tailwindcss from '@tailwindcss/vite';
 import sitemap from '@astrojs/sitemap';
 
-// Placeholder domain until the real one is purchased — trivial find-and-replace later (see CLAUDE.md 5.1).
+// Real domain, live since 2026-08-27 (CLAUDE.md 5.1) — served at the root via
+// GitHub Pages + a custom domain (see public/CNAME), no path prefix needed.
 const SITE_URL = 'https://labacalona.es';
-
-// GitHub Pages serves this repo as a project page at /labacalonaweb/ until the
-// real domain is live — only the CI build needs that path prefix; local/production
-// builds for the real domain stay at the root. See src/utils/paths.ts.
-const BASE_PATH = process.env.GITHUB_ACTIONS ? '/labacalonaweb' : '/';
 
 export default defineConfig({
   site: SITE_URL,
-  base: BASE_PATH,
   // Spanish is the default, unprefixed locale; English lives under /en/.
   // prefixDefaultLocale: false keeps ES at the root per CLAUDE.md 3.1.
   i18n: {
@@ -30,12 +25,6 @@ export default defineConfig({
   },
   vite: {
     plugins: [tailwindcss()],
-    // Exposes the GITHUB_ACTIONS check to client code (Layout.astro uses it to
-    // noindex the temporary GH Pages preview so it never competes with the
-    // real domain once labacalona.es is live).
-    define: {
-      'import.meta.env.PUBLIC_IS_PREVIEW_DEPLOY': JSON.stringify(process.env.GITHUB_ACTIONS ? 'true' : 'false'),
-    },
   },
   integrations: [sitemap()],
 });
