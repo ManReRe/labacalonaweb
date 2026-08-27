@@ -6,7 +6,7 @@ import { routes, t } from '../../data/i18n';
 import { restaurant } from '../../data/restaurant';
 import { withBase } from '../../utils/paths';
 import DiamondIcon from '../../components/DiamondIcon.astro';
-import StarRating from '../../components/StarRating.astro';
+import GoogleRatingBadge from '../../components/GoogleRatingBadge.astro';
 import logoWhite from '../../assets/images/logo-header-white.png';
 import heroBgImg from '../../assets/images/pro-hero-bg.jpg';
 import jamonImg from '../../assets/images/pro-jamon.jpg';
@@ -127,13 +127,13 @@ const highlights = [
         produce, creativity, and honest cooking take centre stage. Plus a spacious, family-friendly atmosphere
         that invites you to enjoy La Bacalona at any time of day.
       </p>
-      <a href={withBase(routes.about[locale])} class="mt-6 inline-block font-semibold text-olive-dark underline-offset-4 hover:underline">
-        Read our story →
-      </a>
-      <div class="mt-6 inline-flex items-center gap-2 text-ink-soft">
-        <StarRating value={restaurant.googleRating.value} emptyClass="text-ink/15" filledClass="text-olive-dark" />
-        <span class="font-semibold text-ink">{restaurant.googleRating.value}</span>
-        <span>· {restaurant.googleRating.count} Google reviews</span>
+      <div class="mt-6">
+        <a href={withBase(routes.about[locale])} class="inline-block font-semibold text-olive-dark underline-offset-4 hover:underline">
+          Read our story
+        </a>
+      </div>
+      <div class="mt-4">
+        <GoogleRatingBadge locale={locale} />
       </div>
     </div>
   </section>

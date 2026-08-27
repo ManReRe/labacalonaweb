@@ -59,6 +59,9 @@ export const ui = {
     phone: 'Teléfono',
     languageSwitcher: 'Idioma',
     skipToContent: 'Saltar al contenido principal',
+    googleReviews: {
+      suffix: 'reseñas en Google',
+    },
   },
   en: {
     nav: {
@@ -103,6 +106,9 @@ export const ui = {
     phone: 'Phone',
     languageSwitcher: 'Language',
     skipToContent: 'Skip to main content',
+    googleReviews: {
+      suffix: 'Google reviews',
+    },
   },
 } as const;
 

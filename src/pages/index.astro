@@ -6,7 +6,7 @@ import { routes, t } from '../data/i18n';
 import { restaurant } from '../data/restaurant';
 import { withBase } from '../utils/paths';
 import DiamondIcon from '../components/DiamondIcon.astro';
-import StarRating from '../components/StarRating.astro';
+import GoogleRatingBadge from '../components/GoogleRatingBadge.astro';
 import logoWhite from '../assets/images/logo-header-white.png';
 import heroBgImg from '../assets/images/pro-hero-bg.jpg';
 import jamonImg from '../assets/images/pro-jamon.jpg';
@@ -127,13 +127,13 @@ const highlights = [
         producto ibérico, la creación y la cocina honesta son los protagonistas. Además de un ambiente amplio y
         familiar que invita a disfrutar de La Bacalona en cualquier momento del día.
       </p>
-      <a href={withBase(routes.about[locale])} class="mt-6 inline-block font-semibold text-olive-dark underline-offset-4 hover:underline">
-        Conoce nuestra historia →
-      </a>
-      <div class="mt-6 inline-flex items-center gap-2 text-ink-soft">
-        <StarRating value={restaurant.googleRating.value} emptyClass="text-ink/15" filledClass="text-olive-dark" />
-        <span class="font-semibold text-ink">{restaurant.googleRating.value.toString().replace('.', ',')}</span>
-        <span>· {restaurant.googleRating.count} reseñas en Google</span>
+      <div class="mt-6">
+        <a href={withBase(routes.about[locale])} class="inline-block font-semibold text-olive-dark underline-offset-4 hover:underline">
+          Conoce nuestra historia
+        </a>
+      </div>
+      <div class="mt-4">
+        <GoogleRatingBadge locale={locale} />
       </div>
     </div>
   </section>

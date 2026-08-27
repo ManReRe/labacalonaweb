@@ -44,8 +44,10 @@ export const restaurant = {
   mapEmbedSrc:
     'https://maps.google.com/maps?q=C.%20Amador%20de%20los%20R%C3%ADos%2038%2C%2041003%20Sevilla&output=embed',
   mapLink: 'https://maps.app.goo.gl/Z5rtY84MpPB6qqTJ6',
-  // Checked manually on Google (Maps/Search listing) — update by hand
-  // occasionally rather than fetching live (no API key/cost, no extra script).
+  // Fallback/first-paint value (also feeds JSON-LD aggregateRating, which
+  // doesn't need to be literally live). GoogleRatingBadge.astro refreshes the
+  // on-page number from the Places API client-side when configured — see
+  // .env.example — but keep this reasonably current by hand as a backstop.
   googleRating: {
     value: 4.5,
     count: 623,

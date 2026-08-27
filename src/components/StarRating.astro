@@ -16,6 +16,7 @@ const stars = '★★★★★';
 <span class="relative inline-block leading-none" aria-hidden="true">
   <span class:list={['flex gap-0.5', emptyClass]}>{stars}</span>
   <span
+    data-star-fill
     class:list={['absolute inset-0 flex gap-0.5 overflow-hidden', filledClass]}
     style={`width: ${percent}%`}
   >
