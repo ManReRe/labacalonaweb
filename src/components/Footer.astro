@@ -68,6 +68,10 @@ const year = new Date().getFullYear();
     </div>
   </div>
   <div class="border-t border-cream-white/10 px-4 py-4 text-center text-xs text-cream-white/60 sm:px-6">
-    &copy; {year} {restaurant.legalName}. {strings.footer.rights}
+    <p>&copy; {year} {restaurant.legalName}. {strings.footer.rights}</p>
+    <p class="mt-1">
+      {strings.footer.credit}{' '}
+      <a href="https://mekriva.com" target="_blank" rel="noopener noreferrer" class="underline-offset-2 hover:underline">Mekriva</a>
+    </p>
   </div>
 </footer>

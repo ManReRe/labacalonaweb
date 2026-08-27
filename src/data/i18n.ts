@@ -42,6 +42,7 @@ export const ui = {
       privacy: 'Política de privacidad',
       cookies: 'Política de cookies',
       rights: 'Todos los derechos reservados.',
+      credit: 'Desarrollado por',
     },
     allergens: {
       title: 'Alérgenos',
@@ -89,6 +90,7 @@ export const ui = {
       privacy: 'Privacy policy',
       cookies: 'Cookie policy',
       rights: 'All rights reserved.',
+      credit: 'Developed by',
     },
     allergens: {
       title: 'Allergens',
