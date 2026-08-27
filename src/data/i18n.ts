@@ -60,6 +60,7 @@ export const ui = {
     phone: 'Teléfono',
     languageSwitcher: 'Idioma',
     skipToContent: 'Saltar al contenido principal',
+    openMenu: 'Abrir menú',
     googleReviews: {
       suffix: 'reseñas en Google',
     },
@@ -108,6 +109,7 @@ export const ui = {
     phone: 'Phone',
     languageSwitcher: 'Language',
     skipToContent: 'Skip to main content',
+    openMenu: 'Open menu',
     googleReviews: {
       suffix: 'Google reviews',
     },

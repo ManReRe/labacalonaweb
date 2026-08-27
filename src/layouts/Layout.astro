@@ -98,10 +98,13 @@ const restaurantJsonLd = {
             const path = window.location.pathname;
             const isEnglishPage = path === homeEn || path.startsWith(homeEn + '/');
             const prefersEnglish = navigator.language?.toLowerCase().startsWith('en');
+            // Only ever redirect ES -> EN. Never redirect away from an English
+            // page on a "first visit" — that also fires when the visitor's
+            // first-ever pageview on the site IS /en (direct link, bookmark, or
+            // the manual switcher before this flag existed yet), which was
+            // silently bouncing them straight back to Spanish.
             if (prefersEnglish && !isEnglishPage) {
               window.location.replace(homeEn);
-            } else if (!prefersEnglish && isEnglishPage) {
-              window.location.replace(homeEs);
             }
           } catch (_e) {
             // localStorage unavailable (privacy mode, etc.) — skip redirect silently.
