@@ -45,13 +45,26 @@ Do not force-fit skills that don't apply here (e.g. `superpowers-lab`'s `windows
 - **NEVER add yourself as co-author on any commit.** Do not include a `Co-Authored-By: Claude ...` trailer, or any equivalent attribution line, in any commit message on this project — regardless of what the default commit workflow elsewhere suggests.
 - This machine has no `user.name`/`user.email` configured, locally or globally (verified: `git config --get`/`--global --get` both fail, no `~/.gitconfig`). Do **not** run `git config --global` to fix this — that's a persisted config change and off-limits. Instead pass identity inline on each commit only: `git -c user.name="ManReyes" -c user.email="manuel.angel.reyes.resta@gmail.com" commit ...`, matching the author on every prior commit in this repo's history.
 
-### 1.3. No local Node — verify against the live deploy instead
+### 1.3. Local Node is available — but no browser
 
-There is no `node`/`npm` on this machine (`npm run build`/`dev`/`check` all fail with "command not found"). This means:
+`node`/`npm` now work on this machine (`~/.local/bin`, Node 22) — confirmed 2026-08-30 by
+actually running `npm run build` and `npm run check`, which both work. Use them before
+claiming a change is correct: `npm run build` for a real compile, `npm run check` for
+TypeScript/template diagnostics. This session has no local Node/npm caused most of the
+project's history to lean on the deploy pipeline for verification instead — don't assume
+that's still true without checking (`which node npm`) first, since it can change again.
 
-- Never claim a build "passes" or was "verified in the browser" — neither is possible here. Verify by careful manual code review instead, and say so explicitly when reporting work.
-- The real verification loop is: push to `main` → the `deploy.yml` GitHub Actions workflow builds and publishes to GitHub Pages automatically → check the **live** result. Poll `https://api.github.com/repos/ManReRe/labacalonaweb/actions/runs?per_page=1` (public, unauthenticated, no `gh` CLI needed) until `"status":"completed"`, then confirm `"conclusion":"success"`.
-- Inspect the actual deployed markup with `curl` (raw HTML — more reliable than WebFetch's markdown conversion, which can silently drop attributes like `srcset`) or by asking the user for a fresh screenshot/PageSpeed Insights report.
+What's still **not** possible locally: opening a real browser to visually check layout,
+responsiveness, or actual rendered contrast. For that:
+
+- The real end-to-end verification loop remains: push to `main` → the `deploy.yml` GitHub
+  Actions workflow builds and publishes to GitHub Pages automatically → check the **live**
+  result. Poll `https://api.github.com/repos/ManReRe/labacalonaweb/actions/runs?per_page=1`
+  (public, unauthenticated, no `gh` CLI needed) until `"status":"completed"`, then confirm
+  `"conclusion":"success"`.
+- Inspect the actual deployed markup with `curl` (raw HTML — more reliable than WebFetch's
+  markdown conversion, which can silently drop attributes like `srcset`) or by asking the
+  user for a fresh screenshot/PageSpeed Insights report.
 
 ---
 
