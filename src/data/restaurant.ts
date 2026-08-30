@@ -1,5 +1,6 @@
 // Central source of truth for restaurant identity (NAP, hours, links).
 // Update here once and every page/JSON-LD block stays in sync.
+import openingHours from './opening-hours.json';
 
 export const restaurant = {
   name: 'La Bacalona',
@@ -60,16 +61,11 @@ export const restaurant = {
     value: 4.5,
     count: 623,
   },
-  openingHours: {
-    // Continuous service every day, no midday closure (CLAUDE.md 5.1).
-    days: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
-    opens: '12:30',
-    closes: '00:30',
-    display: {
-      es: 'Todos los días, 12:30 – 00:30',
-      en: 'Every day, 12:30 PM – 12:30 AM',
-    },
-  },
+  // Continuous service every day, no midday closure (CLAUDE.md 5.1). Kept in
+  // its own JSON file so the scheduled sync workflow (see
+  // scripts/sync-opening-hours.mjs) can overwrite it from the Google Business
+  // Profile listing without touching this file.
+  openingHours,
   priceRange: '€€',
   cuisineTypes: ['Spanish', 'Andalusian', 'Extremaduran', 'Tapas'],
 } as const;

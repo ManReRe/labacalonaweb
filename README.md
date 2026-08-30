@@ -44,6 +44,24 @@ Without these two set, the homepage falls back to the static rating in
 (**Settings → Secrets and variables → Actions**) — the deploy workflow passes them
 through at build time.
 
+## Opening hours sync
+
+`.github/workflows/sync-opening-hours.yml` runs daily (and on manual dispatch), reads
+the current hours from the Google Business Profile listing via the Places API, and
+overwrites `src/data/opening-hours.json` — then rebuilds and redeploys — if they've
+changed. It only acts when the listing reports the exact same hours every day of the
+week (how La Bacalona actually operates); otherwise it logs what it found and leaves
+the file for a human to update, since representing a non-uniform week also needs a
+change to the `OpeningHoursSpecification` JSON-LD in `Layout.astro`.
+
+It needs a repository secret of its own, **`GOOGLE_PLACES_SERVER_API_KEY`** — deliberately
+separate from `PUBLIC_GOOGLE_PLACES_API_KEY` above, because that one is restricted by
+HTTP referrer (safe to ship to the browser) and a server-to-server call from a GitHub
+Actions runner has no real referrer to present. Create a second key in Google Cloud
+Console restricted only by API (Places API (New)) — no referrer or IP restriction, since
+Actions runner IPs aren't stable — and never give it the `PUBLIC_` prefix, or Astro would
+bundle it into client-side JS.
+
 ## Content structure
 
 - `src/data/restaurant.ts` — NAP, hours, links, and other restaurant identity (single

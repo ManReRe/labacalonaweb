@@ -1,0 +1,75 @@
+name: Sync opening hours from Google Business Profile
+
+on:
+  schedule:
+    - cron: '0 6 * * *' # 06:00 UTC daily
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  sync-and-deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      # Writes src/data/opening-hours.json in place if the Google Business
+      # Profile listing's hours differ from what's checked in, and exposes
+      # that as the `changed` output. Everything below only runs if it did.
+      - name: Fetch latest hours from Google Business Profile
+        id: sync
+        run: node scripts/sync-opening-hours.mjs
+        env:
+          GOOGLE_PLACES_SERVER_API_KEY: ${{ secrets.GOOGLE_PLACES_SERVER_API_KEY }}
+          PUBLIC_GOOGLE_PLACE_ID: ${{ secrets.PUBLIC_GOOGLE_PLACE_ID }}
+
+      - name: Commit updated hours
+        if: steps.sync.outputs.changed == 'true'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add src/data/opening-hours.json
+          git commit -m "Sync opening hours from Google Business Profile"
+          git push
+
+      - name: Build
+        if: steps.sync.outputs.changed == 'true'
+        run: npm run build
+        env:
+          PUBLIC_GOOGLE_PLACES_API_KEY: ${{ secrets.PUBLIC_GOOGLE_PLACES_API_KEY }}
+          PUBLIC_GOOGLE_PLACE_ID: ${{ secrets.PUBLIC_GOOGLE_PLACE_ID }}
+
+      - name: Setup Pages
+        if: steps.sync.outputs.changed == 'true'
+        uses: actions/configure-pages@v5
+
+      - name: Upload artifact
+        if: steps.sync.outputs.changed == 'true'
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./dist
+
+      - name: Deploy to GitHub Pages
+        if: steps.sync.outputs.changed == 'true'
+        id: deployment
+        uses: actions/deploy-pages@v4

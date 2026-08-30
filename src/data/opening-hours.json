@@ -1,0 +1,9 @@
+{
+  "days": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+  "opens": "12:30",
+  "closes": "00:30",
+  "display": {
+    "es": "Todos los días, 12:30 – 00:30",
+    "en": "Every day, 12:30 PM – 12:30 AM"
+  }
+}
