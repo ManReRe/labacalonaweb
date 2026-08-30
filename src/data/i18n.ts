@@ -28,13 +28,13 @@ export const ui = {
     cta: {
       reserve: 'Reservar mesa',
       reserveOnline: 'Reservar mesa online',
-      callUs: 'Llámanos',
+      callUs: 'Llámenos',
       seeMenu: 'Ver la carta',
       seeWines: 'Ver los vinos',
       viewOnMap: 'Cómo llegar',
     },
     footer: {
-      tagline: 'Come y bebe en el corazón de Sevilla.',
+      tagline: 'Coma y beba en el corazón de Sevilla.',
       linksTitle: 'Enlaces',
       legalTitle: 'Legal',
       followUs: 'Síguenos',
@@ -48,7 +48,7 @@ export const ui = {
       title: 'Alérgenos',
       legend: 'Leyenda de alérgenos',
       disclaimer:
-        'Los alérgenos indicados son una referencia orientativa pendiente de verificación final por parte de nuestro equipo de cocina. Ante cualquier alergia o intolerancia, consulta siempre con el personal de sala antes de pedir.',
+        'Los alérgenos indicados son una referencia orientativa pendiente de verificación final por parte de nuestro equipo de cocina. Ante cualquier alergia o intolerancia, consulte siempre con el personal de sala antes de pedir.',
       contains: 'Contiene',
     },
     wine: {

@@ -12,9 +12,9 @@ const locale = 'es' as const;
   locale={locale}
   routeKey="reservations"
   title="Reservas | La Bacalona - Restaurante en Sevilla"
-  description="Reserva mesa en La Bacalona online, sin salir de la web, o por teléfono en el 683 37 33 39. Abrimos todos los días de 12:30 a 00:30."
+  description="Reserve mesa en La Bacalona online, sin salir de la web, o por teléfono en el 683 37 33 39."
 >
-  <PageHero eyebrow="Reservas" title="Reserva tu mesa" subtitle="Elige día, hora y número de comensales aquí mismo. Confirmación al instante." />
+  <PageHero eyebrow="Reservas" title="Reserve su mesa" subtitle="Elija día, hora y número de comensales aquí mismo. Confirmación al instante." />
 
   <div class="mx-auto max-w-3xl px-4 py-12 sm:px-6">
     <div class="flex items-start gap-4 rounded-lg border border-ink/10 bg-cream-white p-5">
@@ -31,8 +31,9 @@ const locale = 'es' as const;
       <CoverManagerWidget locale={locale} />
     </div>
 
-    <p class="mt-8 text-center text-ink-soft">
-      Abrimos todos los días de <strong class="text-ink">12:30 a 00:30</strong>, sin cierre a mediodía.
+    <p class="mt-8 text-center text-ink-soft">Abrimos todos los días, sin cierre a mediodía:</p>
+    <p class="mt-1 whitespace-pre-line text-center font-semibold text-ink">
+      {restaurant.openingHours.display.es}
     </p>
   </div>
 </Layout>

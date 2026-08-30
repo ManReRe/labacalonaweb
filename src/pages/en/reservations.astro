@@ -12,7 +12,7 @@ const locale = 'en' as const;
   locale={locale}
   routeKey="reservations"
   title="Reservations | La Bacalona - Restaurant in Seville"
-  description="Book a table at La Bacalona online, right on this page, or by phone at +34 683 37 33 39. Open every day from 12:30 PM to 12:30 AM."
+  description="Book a table at La Bacalona online, right on this page, or by phone at +34 683 37 33 39."
 >
   <PageHero eyebrow="Reservations" title="Book your table" subtitle="Choose your date, time, and party size right here. Instant confirmation." />
 
@@ -31,8 +31,9 @@ const locale = 'en' as const;
       <CoverManagerWidget locale={locale} />
     </div>
 
-    <p class="mt-8 text-center text-ink-soft">
-      Open every day from <strong class="text-ink">12:30 PM to 12:30 AM</strong>, with continuous service.
+    <p class="mt-8 text-center text-ink-soft">Open every day, with continuous service:</p>
+    <p class="mt-1 whitespace-pre-line text-center font-semibold text-ink">
+      {restaurant.openingHours.display.en}
     </p>
   </div>
 </Layout>
