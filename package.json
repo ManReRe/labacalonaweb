@@ -4,7 +4,10 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "check": "astro check"
+    "check": "astro check",
+    "test:links": "linkinator dist --recurse --skip maps.app.goo.gl --skip maps.google.com --skip mekriva.com --skip covermanager.com --skip instagram.com --skip labacalona.es",
+    "test:links:external": "linkinator dist --recurse",
+    "lhci": "lhci autorun"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.3",
@@ -16,6 +19,8 @@
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.10",
+    "@lhci/cli": "^0.15.1",
+    "linkinator": "^8.1.0",
     "typescript": "^5.9.3"
   }
 }

@@ -23,11 +23,32 @@ every push to `main` (see `.github/workflows/deploy.yml`).
 
 ```bash
 npm install
-npm run dev       # http://localhost:4321
-npm run build     # static output in dist/
-npm run preview   # serve the built output locally
-npm run check     # astro check (TypeScript + template diagnostics)
+npm run dev               # http://localhost:4321
+npm run build             # static output in dist/
+npm run preview           # serve the built output locally
+npm run check             # astro check (TypeScript + template diagnostics)
+npm run test:links        # broken internal links/images in dist/ (build first)
+npm run test:links:external  # same, but also hits external links for real
+npm run lhci              # Lighthouse CI against dist/ — see lighthouserc.json
 ```
+
+## Quality gates on deploy
+
+`.github/workflows/deploy.yml` runs an `audit` job before every deploy, alongside the
+build:
+
+- **Internal links/images** (`npm run test:links`) — crawls `dist/` and fails the deploy
+  on any broken internal href, `src`, or `srcset`. External domains (CoverManager,
+  Google Maps, Instagram, mekriva.com) are skipped here so this never fails because of
+  someone else's downtime; `npm run test:links:external` re-checks those too but only as
+  an informational, non-blocking step.
+- **Lighthouse CI** (`npm run lhci`, config in `lighthouserc.json`) — runs against a
+  representative page from each template (home, menu, reservations, contact, ES + EN).
+  Blocks the deploy on accessibility or SEO regressions (both should realistically stay
+  at 1.0 — this project has shipped WCAG contrast bugs to production before); only warns
+  on performance/best-practices, since those are noisier in CI and partly outside our
+  control (the CoverManager iframe's own third-party cookies currently cost the
+  `/reservas` pages a best-practices point neither page's own code can fix).
 
 ## Environment variables
 
