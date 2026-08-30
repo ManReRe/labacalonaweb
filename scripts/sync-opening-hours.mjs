@@ -75,6 +75,8 @@ function buildDisplay(groups, locale) {
       ? `Todos los días, ${opens} – ${closes}`
       : `Every day, ${format12(opens)} – ${format12(closes)}`;
   }
+  // One line per group — a single long sentence wraps badly in narrow
+  // columns (footer, contact page sidebar), especially with 3+ groups.
   return groups
     .map((group) => {
       const dayList = capitalize(joinDayNames(group.days, locale));
@@ -84,7 +86,7 @@ function buildDisplay(groups, locale) {
           : `${format12(group.opens)} – ${format12(group.closes)}`;
       return `${dayList}: ${hours}`;
     })
-    .join(' · ');
+    .join('\n');
 }
 
 async function main() {
