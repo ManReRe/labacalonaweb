@@ -61,10 +61,10 @@ export const restaurant = {
     value: 4.5,
     count: 623,
   },
-  // Continuous service every day, no midday closure (CLAUDE.md 5.1). Kept in
-  // its own JSON file so the scheduled sync workflow (see
-  // scripts/sync-opening-hours.mjs) can overwrite it from the Google Business
-  // Profile listing without touching this file.
+  // Hours vary by day of week — Google Business Profile is always the
+  // source of truth for these (client's explicit call, 2026-08-30), so this
+  // is kept in its own JSON file that the scheduled sync workflow (see
+  // scripts/sync-opening-hours.mjs) overwrites automatically.
   openingHours,
   priceRange: '€€',
   cuisineTypes: ['Spanish', 'Andalusian', 'Extremaduran', 'Tapas'],

@@ -49,10 +49,11 @@ through at build time.
 `.github/workflows/sync-opening-hours.yml` runs daily (and on manual dispatch), reads
 the current hours from the Google Business Profile listing via the Places API, and
 overwrites `src/data/opening-hours.json` — then rebuilds and redeploys — if they've
-changed. It only acts when the listing reports the exact same hours every day of the
-week (how La Bacalona actually operates); otherwise it logs what it found and leaves
-the file for a human to update, since representing a non-uniform week also needs a
-change to the `OpeningHoursSpecification` JSON-LD in `Layout.astro`.
+changed. The listing is always the source of truth, including when it reports
+different hours on different days of the week: `scripts/sync-opening-hours.mjs` groups
+days that share identical hours together, and that grouping feeds both the displayed
+text and an array of `OpeningHoursSpecification` entries in the JSON-LD (`Layout.astro`)
+— one per group, rather than assuming a single set of hours for the whole week.
 
 It needs a repository secret of its own, **`GOOGLE_PLACES_SERVER_API_KEY`** — deliberately
 separate from `PUBLIC_GOOGLE_PLACES_API_KEY` above, because that one is restricted by

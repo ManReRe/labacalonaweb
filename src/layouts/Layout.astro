@@ -44,12 +44,15 @@ const restaurantJsonLd = {
     addressRegion: restaurant.address.addressRegion,
     addressCountry: restaurant.address.addressCountry,
   },
-  openingHoursSpecification: {
+  // One spec per group of days sharing the same hours — hours can (and do)
+  // vary by day per the Google Business Profile listing, which is always
+  // the source of truth (see scripts/sync-opening-hours.mjs).
+  openingHoursSpecification: restaurant.openingHours.groups.map((group) => ({
     '@type': 'OpeningHoursSpecification',
-    dayOfWeek: restaurant.openingHours.days,
-    opens: restaurant.openingHours.opens,
-    closes: restaurant.openingHours.closes,
-  },
+    dayOfWeek: group.days,
+    opens: group.opens,
+    closes: group.closes,
+  })),
   sameAs: [restaurant.instagram],
   acceptsReservations: 'True',
   reservations: restaurant.coverManagerUrl,

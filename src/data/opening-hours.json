@@ -1,9 +1,10 @@
 {
-  "days": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
-  "opens": "12:30",
-  "closes": "00:30",
+  "groups": [
+    { "days": ["Monday", "Friday", "Saturday"], "opens": "12:00", "closes": "00:00" },
+    { "days": ["Tuesday", "Wednesday", "Thursday", "Sunday"], "opens": "12:30", "closes": "00:00" }
+  ],
   "display": {
-    "es": "Todos los días, 12:30 – 00:30",
-    "en": "Every day, 12:30 PM – 12:30 AM"
+    "es": "Lunes, viernes y sábado: 12:00 – 00:00 · Martes, miércoles, jueves y domingo: 12:30 – 00:00",
+    "en": "Monday, Friday and Saturday: 12:00 PM – 12:00 AM · Tuesday, Wednesday, Thursday and Sunday: 12:30 PM – 12:00 AM"
   }
 }
