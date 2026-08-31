@@ -69,7 +69,16 @@ const restaurantJsonLd = {
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    {/*
+      Google Search prefers ICO/PNG over SVG for the little icon shown next
+      to a result's URL (SVG-only support there is limited) — this trio
+      matches Google's own recommended favicon setup. The .ico is
+      multi-resolution (16/32/48px); browsers that support SVG favicons use
+      the crisper one instead.
+    */}
+    <link rel="icon" href={withBase('/favicon.ico')} sizes="48x48" />
     <link rel="icon" type="image/svg+xml" href={withBase('/favicon.svg')} />
+    <link rel="apple-touch-icon" href={withBase('/apple-touch-icon.png')} />
     <meta name="generator" content={Astro.generator} />
 
     <title>{title}</title>
