@@ -26,16 +26,20 @@ const locale = 'es' as const;
     <section>
       <h2 class="font-display text-2xl tracking-wide text-ink">2. Qué datos tratamos</h2>
       <p class="mt-2">
-        Este sitio web no incorpora formularios propios de recogida de datos ni herramientas de analítica o
-        publicidad. Cuando reserva mesa a través de nuestro proveedor de reservas (CoverManager), sus datos
-        (nombre, teléfono, email) son tratados directamente por dicho proveedor conforme a su propia política de
-        privacidad, no por {restaurant.name}.
+        Este sitio web no incorpora formularios propios de recogida de datos ni herramientas de publicidad.
+        Usamos GoatCounter, una herramienta de analítica sin cookies, para conocer el número de visitas a la
+        web: no guarda datos que permitan identificarle, y la dirección IP se procesa de forma anónima
+        (resumida mediante hash con una clave que rota cada 8 horas) sin llegar a almacenarse. Cuando reserva
+        mesa a través de nuestro proveedor de reservas (CoverManager), sus datos (nombre, teléfono, email) son
+        tratados directamente por dicho proveedor conforme a su propia política de privacidad, no por{' '}
+        {restaurant.name}.
       </p>
     </section>
 
     <section>
       <h2 class="font-display text-2xl tracking-wide text-ink">3. Terceros que pueden tratar datos</h2>
       <ul class="mt-2 list-disc space-y-1 pl-5">
+        <li>GoatCounter (analítica web, sin cookies ni datos personales — ver arriba).</li>
         <li>CoverManager (sistema de reservas online).</li>
         <li>Google Maps (mapa incrustado en la página de contacto).</li>
       </ul>

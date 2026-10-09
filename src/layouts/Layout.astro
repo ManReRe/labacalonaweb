@@ -135,5 +135,20 @@ const restaurantJsonLd = {
         });
       })();
     </script>
+
+    {/*
+      GoatCounter — cookieless page-view analytics (no localStorage, no
+      fingerprinting; IP is hashed with a salt that rotates every 8h and
+      never stored — see privacidad.astro / privacy-policy.astro). Added by
+      explicit client request (2026-10-09) to see traffic beyond what
+      Search Console reports (direct visits, Instagram, etc.), without
+      reopening the "no analytics by default" stance in CLAUDE.md 3.2 for
+      anything heavier.
+    */}
+    <script
+      data-goatcounter="https://labacalona.goatcounter.com/count"
+      async
+      src="https://gc.zgo.at/count.js"
+      is:inline></script>
   </body>
 </html>

@@ -2,6 +2,8 @@
 import Layout from '../../layouts/Layout.astro';
 import PageHero from '../../components/PageHero.astro';
 import { restaurant } from '../../data/restaurant';
+import { routes } from '../../data/i18n';
+import { withBase } from '../../utils/paths';
 
 const locale = 'en' as const;
 ---
@@ -16,8 +18,15 @@ const locale = 'en' as const;
 
   <div class="mx-auto max-w-3xl space-y-6 px-4 py-12 text-ink-soft sm:px-6">
     <p>
-      This website does not use its own analytics, advertising, or tracking cookies. The only cookies that may
-      be set come from the following functional services, embedded directly on a couple of pages:
+      This website does not use its own advertising or tracking cookies. To see how many people visit, we use{' '}
+      <strong class="text-ink">GoatCounter</strong>, an analytics tool that sets no cookies and keeps no data
+      that could identify you (your IP address is processed anonymously and irreversibly, never stored — more
+      detail in our{' '}
+      <a href={withBase(routes.privacy[locale])} class="underline underline-offset-2 hover:text-ink">
+        privacy policy
+      </a>
+      ). The only cookies that may be set come from the following functional services, embedded directly on a
+      couple of pages:
     </p>
     <ul class="list-disc space-y-2 pl-5">
       <li>
@@ -30,7 +39,7 @@ const locale = 'en' as const;
     </ul>
     <p>
       You can manage or delete these cookies at any time from your browser settings. Because {restaurant.name}
-      does not use analytics or advertising cookies, no consent-management banner is required.
+      does not use advertising or tracking cookies, no consent-management banner is required.
     </p>
   </div>
 </Layout>

@@ -27,7 +27,7 @@ recommended approach and need no redirect on top. Don't reintroduce one.
 - [Astro](https://astro.build) (SSG) — see `astro.config.mjs`
 - Tailwind CSS (`@tailwindcss/vite`)
 - Astro's built-in i18n routing (`es` default/unprefixed, `en` under `/en/`)
-- No analytics/tracking scripts by default
+- No tracking/advertising scripts; [GoatCounter](https://www.goatcounter.com) for cookieless page-view analytics — see below
 
 ## Requirements
 
@@ -63,6 +63,18 @@ build:
   on performance/best-practices, since those are noisier in CI and partly outside our
   control (the CoverManager iframe's own third-party cookies currently cost the
   `/reservas` pages a best-practices point neither page's own code can fix).
+
+## Analytics
+
+[GoatCounter](https://www.goatcounter.com) (`labacalona.goatcounter.com`, dashboard at
+that URL) tracks page views — added 2026-10-09 on request, to see traffic that Search
+Console doesn't report (direct visits, social referrals, etc.). It sets no cookies, stores
+no localStorage, and never retains an IP address (hashed with a salt that rotates every
+8 hours, purely to dedupe repeat visits within that window), so it needs no cookie-consent
+banner — but it's still disclosed as a data processor in the privacy and cookie policy
+pages, since "no cookies" isn't the same as "no third party involved." The snippet is
+inline in `src/layouts/Layout.astro`, loaded on every page; nothing to configure in CI or
+`.env`.
 
 ## Environment variables
 

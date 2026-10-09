@@ -2,6 +2,8 @@
 import Layout from '../layouts/Layout.astro';
 import PageHero from '../components/PageHero.astro';
 import { restaurant } from '../data/restaurant';
+import { routes } from '../data/i18n';
+import { withBase } from '../utils/paths';
 
 const locale = 'es' as const;
 ---
@@ -16,9 +18,15 @@ const locale = 'es' as const;
 
   <div class="mx-auto max-w-3xl space-y-6 px-4 py-12 text-ink-soft sm:px-6">
     <p>
-      Este sitio web no utiliza cookies propias de analítica, publicidad o seguimiento. Las únicas cookies que
-      pueden llegar a instalarse proceden de los siguientes servicios funcionales, integrados directamente en
-      algunas páginas:
+      Este sitio web no utiliza cookies propias de publicidad ni de seguimiento. Para saber cuántas personas lo
+      visitan usamos <strong class="text-ink">GoatCounter</strong>, una herramienta de analítica que no instala
+      ninguna cookie ni guarda datos que permitan identificarle (la dirección IP se procesa de forma anónima e
+      irreversible, sin almacenarse — más detalle en nuestra{' '}
+      <a href={withBase(routes.privacy[locale])} class="underline underline-offset-2 hover:text-ink">
+        política de privacidad
+      </a>
+      ). Las únicas cookies que pueden llegar a instalarse proceden de los siguientes servicios funcionales,
+      integrados directamente en algunas páginas:
     </p>
     <ul class="list-disc space-y-2 pl-5">
       <li>
@@ -31,7 +39,7 @@ const locale = 'es' as const;
     </ul>
     <p>
       Puede gestionar o eliminar estas cookies desde la configuración de su navegador en cualquier momento. Al
-      no usar cookies de analítica ni publicidad, {restaurant.name} no requiere un panel de gestión de
+      no usar cookies de publicidad ni de seguimiento, {restaurant.name} no requiere un panel de gestión de
       consentimiento.
     </p>
   </div>
