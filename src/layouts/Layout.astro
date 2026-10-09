@@ -11,12 +11,10 @@ interface Props {
   routeKey: RouteKey;
   title: string;
   description: string;
-  /** Set true only on the two homepages — drives the one-time client redirect. */
-  isHome?: boolean;
   ogImage?: string;
 }
 
-const { locale, routeKey, title, description, isHome = false, ogImage } = Astro.props;
+const { locale, routeKey, title, description, ogImage } = Astro.props;
 const strings = t(locale);
 
 const canonicalPath = routes[routeKey][locale];
@@ -24,8 +22,6 @@ const canonicalURL = new URL(canonicalPath, Astro.site);
 const esURL = new URL(routes[routeKey].es, Astro.site);
 const enURL = new URL(routes[routeKey].en, Astro.site);
 const defaultOgImage = new URL('/og-default.jpg', Astro.site).toString();
-const homeEs = withBase(routes.home.es);
-const homeEn = withBase(routes.home.en);
 
 const restaurantJsonLd = {
   '@context': 'https://schema.org',
@@ -98,32 +94,6 @@ const restaurantJsonLd = {
     <meta name="twitter:card" content="summary_large_image" />
 
     <script type="application/ld+json" set:html={JSON.stringify(restaurantJsonLd)} is:inline />
-
-    {isHome && (
-      <script define:vars={{ homeEs, homeEn }} is:inline>
-        // One-time client-side language redirect on first visit only (CLAUDE.md 3.1).
-        // Never a server/edge redirect — crawlers always see the unprefixed ES page.
-        (function () {
-          try {
-            if (localStorage.getItem('labacalona-locale-redirected')) return;
-            localStorage.setItem('labacalona-locale-redirected', '1');
-            const path = window.location.pathname;
-            const isEnglishPage = path === homeEn || path.startsWith(homeEn + '/');
-            const prefersEnglish = navigator.language?.toLowerCase().startsWith('en');
-            // Only ever redirect ES -> EN. Never redirect away from an English
-            // page on a "first visit" — that also fires when the visitor's
-            // first-ever pageview on the site IS /en (direct link, bookmark, or
-            // the manual switcher before this flag existed yet), which was
-            // silently bouncing them straight back to Spanish.
-            if (prefersEnglish && !isEnglishPage) {
-              window.location.replace(homeEn);
-            }
-          } catch (_e) {
-            // localStorage unavailable (privacy mode, etc.) — skip redirect silently.
-          }
-        })();
-      </script>
-    )}
   </head>
   <body class="flex min-h-screen flex-col bg-paper text-ink">
     <a

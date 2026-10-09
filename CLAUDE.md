@@ -75,7 +75,7 @@ Your default stack for restaurant websites is:
 - **Framework:** Astro (content-first, zero-JS-by-default, best Core Web Vitals).   
 - **Rendering:** Static Site Generation (SSG) for all marketing/content pages.
 - **Styling:** Tailwind CSS or clean, modular CSS (no heavy UI frameworks).
-- **Interactivity:** Minimal, progressive enhancement where needed (e.g., reservation widget, image gallery, client-side language redirect).
+- **Interactivity:** Minimal, progressive enhancement where needed (e.g., reservation widget, image gallery). Do not add a client-side language auto-redirect — see section 3.1.
 - **Deployment target:** Any static host with global CDN (e.g., Vercel, Netlify, Cloudflare Pages).
 - **Internationalization:** When a site is multi-language, use Astro's built-in i18n routing — default locale unprefixed at the root (e.g., `/menu`), other locales under a prefix (e.g., `/en/menu`). Do not use a separate framework or CMS for translations.
 
@@ -140,8 +140,8 @@ When a site supports more than one language:
 - Spanish stays at the root, unprefixed (`/`, `/menu`, `/vinos`...); other locales live under their own prefix (`/en/menu`, `/en/wines`...).
 - Every page declares `hreflang` alternates for all its language versions, plus `x-default` pointing at the Spanish version.
 - Dish and wine **names** stay in Spanish in every locale (they are part of the gastronomic identity); only **descriptions** are translated.
-- On first visit to `/`, a small client-side script may compare `navigator.language` against the current locale and redirect once to the matching locale if it differs — but only ever client-side (never a server/edge redirect that could hide a locale from crawlers), and only once: store the choice in `localStorage` so returning visitors are never redirected again.
-- A manual language switcher must always be visible in the header/footer, regardless of the auto-redirect, so a user (or crawler) can reach and stay on either version.
+- **Do not add a client-side `navigator.language` auto-redirect, even gated to "first visit only" via `localStorage`.** This project shipped one (CLAUDE.md pre-2026-10-09) and it caused real harm: Googlebot's renderer defaults to an English locale and starts every crawl with empty storage, so it hit the redirect on *every* visit to `/`, got bounced to `/en`, and Google indexed the English homepage for Spanish-language brand searches (confirmed live: searching "La Bacalona Sevilla" from Spain showed the English snippet with a "Traducir esta página" prompt). Google treats a JS redirect like a server redirect for indexing purposes — this is a documented anti-pattern, not a one-off bug. A manual, always-visible language switcher plus correct `hreflang` (below) is Google's own recommended approach and is sufficient; don't reintroduce automatic redirection to "fix" it.
+- A manual language switcher must always be visible in the header/footer so a user (or crawler) can reach and stay on either version.
 - When menu/wine content is updated via prompt (section 7), update both language versions in the same change so they never drift out of sync.
 
 ### 3.2. Analytics and privacy
@@ -205,7 +205,7 @@ When the restaurant is **La Bacalona**, apply the following specific configurati
 - **Logo path (local dev):** `/home/texk/development/labacalonaweb/Logo`
 - **Menu path (local dev):** `/home/texk/development/labacalonaweb/Menu` (source for content extraction only — never link or embed the raw PDF/JPEG, see section 3).
 - **Photos path (local dev):** `/home/texk/development/labacalonaweb/Pictures` (now populated with real professional photography — all placeholders have been replaced; don't reintroduce placeholder slots without checking here first).
-- **Languages:** Spanish (root, primary) + English (`/en/`), with automatic device-language detection on first visit — see section 3.1.
+- **Languages:** Spanish (root, primary) + English (`/en/`), reachable via the manual switcher and correct `hreflang` only — **no** client-side auto-redirect (removed 2026-10-09 after it caused Google to index the English homepage for Spanish searches; see section 3.1).
 - **Reservation system:** CoverManager (keep the reservation manager if possible). The real widget iframe URL is confirmed and embedded directly (`CoverManagerWidget.astro`) — this isn't a fallback state.
 - **Live Google rating:** the homepage badge (`GoogleRatingBadge.astro`) refreshes the rating/review count client-side from the Places API (New), with no link to the reviews (explicit client request) and a static fallback from `src/data/restaurant.ts` for first paint/no-JS/JSON-LD. Needs `PUBLIC_GOOGLE_PLACES_API_KEY` (HTTP-referrer-restricted to this site's domains, API-restricted to Places API (New) only) and `PUBLIC_GOOGLE_PLACE_ID` — see `.env.example` and the README. Both are already configured as GitHub Actions repo secrets; don't re-walk the whole Google Cloud Console setup unless something is actually broken.
 - **Opening hours sync:** `src/data/opening-hours.json` (imported by `restaurant.ts`) is kept in sync with the Google Business Profile listing by `.github/workflows/sync-opening-hours.yml`, running daily via `scripts/sync-opening-hours.mjs` — no manual edits needed, ever; the listing is always authoritative, including when it reports different hours on different days (days sharing identical hours are grouped, both in the JSON-LD and in the displayed text — see the script's comments). Uses its own repo secret, `GOOGLE_PLACES_SERVER_API_KEY` — a *second*, separate Places API key from `PUBLIC_GOOGLE_PLACES_API_KEY` above, because a server-to-server call from Actions has no browser referrer to satisfy that key's HTTP-referrer restriction. See the README's "Opening hours sync" section before touching this.
@@ -431,6 +431,6 @@ When the user interacts with you (Claude, GPT, etc.) using this `Claude.md`, you
   - Instagram.
   - CoverManager reservations.
   - Menu, wine list, and photos from local paths.
-  - Spanish (root) + English (`/en/`) with automatic device-language detection.
+  - Spanish (root) + English (`/en/`), manual switcher only — no client-side auto-redirect (it misled Googlebot into indexing the English homepage for Spanish searches).
   - “Tinto de la casa” must be removed.
 - You must always aim for a **TOP-level website**, better than generic provider pages, both visually and technically.

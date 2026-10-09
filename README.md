@@ -1,12 +1,26 @@
 # La Bacalona — website
 
 Marketing website for La Bacalona, a restaurant in Seville. Static, content-first Astro
-site: Spanish at the root, English under `/en/`, zero client JS beyond a few small
-progressive-enhancement scripts (language redirect, scroll reveal, CoverManager
-reservation widget, live Google rating).
+site: Spanish at the root, English under `/en/` (manual switcher only — see "No
+client-side language redirect" below), zero client JS beyond a few small
+progressive-enhancement scripts (scroll reveal, CoverManager reservation widget, live
+Google rating).
 
 Live at [labacalona.es](https://labacalona.es), deployed automatically to GitHub Pages on
 every push to `main` (see `.github/workflows/deploy.yml`).
+
+## No client-side language redirect
+
+The site used to redirect `/` to `/en` automatically when `navigator.language` looked
+English, once per visitor (tracked via `localStorage`). It was removed 2026-10-09: Googlebot
+renders with an English locale by default and starts every crawl with empty storage, so it
+hit the redirect on every visit and Google ended up indexing the English homepage for
+Spanish-language searches (confirmed live — searching "La Bacalona Sevilla" from Spain
+showed the English snippet with a "Traducir esta página" prompt). Google treats a
+JS-driven redirect like a server one for indexing purposes, so this wasn't a one-off bug —
+it's a documented anti-pattern. The fix was simply to remove it: correct `hreflang` tags
+(`Layout.astro`) plus the always-visible manual switcher (`Header.astro`) are Google's own
+recommended approach and need no redirect on top. Don't reintroduce one.
 
 ## Stack
 
