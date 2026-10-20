@@ -1,5 +1,6 @@
 ---
 import { allergens, allergenOrder } from '../data/allergens';
+import { ALLERGENS_VERIFIED } from '../data/menu';
 import { t, type Locale } from '../data/i18n';
 
 interface Props {
@@ -8,6 +9,11 @@ interface Props {
 
 const { locale } = Astro.props;
 const strings = t(locale);
+// See the comment on ALLERGENS_VERIFIED (src/data/menu.ts) and on
+// allergens.disclaimerPending/Verified (src/data/i18n.ts) — this must keep
+// switching automatically the moment the kitchen confirms the data, not
+// stay on the softer wording by default.
+const disclaimer = ALLERGENS_VERIFIED ? strings.allergens.disclaimerVerified : strings.allergens.disclaimerPending;
 ---
 
 <section class="mt-12 rounded-lg border border-ink/10 bg-cream-white p-5" aria-labelledby="allergen-legend-title">
@@ -21,6 +27,6 @@ const strings = t(locale);
     ))}
   </ul>
   <p class="mt-4 rounded-md bg-sand/60 p-3 text-sm text-ink-soft" role="note">
-    ⚠️ {strings.allergens.disclaimer}
+    ⚠️ {disclaimer}
   </p>
 </section>

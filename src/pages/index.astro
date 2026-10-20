@@ -12,44 +12,38 @@ import heroBgImg from '../assets/images/pro-hero-bg.jpg';
 import jamonImg from '../assets/images/pro-jamon.jpg';
 import platoImg from '../assets/images/pro-plato-tapa.jpg';
 import vinosImg from '../assets/images/pro-vinos.jpg';
-import ambienteImg from '../assets/images/pro-interior-guitarra.jpg';
 import mesaLargaImg from '../assets/images/pro-mesa-larga.jpg';
-import servicioImg from '../assets/images/pro-servicio.jpg';
 
 const locale = 'es' as const;
 const strings = t(locale);
 
-// Descriptions are a first draft to be refined with the client.
+// Four cards, each with a concrete, specific fact (2026-10-20 rewrite) — cut
+// from six after the previous set leaned on generic filler ("magnífico
+// ambiente familiar", "trato cercano") with nothing behind it.
 const highlights = [
   {
-    title: 'Producto extremeño de primera calidad.',
-    text: 'Jamón y embutidos ibéricos de bellota, cortados a mano en su punto.',
+    title: 'Chacinas de Llerena, carnes ibéricas de Fregenal.',
+    text: 'Trabajamos con proveedores extremeños y andaluces de siempre: chacinas de Llerena, quesos de varias zonas de Extremadura y carnes ibéricas de bellota de Fregenal de la Sierra.',
     img: jamonImg,
+    alt: 'Chacinas y jamón ibérico cortados a mano',
   },
   {
-    title: 'Cocina tradicional e innovación.',
-    text: 'Recetas de siempre con toques actuales que sorprenden en cada bocado.',
-    img: platoImg,
-  },
-  {
-    title: 'Bodega de vinos extremeños y andaluces.',
-    text: 'Una selección cuidada para maridar cada plato de la carta.',
+    title: 'Vino de nuestra bodega, Palacio Quemado.',
+    text: 'Está en Alange (Badajoz), D.O. Ribera del Guadiana. La tienes en la carta de vinos, por copa o botella.',
     img: vinosImg,
+    alt: 'Copa de vino tinto Palacio Quemado',
   },
   {
-    title: 'Magnífico ambiente familiar.',
-    text: 'Un espacio cálido y cuidado, pensado para sentirse como en casa.',
-    img: ambienteImg,
+    title: 'El flamenquín y el cachopazo no suelen sobrar.',
+    text: 'Taco de chicharrón, tartar de atún, carpaccio de panceta de bellota, cachopazo Bacalona para compartir... y el flamenquín, que casi nadie deja en el plato.',
+    img: platoImg,
+    alt: 'Flamenquín Bacalona recién hecho',
   },
   {
-    title: 'Celebración de reuniones y de eventos.',
-    text: 'Mesas para grupos y ocasiones especiales, con atención personalizada.',
+    title: 'Salón y terraza para grupos de hasta 150.',
+    text: 'Distintas configuraciones de mesa según cuántos seáis, evento privado con el local completo o parcial, y menús de grupo a medida.',
     img: mesaLargaImg,
-  },
-  {
-    title: 'Trato cercano y familiar.',
-    text: 'Un equipo que le conoce por su nombre desde la primera visita.',
-    img: servicioImg,
+    alt: 'Mesa larga preparada para un grupo',
   },
 ];
 ---
@@ -58,7 +52,7 @@ const highlights = [
   locale={locale}
   routeKey="home"
   title="La Bacalona Sevilla"
-  description="La Bacalona: taberna extremeña-andaluza con producto de temporada, ibéricos de bellota y una carta pensada para compartir. Reserve mesa en Sevilla."
+  description="Taberna extremeña en Sevilla desde 2022: chacinas de Llerena, ibéricos de bellota de Fregenal y vino de Alange. Reserva mesa online."
 >
   <section class="relative overflow-hidden bg-espresso text-cream-white">
     <Image
@@ -96,7 +90,7 @@ const highlights = [
           <div class="overflow-hidden rounded-lg shadow-md">
             <Image
               src={item.img}
-              alt=""
+              alt={item.alt}
               width={700}
               height={500}
               class="aspect-[7/5] w-full object-cover"
@@ -124,13 +118,12 @@ const highlights = [
       <DiamondIcon class="mx-auto mb-4 block h-3.5 w-3.5 text-olive" />
       <h2 class="font-display text-4xl text-ink">En el corazón de Sevilla</h2>
       <p class="mx-auto mt-5 max-w-2xl text-lg text-ink-soft">
-        Nos encontrará en la calle Amador de los Ríos, en el corazón de Sevilla. Un lugar donde el buen gusto, el
-        producto ibérico, la creación y la cocina honesta son los protagonistas. Además de un ambiente amplio y
-        familiar que invita a disfrutar de La Bacalona en cualquier momento del día.
+        Estamos en la calle Amador de los Ríos. Abrimos en 2022 para traer el producto extremeño —de Llerena, de
+        Fregenal de la Sierra— a una taberna de barrio, con salón amplio y terraza para grupos.
       </p>
       <div class="mt-6">
         <a href={withBase(routes.about[locale])} class="inline-block font-semibold text-olive-dark underline-offset-4 hover:underline">
-          Conozca nuestra historia
+          Conoce nuestra historia
         </a>
       </div>
       <div class="mt-4">

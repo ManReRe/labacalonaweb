@@ -28,13 +28,13 @@ export const ui = {
     cta: {
       reserve: 'Reservar mesa',
       reserveOnline: 'Reservar mesa online',
-      callUs: 'Llámenos',
+      callUs: 'Llamar',
       seeMenu: 'Ver la carta',
       seeWines: 'Ver los vinos',
       viewOnMap: 'Cómo llegar',
     },
     footer: {
-      tagline: 'Coma y beba en el corazón de Sevilla.',
+      tagline: 'Chacinas, vino y buena mesa en Amador de los Ríos desde 2022.',
       linksTitle: 'Enlaces',
       legalTitle: 'Legal',
       followUs: 'Síguenos',
@@ -47,8 +47,13 @@ export const ui = {
     allergens: {
       title: 'Alérgenos',
       legend: 'Leyenda de alérgenos',
-      disclaimer:
-        'Los alérgenos indicados son una referencia orientativa pendiente de verificación final por parte de nuestro equipo de cocina. Ante cualquier alergia o intolerancia, consulte siempre con el personal de sala antes de pedir.',
+      // Which one shows depends on ALLERGENS_VERIFIED (src/data/menu.ts) —
+      // see AllergenLegend.astro. Don't collapse these into one string: the
+      // "pending" wording is load-bearing while the kitchen hasn't signed
+      // off on the data (2026-10-20, client's explicit instruction).
+      disclaimerPending:
+        'Los alérgenos indicados son orientativos. Si tienes alguna alergia o intolerancia, consulta siempre con nuestro personal antes de pedir.',
+      disclaimerVerified: 'Si tienes alguna alergia o intolerancia, consúltanos. Estaremos encantados de ayudarte.',
       contains: 'Contiene',
     },
     wine: {
@@ -83,7 +88,7 @@ export const ui = {
       viewOnMap: 'Get directions',
     },
     footer: {
-      tagline: 'Eat and drink in the heart of Seville.',
+      tagline: 'Cured meats, wine, and good food on Amador de los Ríos since 2022.',
       linksTitle: 'Links',
       legalTitle: 'Legal',
       followUs: 'Follow us',
@@ -96,8 +101,9 @@ export const ui = {
     allergens: {
       title: 'Allergens',
       legend: 'Allergen legend',
-      disclaimer:
-        'The allergens listed are an indicative reference, pending final verification by our kitchen team. If you have any allergy or intolerance, always check with our staff before ordering.',
+      disclaimerPending:
+        'The allergens listed are indicative. If you have any allergy or intolerance, always check with our staff before ordering.',
+      disclaimerVerified: "If you have any allergy or intolerance, just ask us — we're happy to help.",
       contains: 'Contains',
     },
     wine: {

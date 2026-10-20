@@ -13,9 +13,13 @@ const locale = 'en' as const;
   locale={locale}
   routeKey="wines"
   title="Wines | La Bacalona - Restaurant in Seville"
-  description="La Bacalona's wine list: reds from Ribera del Duero, Rioja, and Ribera del Guadiana, whites, fortified wines, and sparkling, by glass or bottle."
+  description="La Bacalona's wine list: Palacio Quemado (Alange) is our house bodega, plus reds from Ribera del Duero and Rioja, whites, and fortified wines."
 >
-  <PageHero eyebrow="Wines" title="Our wine list">
+  <PageHero
+    eyebrow="Wines"
+    title="Our wine list"
+    subtitle="Our house bodega is Palacio Quemado, in Alange (Badajoz). You'll find it by the glass or bottle, alongside reds from Ribera del Duero and Rioja, whites, and fortified wines."
+  >
     <ReservationCta locale={locale} />
   </PageHero>
 

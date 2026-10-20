@@ -14,12 +14,12 @@ export const restaurant = {
     name: 'N/A',
     nif: 'N/A',
   },
-  // Not currently rendered anywhere — kept as a spare tagline. Usted-form
-  // imperative ("coma, beba, viva") to match the site's formal address; the
-  // previous "Comé, bebé, viví" was voseo (Argentina/Uruguay), not
-  // Peninsular Spanish.
+  // Not currently rendered anywhere — kept as a spare tagline. Tú-form
+  // imperative ("come, bebe, vive") to match the site's informal address
+  // (2026-10-20); the previous "Comé, bebé, viví" was voseo
+  // (Argentina/Uruguay), not Peninsular Spanish.
   tagline: {
-    es: 'Coma, beba, viva…',
+    es: 'Come, bebe, vive…',
     en: 'Eat, drink, live…',
   },
   shortDescription: {

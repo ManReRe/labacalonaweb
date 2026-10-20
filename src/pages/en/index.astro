@@ -12,44 +12,38 @@ import heroBgImg from '../../assets/images/pro-hero-bg.jpg';
 import jamonImg from '../../assets/images/pro-jamon.jpg';
 import platoImg from '../../assets/images/pro-plato-tapa.jpg';
 import vinosImg from '../../assets/images/pro-vinos.jpg';
-import ambienteImg from '../../assets/images/pro-interior-guitarra.jpg';
 import mesaLargaImg from '../../assets/images/pro-mesa-larga.jpg';
-import servicioImg from '../../assets/images/pro-servicio.jpg';
 
 const locale = 'en' as const;
 const strings = t(locale);
 
-// Descriptions are a first draft to be refined with the client.
+// Four cards, each with a concrete, specific fact (2026-10-20 rewrite) — cut
+// from six after the previous set leaned on generic filler ("a wonderful
+// atmosphere", "warm, personal service") with nothing behind it.
 const highlights = [
   {
-    title: 'Top-quality Extremaduran produce.',
-    text: 'Hand-carved acorn-fed Iberian ham and cured meats, sliced to order.',
+    title: 'Cured meats from Llerena, Iberian meats from Fregenal.',
+    text: 'We work with long-standing suppliers from Extremadura and Andalusia: cured meats from Llerena, cheeses from several parts of Extremadura, and acorn-fed Iberian meats from Fregenal de la Sierra.',
     img: jamonImg,
+    alt: 'Hand-sliced Iberian cured meats',
   },
   {
-    title: 'Traditional cooking with a touch of innovation.',
-    text: 'Time-honoured recipes with modern touches that surprise in every bite.',
-    img: platoImg,
-  },
-  {
-    title: 'A wine cellar of Extremaduran and Andalusian wines.',
-    text: 'A curated selection to pair with every dish on the menu.',
+    title: 'Wine from our own bodega, Palacio Quemado.',
+    text: "It's in Alange (Badajoz), D.O. Ribera del Guadiana. You'll find it on the wine list, by the glass or bottle.",
     img: vinosImg,
+    alt: 'A glass of Palacio Quemado red wine',
   },
   {
-    title: 'A wonderful, family-friendly atmosphere.',
-    text: 'A warm, well-kept space designed to make you feel at home.',
-    img: ambienteImg,
+    title: 'The flamenquín and the cachopazo rarely make it home.',
+    text: 'Taco de chicharrón, tartar de atún, carpaccio de panceta de bellota, a cachopazo Bacalona to share... and the flamenquín, which almost nobody leaves on the plate.',
+    img: platoImg,
+    alt: 'A freshly made Flamenquín Bacalona',
   },
   {
-    title: 'Perfect for gatherings and private events.',
-    text: 'Tables for groups and special occasions, with personal attention.',
+    title: 'A dining room and terrace for groups of up to 150.',
+    text: 'Different table layouts depending on your group size, a private event with the full venue or part of it, and tailored group menus.',
     img: mesaLargaImg,
-  },
-  {
-    title: 'Warm, personal service.',
-    text: 'A team that knows you by name from your very first visit.',
-    img: servicioImg,
+    alt: 'A long table set for a group',
   },
 ];
 ---
@@ -58,7 +52,7 @@ const highlights = [
   locale={locale}
   routeKey="home"
   title="La Bacalona Sevilla"
-  description="La Bacalona: an Extremaduran-Andalusian tavern built on seasonal produce, acorn-fed Iberian cured meats, and a menu made for sharing. Book a table in Seville."
+  description="An Extremaduran tavern in Seville since 2022: cured meats from Llerena, acorn-fed Iberian meats from Fregenal, and wine from Alange. Book a table online."
 >
   <section class="relative overflow-hidden bg-espresso text-cream-white">
     <Image
@@ -96,7 +90,7 @@ const highlights = [
           <div class="overflow-hidden rounded-lg shadow-md">
             <Image
               src={item.img}
-              alt=""
+              alt={item.alt}
               width={700}
               height={500}
               class="aspect-[7/5] w-full object-cover"
@@ -124,9 +118,9 @@ const highlights = [
       <DiamondIcon class="mx-auto mb-4 block h-3.5 w-3.5 text-olive" />
       <h2 class="font-display text-4xl text-ink">In the heart of Seville</h2>
       <p class="mx-auto mt-5 max-w-2xl text-lg text-ink-soft">
-        You'll find us on Calle Amador de los Ríos, in the heart of Seville. A place where good taste, Iberian
-        produce, creativity, and honest cooking take centre stage. Plus a spacious, family-friendly atmosphere
-        that invites you to enjoy La Bacalona at any time of day.
+        You'll find us on Calle Amador de los Ríos. We opened in 2022 to bring Extremaduran produce — from
+        Llerena, from Fregenal de la Sierra — to a neighbourhood tavern, with a spacious dining room and terrace
+        for groups.
       </p>
       <div class="mt-6">
         <a href={withBase(routes.about[locale])} class="inline-block font-semibold text-olive-dark underline-offset-4 hover:underline">
