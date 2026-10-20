@@ -31,5 +31,17 @@ export default defineConfig({
   vite: {
     plugins: [tailwindcss()],
   },
-  integrations: [sitemap()],
+  integrations: [
+    sitemap({
+      // Mirrors astro.config's own i18n routing: pairs each ES (unprefixed)
+      // URL with its /en/ counterpart and emits xhtml:link hreflang
+      // alternates per entry in the sitemap, on top of the per-page <link
+      // rel="alternate" hreflang> tags already in Layout.astro — a second,
+      // independent signal Google reads for the same thing.
+      i18n: {
+        defaultLocale: 'es',
+        locales: { es: 'es', en: 'en' },
+      },
+    }),
+  ],
 });

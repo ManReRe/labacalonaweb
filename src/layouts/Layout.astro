@@ -22,6 +22,44 @@ const canonicalURL = new URL(canonicalPath, Astro.site);
 const esURL = new URL(routes[routeKey].es, Astro.site);
 const enURL = new URL(routes[routeKey].en, Astro.site);
 const defaultOgImage = new URL('/og-default.jpg', Astro.site).toString();
+const resolvedOgImage = ogImage ?? defaultOgImage;
+
+// Home > [current page] — every other page gets one; the homepage doesn't
+// link to itself. Labels borrow from nav where the page has a nav entry,
+// and from the footer's legal-links labels otherwise (legalNotice/privacy/
+// cookies aren't in the main nav).
+const breadcrumbLabel: Record<RouteKey, string> = {
+  home: strings.nav.home,
+  about: strings.nav.about,
+  menu: strings.nav.menu,
+  wines: strings.nav.wines,
+  reservations: strings.nav.reservations,
+  contact: strings.nav.contact,
+  legalNotice: strings.footer.legalNotice,
+  privacy: strings.footer.privacy,
+  cookies: strings.footer.cookies,
+};
+const breadcrumbJsonLd =
+  routeKey === 'home'
+    ? null
+    : ({
+        '@context': 'https://schema.org',
+        '@type': 'BreadcrumbList',
+        itemListElement: [
+          {
+            '@type': 'ListItem',
+            position: 1,
+            name: strings.nav.home,
+            item: new URL(routes.home[locale], Astro.site).toString(),
+          },
+          {
+            '@type': 'ListItem',
+            position: 2,
+            name: breadcrumbLabel[routeKey],
+            item: canonicalURL.toString(),
+          },
+        ],
+      } as const);
 
 const restaurantJsonLd = {
   '@context': 'https://schema.org',
@@ -52,6 +90,11 @@ const restaurantJsonLd = {
   sameAs: [restaurant.instagram],
   acceptsReservations: 'True',
   reservations: restaurant.coverManagerUrl,
+  // Points at the real Menu/MenuSection/MenuItem graph built in
+  // buildMenuJsonLd (src/data/menu.ts) and emitted on /menu itself — this is
+  // just the cross-reference from the Restaurant entity to it.
+  hasMenu: new URL(routes.menu[locale], Astro.site).toString(),
+  hasMap: restaurant.mapLink,
   aggregateRating: {
     '@type': 'AggregateRating',
     ratingValue: restaurant.googleRating.value,
@@ -86,14 +129,21 @@ const restaurantJsonLd = {
     <link rel="alternate" hreflang="x-default" href={esURL} />
 
     <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={restaurant.name} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonicalURL} />
-    <meta property="og:image" content={ogImage ?? defaultOgImage} />
+    <meta property="og:image" content={resolvedOgImage} />
     <meta property="og:locale" content={locale === 'es' ? 'es_ES' : 'en_US'} />
     <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={resolvedOgImage} />
 
     <script type="application/ld+json" set:html={JSON.stringify(restaurantJsonLd)} is:inline />
+    {breadcrumbJsonLd && (
+      <script type="application/ld+json" set:html={JSON.stringify(breadcrumbJsonLd)} is:inline />
+    )}
   </head>
   <body class="flex min-h-screen flex-col bg-paper text-ink">
     <a

@@ -5,6 +5,8 @@ import AllergenLegend from '../components/AllergenLegend.astro';
 import PageHero from '../components/PageHero.astro';
 import ReservationCta from '../components/ReservationCta.astro';
 import { menuSections, menuNotes, buildMenuJsonLd } from '../data/menu';
+import { routes } from '../data/i18n';
+import { withBase } from '../utils/paths';
 
 const locale = 'es' as const;
 const menuJsonLd = buildMenuJsonLd(locale);
@@ -31,7 +33,14 @@ const menuJsonLd = buildMenuJsonLd(locale);
 
     <AllergenLegend locale={locale} />
 
-    <div class="mt-10 flex justify-center">
+    <p class="mt-6 text-center text-ink-soft">
+      ¿Quieres maridarlo? Echa un vistazo a{' '}
+      <a href={withBase(routes.wines[locale])} class="font-semibold text-olive-dark underline-offset-4 hover:underline">
+        nuestra carta de vinos
+      </a>.
+    </p>
+
+    <div class="mt-6 flex justify-center">
       <ReservationCta locale={locale} />
     </div>
   </div>

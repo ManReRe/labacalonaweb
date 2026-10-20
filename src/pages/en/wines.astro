@@ -5,6 +5,8 @@ import AllergenLegend from '../../components/AllergenLegend.astro';
 import PageHero from '../../components/PageHero.astro';
 import ReservationCta from '../../components/ReservationCta.astro';
 import { wineSections } from '../../data/wines';
+import { routes } from '../../data/i18n';
+import { withBase } from '../../utils/paths';
 
 const locale = 'en' as const;
 ---
@@ -13,12 +15,12 @@ const locale = 'en' as const;
   locale={locale}
   routeKey="wines"
   title="Wines | La Bacalona - Restaurant in Seville"
-  description="La Bacalona's wine list: Palacio Quemado (Alange) is our house bodega, plus reds from Ribera del Duero and Rioja, whites, and fortified wines."
+  description="La Bacalona's wine list: Palacio Quemado (D.O. Ribera del Guadiana), plus Ribera del Duero, Rioja, D.O. Rueda whites, and fortified wines."
 >
   <PageHero
     eyebrow="Wines"
     title="Our wine list"
-    subtitle="Our house bodega is Palacio Quemado, in Alange (Badajoz). You'll find it by the glass or bottle, alongside reds from Ribera del Duero and Rioja, whites, and fortified wines."
+    subtitle="Our house bodega is Palacio Quemado, in Alange (Badajoz), D.O. Ribera del Guadiana. You'll find it by the glass or bottle, alongside reds from Ribera del Duero and Rioja, D.O. Rueda whites, and fortified wines."
   >
     <ReservationCta locale={locale} />
   </PageHero>
@@ -28,7 +30,14 @@ const locale = 'en' as const;
 
     <AllergenLegend locale={locale} />
 
-    <div class="mt-10 flex justify-center">
+    <p class="mt-6 text-center text-ink-soft">
+      Want to see what to eat first? Here's{' '}
+      <a href={withBase(routes.menu[locale])} class="font-semibold text-olive-dark underline-offset-4 hover:underline">
+        our menu
+      </a>.
+    </p>
+
+    <div class="mt-6 flex justify-center">
       <ReservationCta locale={locale} />
     </div>
   </div>

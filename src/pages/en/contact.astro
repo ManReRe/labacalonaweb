@@ -3,7 +3,8 @@ import Layout from '../../layouts/Layout.astro';
 import PageHero from '../../components/PageHero.astro';
 import MapEmbed from '../../components/MapEmbed.astro';
 import { restaurant } from '../../data/restaurant';
-import { t } from '../../data/i18n';
+import { routes, t } from '../../data/i18n';
+import { withBase } from '../../utils/paths';
 
 const locale = 'en' as const;
 const strings = t(locale);
@@ -32,14 +33,22 @@ const strings = t(locale);
       <h2 class="mt-8 font-display text-2xl tracking-wide text-ink">{strings.hours}</h2>
       <p class="mt-2 whitespace-pre-line text-ink-soft">{restaurant.openingHours.display.en}</p>
 
-      <a
-        href={restaurant.mapLink}
-        target="_blank"
-        rel="noopener noreferrer"
-        class="mt-6 inline-flex min-h-[44px] items-center justify-center rounded-md bg-olive px-6 py-3 font-semibold text-cream-white hover:bg-olive-dark"
-      >
-        {strings.cta.viewOnMap}
-      </a>
+      <div class="mt-6 flex flex-wrap gap-3">
+        <a
+          href={restaurant.mapLink}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex min-h-[44px] items-center justify-center rounded-md bg-olive px-6 py-3 font-semibold text-cream-white hover:bg-olive-dark"
+        >
+          {strings.cta.viewOnMap}
+        </a>
+        <a
+          href={withBase(routes.reservations[locale])}
+          class="inline-flex min-h-[44px] items-center justify-center rounded-md border border-ink/30 px-6 py-3 font-semibold text-ink hover:bg-ink hover:text-cream-white"
+        >
+          {strings.cta.reserve}
+        </a>
+      </div>
     </div>
 
     <MapEmbed locale={locale} />

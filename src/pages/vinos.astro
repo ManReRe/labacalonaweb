@@ -5,6 +5,8 @@ import AllergenLegend from '../components/AllergenLegend.astro';
 import PageHero from '../components/PageHero.astro';
 import ReservationCta from '../components/ReservationCta.astro';
 import { wineSections } from '../data/wines';
+import { routes } from '../data/i18n';
+import { withBase } from '../utils/paths';
 
 const locale = 'es' as const;
 ---
@@ -13,12 +15,12 @@ const locale = 'es' as const;
   locale={locale}
   routeKey="wines"
   title="Vinos | La Bacalona - Restaurante en Sevilla"
-  description="Carta de vinos de La Bacalona: Palacio Quemado (Alange) como bodega de la casa, más tintos de Ribera del Duero y Rioja, blancos y generosos."
+  description="Carta de vinos de La Bacalona: Palacio Quemado (D.O. Ribera del Guadiana), más Ribera del Duero, Rioja, D.O. Rueda y generosos."
 >
   <PageHero
     eyebrow="Vinos"
     title="Nuestra carta de vinos"
-    subtitle="Nuestra bodega de la casa es Palacio Quemado, en Alange (Badajoz). La tienes por copa o botella, junto a tintos de Ribera del Duero y Rioja, blancos y generosos."
+    subtitle="Nuestra bodega de la casa es Palacio Quemado, en Alange (Badajoz), D.O. Ribera del Guadiana. La tienes por copa o botella, junto a tintos de Ribera del Duero y Rioja, blancos D.O. Rueda y generosos."
   >
     <ReservationCta locale={locale} />
   </PageHero>
@@ -28,7 +30,14 @@ const locale = 'es' as const;
 
     <AllergenLegend locale={locale} />
 
-    <div class="mt-10 flex justify-center">
+    <p class="mt-6 text-center text-ink-soft">
+      ¿Prefieres ver primero qué comer? Aquí tienes{' '}
+      <a href={withBase(routes.menu[locale])} class="font-semibold text-olive-dark underline-offset-4 hover:underline">
+        nuestra carta
+      </a>.
+    </p>
+
+    <div class="mt-6 flex justify-center">
       <ReservationCta locale={locale} />
     </div>
   </div>
