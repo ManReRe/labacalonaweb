@@ -17,31 +17,32 @@ import mesaLargaImg from '../../assets/images/pro-mesa-larga.jpg';
 const locale = 'en' as const;
 const strings = t(locale);
 
-// Four cards, each with a concrete, specific fact (2026-10-20 rewrite) — cut
-// from six after the previous set leaned on generic filler ("a wonderful
-// atmosphere", "warm, personal service") with nothing behind it.
+// Four cards. Titles broadened at the client's request (2026-10-22) — see
+// the ES file for the full note, including why card 1's text deliberately
+// keeps provenance vague (the client's own call, not this file's usual
+// concrete-detail bias) — don't "fix" it back without checking first.
 const highlights = [
   {
-    title: 'Cured meats from Llerena, Iberian meats from Fregenal.',
-    text: 'We work with long-standing suppliers from Extremadura and Andalusia: cured meats from Llerena, cheeses from several parts of Extremadura, and acorn-fed Iberian meats from Fregenal de la Sierra.',
+    title: 'From Extremadura and Andalusia to your table.',
+    text: 'We combine Extremaduran and Andalusian cuisine with selected products from the best areas and suppliers.',
     img: jamonImg,
     alt: 'Hand-sliced Iberian cured meats',
   },
   {
-    title: 'Wines from four different D.O.s.',
+    title: 'Wines to pair with any dish.',
     text: 'Reds from Ribera del Duero, Rioja, and Ribera del Guadiana, D.O. Rueda whites, and fortified wines, by the glass or bottle.',
     img: vinosImg,
     alt: 'A glass of red wine at La Bacalona',
   },
   {
-    title: 'The flamenquín and the cachopazo rarely make it home.',
-    text: 'Taco de chicharrón, tartar de atún, carpaccio de panceta de bellota, a cachopazo Bacalona to share... and the flamenquín, which almost nobody leaves on the plate.',
+    title: 'A relaxed, family atmosphere, with our own signature.',
+    text: 'Close, personal service and varied cooking: traditional dishes, rices, and our own creations.',
     img: platoImg,
     alt: 'A freshly made Flamenquín Bacalona',
   },
   {
-    title: 'A dining room and terrace for groups of up to 150.',
-    text: 'Different table layouts depending on your group size, a private event with the full venue or part of it, and tailored group menus.',
+    title: 'Events, tailored to you.',
+    text: 'Different table layouts depending on your group size, a private event with the full venue or part of it, group menus, and also cocktail-style menus — all tailored to you.',
     img: mesaLargaImg,
     alt: 'A long table set for a group',
   },

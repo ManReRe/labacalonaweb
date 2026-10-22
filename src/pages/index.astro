@@ -17,31 +17,36 @@ import mesaLargaImg from '../assets/images/pro-mesa-larga.jpg';
 const locale = 'es' as const;
 const strings = t(locale);
 
-// Four cards, each with a concrete, specific fact (2026-10-20 rewrite) — cut
-// from six after the previous set leaned on generic filler ("magnífico
-// ambiente familiar", "trato cercano") with nothing behind it.
+// Four cards. Titles broadened at the client's request (2026-10-22) — the
+// original, more specific ones ("Chacinas de Llerena...") read too niche to
+// him for a first-glance headline. Final wording went through several
+// rounds with the client (Kike) and the person relaying his notes (Manuel)
+// — card 1's text is the client's own, keeping provenance vague on
+// purpose ("people don't want to hear where every product comes from"),
+// which is a deliberate departure from this file's usual concrete-detail
+// bias; don't "fix" it back without checking with them first.
 const highlights = [
   {
-    title: 'Chacinas de Llerena, carnes ibéricas de Fregenal.',
-    text: 'Trabajamos con proveedores extremeños y andaluces de siempre: chacinas de Llerena, quesos de varias zonas de Extremadura y carnes ibéricas de bellota de Fregenal de la Sierra.',
+    title: 'De Extremadura y Andalucía a tu mesa.',
+    text: 'Combinamos la gastronomía extremeña y andaluza con productos seleccionados provenientes de las mejores zonas y proveedores.',
     img: jamonImg,
     alt: 'Chacinas y jamón ibérico cortados a mano',
   },
   {
-    title: 'Vinos de cuatro denominaciones distintas.',
+    title: 'Vinos para acompañar cualquier plato.',
     text: 'Tintos de Ribera del Duero, Rioja y Ribera del Guadiana, blancos D.O. Rueda y generosos, por copa o botella.',
     img: vinosImg,
     alt: 'Copa de vino tinto en La Bacalona',
   },
   {
-    title: 'El flamenquín y el cachopazo no suelen sobrar.',
-    text: 'Taco de chicharrón, tartar de atún, carpaccio de panceta de bellota, cachopazo Bacalona para compartir... y el flamenquín, que casi nadie deja en el plato.',
+    title: 'Ambiente familiar y distendido, con marca de la casa.',
+    text: 'Trato cercano y cocina variada: platos tradicionales, arroces y creaciones propias.',
     img: platoImg,
     alt: 'Flamenquín Bacalona recién hecho',
   },
   {
-    title: 'Salón y terraza para grupos de hasta 150.',
-    text: 'Distintas configuraciones de mesa según cuántos seáis, evento privado con el local completo o parcial, y menús de grupo a medida.',
+    title: 'Organización de eventos a medida.',
+    text: 'Distintas configuraciones de mesa según cuántos seáis, evento privado con el local completo o parcial, menús de grupo y también menú tipo cóctel, a medida.',
     img: mesaLargaImg,
     alt: 'Mesa larga preparada para un grupo',
   },
