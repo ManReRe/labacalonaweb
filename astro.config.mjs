@@ -19,7 +19,10 @@ export default defineConfig({
       fallbackType: 'rewrite',
     },
   },
-  trailingSlash: 'never',
+  // 'always' (2026-10-22, was 'never') to match what GitHub Pages actually
+  // serves without a redirect for a directory build — see the long comment
+  // on `routes` in src/data/i18n.ts for the full story.
+  trailingSlash: 'always',
   build: {
     format: 'directory',
     // The whole site is one small compiled CSS file; inlining it into every

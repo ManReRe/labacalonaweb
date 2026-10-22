@@ -1,16 +1,30 @@
 export type Locale = 'es' | 'en';
 
 // Path segments per locale. Spanish stays unprefixed at the root (CLAUDE.md 3.1).
+//
+// Trailing slash on every path except "/" itself (2026-10-22 fix): with
+// build.format "directory" (dist/menu/index.html, etc.), GitHub Pages always
+// 301s a no-slash request ("/menu") to the slash version ("/menu/") — that's
+// just how it serves a directory's index.html. Our canonical tag used to
+// claim the no-slash URL was the official one, which meant it pointed at a
+// URL that immediately redirected away from itself. Google flagged exactly
+// that as a "redirect error" and refused to index 17 of our 18 pages over
+// it (confirmed live via Search Console — only "/" was unaffected, since
+// it's inherently slash-free either way). Astro's `trailingSlash: 'always'`
+// (astro.config.mjs) only governs its own routing/sitemap generation — it
+// doesn't rewrite these literal strings, so they have to carry the slash
+// themselves for every canonical/hreflang/nav link built from this table to
+// match what the server actually serves without a redirect.
 export const routes = {
-  home: { es: '/', en: '/en' },
-  about: { es: '/sobre-nosotros', en: '/en/about' },
-  menu: { es: '/menu', en: '/en/menu' },
-  wines: { es: '/vinos', en: '/en/wines' },
-  reservations: { es: '/reservas', en: '/en/reservations' },
-  contact: { es: '/contacto', en: '/en/contact' },
-  legalNotice: { es: '/aviso-legal', en: '/en/legal-notice' },
-  privacy: { es: '/privacidad', en: '/en/privacy-policy' },
-  cookies: { es: '/cookies', en: '/en/cookie-policy' },
+  home: { es: '/', en: '/en/' },
+  about: { es: '/sobre-nosotros/', en: '/en/about/' },
+  menu: { es: '/menu/', en: '/en/menu/' },
+  wines: { es: '/vinos/', en: '/en/wines/' },
+  reservations: { es: '/reservas/', en: '/en/reservations/' },
+  contact: { es: '/contacto/', en: '/en/contact/' },
+  legalNotice: { es: '/aviso-legal/', en: '/en/legal-notice/' },
+  privacy: { es: '/privacidad/', en: '/en/privacy-policy/' },
+  cookies: { es: '/cookies/', en: '/en/cookie-policy/' },
 } as const;
 
 export type RouteKey = keyof typeof routes;
